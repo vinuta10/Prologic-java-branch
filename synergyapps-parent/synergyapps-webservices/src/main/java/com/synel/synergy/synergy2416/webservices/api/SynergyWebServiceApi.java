@@ -3,8 +3,8 @@ package com.synel.synergy.synergy2416.webservices.api;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import com.synel.synergy.synergy2416.webservices.Employee;
-import com.synel.synergy.synergy2416.webservices.LaborLevelDetail;
+import com.xacttime.Employee;
+import com.xacttime.LaborLevelDetail;
 
 public interface SynergyWebServiceApi {
 	/**

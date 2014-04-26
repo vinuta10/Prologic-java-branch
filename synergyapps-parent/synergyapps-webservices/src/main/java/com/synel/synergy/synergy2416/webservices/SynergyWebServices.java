@@ -2,53 +2,45 @@ package com.synel.synergy.synergy2416.webservices;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.rpc.ServiceException;
 
 import com.synel.synergy.synergy2416.webservices.api.SynergyWebServiceApi;
 import com.synel.synergy.synergy2416.system.SystemInformation;
+import com.xacttime.*;
 
 
 public class SynergyWebServices implements SynergyWebServiceApi {
 	
-	private SynergySoapStub mSYservice;
-	private SynergyLocator mloc;
-	//private static SynergySoapProxy mssp = new SynergySoapProxy(); 
+	private Synergy mSYservice;
 	private SynergySoap mPort;
 	private String mWebServicesKey;
 	private int mTerminalId;
 	
 	public SynergyWebServices ()
 	{
+		//Make a service
+		mSYservice = new Synergy();
+		// Use the service to get a stub which implements the SDI
+		mPort = mSYservice.getSynergySoap();
 		mWebServicesKey = SystemInformation.getWebServicesKey();
 		mTerminalId = SystemInformation.getTerminalId();
-		mloc =  new SynergyLocator();
-		URL url = null;
-		try {
-			url = new URL(SystemInformation.getWebServiceEndPoint());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			mPort=mloc.getSynergySoap(url);
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		mSYservice = (SynergySoapStub) mPort;
- 	   	mSYservice.setTimeout(SystemInformation.getWebServicesTimeoutValue());
 	}
 	
 	public int sendPunchRt(int userID, long transactionTimeEpoch,
 			int punchNum, int[] lldetailIds) throws Exception {
-		PunchData pd = new PunchData();
+		com.xacttime.PunchData pd = new com.xacttime.PunchData();
 		pd.setUserId(userID);
-		pd.setLaborLevelDetailIds(lldetailIds);
+		ArrayOfInt aoi = new ArrayOfInt();
+		for(Integer i:lldetailIds){
+			aoi.getInt().add(i);
+		}
+		pd.setLaborLevelDetailIds(aoi);
 		pd.setPunchType(getPunchType(punchNum));
 		pd.setTransactionTime(new DateTimeOffset());
-		PunchStatus ps = mSYservice.recordPunch(mWebServicesKey, mTerminalId, pd);
+		PunchStatus ps = mPort.recordPunch(mWebServicesKey, mTerminalId, pd);
 		if (ps.isSuccess())
 		{
 			System.out.println("PunchData Send... "+ps.getMessage());
@@ -59,23 +51,23 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 	private TimeSlicePreType getPunchType(int punchNum) {
 		switch(punchNum){
     	case 1:
-    		return TimeSlicePreType.ClockIn;
+    		return TimeSlicePreType.CLOCK_IN;
     	case 2:
-    		return TimeSlicePreType.ClockOut;
+    		return TimeSlicePreType.CLOCK_OUT;
     	case 3:
-    		return TimeSlicePreType.StartBreak;
+    		return TimeSlicePreType.START_BREAK;
     	case 4:
-    		return TimeSlicePreType.StartLunch;
+    		return TimeSlicePreType.START_LUNCH;
     	case 5:
-    		return TimeSlicePreType.EndBreak;
+    		return TimeSlicePreType.END_BREAK;
     	case 6:
-    		return TimeSlicePreType.EndLunch;
+    		return TimeSlicePreType.END_LUNCH;
     	case 7:
-    		return TimeSlicePreType.PayAdjustment;
+    		return TimeSlicePreType.PAY_ADJUSTMENT;
     	case 8:
-    		return TimeSlicePreType.NonWork;
+    		return TimeSlicePreType.NON_WORK;
     	default:
-    		return TimeSlicePreType.SwipeAndGo;
+    		return TimeSlicePreType.SWIPE_AND_GO;
 		}
 	}
 
@@ -84,8 +76,15 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		return 0;
 	}
 
-	public int getFingerPrints() throws Exception {
-		// TODO Auto-generated method stub
+	public int getFingerPrints() {
+		ArrayOfFingerprint fps = new ArrayOfFingerprint();
+		try {
+    	fps = mPort.getFingerprints(mWebServicesKey, mTerminalId);
+    	//save fps to the database using hibernate
+    	
+		}catch (Exception ex) {
+			return -1;
+		}
 		return 0;
 	}
 
@@ -95,11 +94,15 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 	}
 
 	public List<Employee> getEmployees(int deviceId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayOfEmployee employees = new ArrayOfEmployee();
+		
+		employees = mPort.getEmployees(mWebServicesKey, mTerminalId);
+		showEmployees(employees);
+		return employees.getEmployee();
 	}
 
-	public List<LaborLevelDetail> getLaborLevelDetails() {
+	public List<LaborLevel> getLaborLevels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -113,6 +116,19 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	private void showEmployees(ArrayOfEmployee employees) {
+		for(Employee emp:employees.getEmployee()){
+			System.out.println("==================================");
+			System.out.println(emp.toString());
+			System.out.println("==================================");
+		}
+		
+	}
 
+	public List<LaborLevelDetail> getLaborLevelDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
