@@ -5,10 +5,10 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
 public class Options  implements java.io.Serializable {
-    private com.xacttime.IdTypes identifyUsersWith;
+    private IdTypes identifyUsersWith;
 
     private java.lang.String timeZone;
 
@@ -16,7 +16,7 @@ public class Options  implements java.io.Serializable {
     }
 
     public Options(
-           com.xacttime.IdTypes identifyUsersWith,
+           IdTypes identifyUsersWith,
            java.lang.String timeZone) {
            this.identifyUsersWith = identifyUsersWith;
            this.timeZone = timeZone;
@@ -28,7 +28,7 @@ public class Options  implements java.io.Serializable {
      * 
      * @return identifyUsersWith
      */
-    public com.xacttime.IdTypes getIdentifyUsersWith() {
+    public IdTypes getIdentifyUsersWith() {
         return identifyUsersWith;
     }
 
@@ -38,7 +38,7 @@ public class Options  implements java.io.Serializable {
      * 
      * @param identifyUsersWith
      */
-    public void setIdentifyUsersWith(com.xacttime.IdTypes identifyUsersWith) {
+    public void setIdentifyUsersWith(IdTypes identifyUsersWith) {
         this.identifyUsersWith = identifyUsersWith;
     }
 

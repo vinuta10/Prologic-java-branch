@@ -5,7 +5,7 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
 public class PunchStatus  implements java.io.Serializable {
     private boolean success;
@@ -14,7 +14,7 @@ public class PunchStatus  implements java.io.Serializable {
 
     private int userId;
 
-    private com.xacttime.DateTimeOffset transactionTime;
+    private DateTimeOffset transactionTime;
 
     public PunchStatus() {
     }
@@ -23,7 +23,7 @@ public class PunchStatus  implements java.io.Serializable {
            boolean success,
            java.lang.String message,
            int userId,
-           com.xacttime.DateTimeOffset transactionTime) {
+           DateTimeOffset transactionTime) {
            this.success = success;
            this.message = message;
            this.userId = userId;
@@ -96,7 +96,7 @@ public class PunchStatus  implements java.io.Serializable {
      * 
      * @return transactionTime
      */
-    public com.xacttime.DateTimeOffset getTransactionTime() {
+    public DateTimeOffset getTransactionTime() {
         return transactionTime;
     }
 
@@ -106,7 +106,7 @@ public class PunchStatus  implements java.io.Serializable {
      * 
      * @param transactionTime
      */
-    public void setTransactionTime(com.xacttime.DateTimeOffset transactionTime) {
+    public void setTransactionTime(DateTimeOffset transactionTime) {
         this.transactionTime = transactionTime;
     }
 

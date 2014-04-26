@@ -29,4 +29,13 @@
     <module>synergyapps-webservices</module>
     <module>synergyapps-system</module>
   </modules>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>commons-codec</groupId>
+  			<artifactId>commons-codec</artifactId>
+  			<version>1.9</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>

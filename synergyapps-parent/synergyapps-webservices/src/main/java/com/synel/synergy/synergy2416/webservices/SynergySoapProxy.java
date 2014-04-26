@@ -1,8 +1,8 @@
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
-public class SynergySoapProxy implements com.xacttime.SynergySoap {
+public class SynergySoapProxy implements SynergySoap {
   private String _endpoint = null;
-  private com.xacttime.SynergySoap synergySoap = null;
+  private SynergySoap synergySoap = null;
   
   public SynergySoapProxy() {
     _initSynergySoapProxy();
@@ -15,7 +15,7 @@ public class SynergySoapProxy implements com.xacttime.SynergySoap {
   
   private void _initSynergySoapProxy() {
     try {
-      synergySoap = (new com.xacttime.SynergyLocator()).getSynergySoap();
+      synergySoap = (new SynergyLocator()).getSynergySoap();
       if (synergySoap != null) {
         if (_endpoint != null)
           ((javax.xml.rpc.Stub)synergySoap)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
@@ -38,49 +38,49 @@ public class SynergySoapProxy implements com.xacttime.SynergySoap {
     
   }
   
-  public com.xacttime.SynergySoap getSynergySoap() {
+  public SynergySoap getSynergySoap() {
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap;
   }
   
-  public com.xacttime.PunchStatus recordPunch(java.lang.String webServicesKey, int terminalId, com.xacttime.PunchData punch) throws java.rmi.RemoteException{
+  public PunchStatus recordPunch(java.lang.String webServicesKey, int terminalId, PunchData punch) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.recordPunch(webServicesKey, terminalId, punch);
   }
   
-  public com.xacttime.PunchStatus[] recordPunches(java.lang.String webServicesKey, int terminalId, com.xacttime.PunchData[] punches) throws java.rmi.RemoteException{
+  public PunchStatus[] recordPunches(java.lang.String webServicesKey, int terminalId, PunchData[] punches) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.recordPunches(webServicesKey, terminalId, punches);
   }
   
-  public com.xacttime.Employee[] getEmployees(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException{
+  public Employee[] getEmployees(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.getEmployees(webServicesKey, terminalId);
   }
   
-  public com.xacttime.LaborLevel[] getLaborLevels(java.lang.String webServicesKey) throws java.rmi.RemoteException{
+  public LaborLevel[] getLaborLevels(java.lang.String webServicesKey) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.getLaborLevels(webServicesKey);
   }
   
-  public com.xacttime.Options getOptions(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException{
+  public Options getOptions(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.getOptions(webServicesKey, terminalId);
   }
   
-  public com.xacttime.Fingerprint[] getFingerprints(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException{
+  public Fingerprint[] getFingerprints(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.getFingerprints(webServicesKey, terminalId);
   }
   
-  public boolean setFingerprint(java.lang.String webServicesKey, com.xacttime.Fingerprint fingerprint) throws java.rmi.RemoteException{
+  public boolean setFingerprint(java.lang.String webServicesKey, Fingerprint fingerprint) throws java.rmi.RemoteException{
     if (synergySoap == null)
       _initSynergySoapProxy();
     return synergySoap.setFingerprint(webServicesKey, fingerprint);

@@ -7,6 +7,7 @@
 
 package com.synel.synergy.synergy2416.webservices;
 
+
 public class DateTimeOffset  implements java.io.Serializable {
     public DateTimeOffset() {
     }

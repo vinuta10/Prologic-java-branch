@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
-public class SynergyLocator extends org.apache.axis.client.Service implements com.xacttime.Synergy {
+public class SynergyLocator extends org.apache.axis.client.Service implements Synergy {
 
     public SynergyLocator() {
     }
@@ -39,7 +39,7 @@ public class SynergyLocator extends org.apache.axis.client.Service implements co
         SynergySoapWSDDServiceName = name;
     }
 
-    public com.xacttime.SynergySoap getSynergySoap() throws javax.xml.rpc.ServiceException {
+    public SynergySoap getSynergySoap() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(SynergySoap_address);
@@ -50,9 +50,9 @@ public class SynergyLocator extends org.apache.axis.client.Service implements co
         return getSynergySoap(endpoint);
     }
 
-    public com.xacttime.SynergySoap getSynergySoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public SynergySoap getSynergySoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            com.xacttime.SynergySoapStub _stub = new com.xacttime.SynergySoapStub(portAddress, this);
+            SynergySoapStub _stub = new SynergySoapStub(portAddress, this);
             _stub.setPortName(getSynergySoapWSDDServiceName());
             return _stub;
         }
@@ -72,8 +72,8 @@ public class SynergyLocator extends org.apache.axis.client.Service implements co
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (com.xacttime.SynergySoap.class.isAssignableFrom(serviceEndpointInterface)) {
-                com.xacttime.SynergySoapStub _stub = new com.xacttime.SynergySoapStub(new java.net.URL(SynergySoap_address), this);
+            if (SynergySoap.class.isAssignableFrom(serviceEndpointInterface)) {
+                SynergySoapStub _stub = new SynergySoapStub(new java.net.URL(SynergySoap_address), this);
                 _stub.setPortName(getSynergySoapWSDDServiceName());
                 return _stub;
             }

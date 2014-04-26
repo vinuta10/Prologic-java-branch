@@ -5,14 +5,14 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
 public class PunchData  implements java.io.Serializable {
     private int userId;
 
-    private com.xacttime.DateTimeOffset transactionTime;
+    private DateTimeOffset transactionTime;
 
-    private com.xacttime.TimeSlicePreType punchType;
+    private TimeSlicePreType punchType;
 
     private int[] laborLevelDetailIds;
 
@@ -21,8 +21,8 @@ public class PunchData  implements java.io.Serializable {
 
     public PunchData(
            int userId,
-           com.xacttime.DateTimeOffset transactionTime,
-           com.xacttime.TimeSlicePreType punchType,
+           DateTimeOffset transactionTime,
+           TimeSlicePreType punchType,
            int[] laborLevelDetailIds) {
            this.userId = userId;
            this.transactionTime = transactionTime;
@@ -56,7 +56,7 @@ public class PunchData  implements java.io.Serializable {
      * 
      * @return transactionTime
      */
-    public com.xacttime.DateTimeOffset getTransactionTime() {
+    public DateTimeOffset getTransactionTime() {
         return transactionTime;
     }
 
@@ -66,7 +66,7 @@ public class PunchData  implements java.io.Serializable {
      * 
      * @param transactionTime
      */
-    public void setTransactionTime(com.xacttime.DateTimeOffset transactionTime) {
+    public void setTransactionTime(DateTimeOffset transactionTime) {
         this.transactionTime = transactionTime;
     }
 
@@ -76,7 +76,7 @@ public class PunchData  implements java.io.Serializable {
      * 
      * @return punchType
      */
-    public com.xacttime.TimeSlicePreType getPunchType() {
+    public TimeSlicePreType getPunchType() {
         return punchType;
     }
 
@@ -86,7 +86,7 @@ public class PunchData  implements java.io.Serializable {
      * 
      * @param punchType
      */
-    public void setPunchType(com.xacttime.TimeSlicePreType punchType) {
+    public void setPunchType(TimeSlicePreType punchType) {
         this.punchType = punchType;
     }
 

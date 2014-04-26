@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
-public class SynergySoapStub extends org.apache.axis.client.Stub implements com.xacttime.SynergySoap {
+public class SynergySoapStub extends org.apache.axis.client.Stub implements SynergySoap {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();
@@ -29,11 +29,11 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "terminalId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "punch"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://xacttime.com/", "PunchData"), com.xacttime.PunchData.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "punch"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://xacttime.com/", "PunchData"), PunchData.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://xacttime.com/", "PunchStatus"));
-        oper.setReturnClass(com.xacttime.PunchStatus.class);
+        oper.setReturnClass(PunchStatus.class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://xacttime.com/", "RecordPunchResult"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -45,12 +45,12 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "terminalId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "punches"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfPunchData"), com.xacttime.PunchData[].class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "punches"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfPunchData"), PunchData[].class, false, false);
         param.setItemQName(new javax.xml.namespace.QName("http://xacttime.com/", "PunchData"));
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfPunchStatus"));
-        oper.setReturnClass(com.xacttime.PunchStatus[].class);
+        oper.setReturnClass(PunchStatus[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://xacttime.com/", "RecordPunchesResult"));
         param = oper.getReturnParamDesc();
         param.setItemQName(new javax.xml.namespace.QName("http://xacttime.com/", "PunchStatus"));
@@ -65,7 +65,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "terminalId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfEmployee"));
-        oper.setReturnClass(com.xacttime.Employee[].class);
+        oper.setReturnClass(Employee[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://xacttime.com/", "GetEmployeesResult"));
         param = oper.getReturnParamDesc();
         param.setItemQName(new javax.xml.namespace.QName("http://xacttime.com/", "Employee"));
@@ -78,7 +78,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "webServicesKey"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://microsoft.com/wsdl/types/", "guid"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfLaborLevel"));
-        oper.setReturnClass(com.xacttime.LaborLevel[].class);
+        oper.setReturnClass(LaborLevel[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://xacttime.com/", "GetLaborLevelsResult"));
         param = oper.getReturnParamDesc();
         param.setItemQName(new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevel"));
@@ -93,7 +93,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "terminalId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://xacttime.com/", "Options"));
-        oper.setReturnClass(com.xacttime.Options.class);
+        oper.setReturnClass(Options.class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://xacttime.com/", "GetOptionsResult"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -106,7 +106,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "terminalId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfFingerprint"));
-        oper.setReturnClass(com.xacttime.Fingerprint[].class);
+        oper.setReturnClass(Fingerprint[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://xacttime.com/", "GetFingerprintsResult"));
         param = oper.getReturnParamDesc();
         param.setItemQName(new javax.xml.namespace.QName("http://xacttime.com/", "Fingerprint"));
@@ -118,7 +118,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         oper.setName("SetFingerprint");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "webServicesKey"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://microsoft.com/wsdl/types/", "guid"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "fingerprint"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://xacttime.com/", "Fingerprint"), com.xacttime.Fingerprint.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://xacttime.com/", "fingerprint"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://xacttime.com/", "Fingerprint"), Fingerprint.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
@@ -168,7 +168,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfEmployee");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.Employee[].class;
+            cls = Employee[].class;
             cachedSerClasses.add(cls);
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "Employee");
             qName2 = new javax.xml.namespace.QName("http://xacttime.com/", "Employee");
@@ -177,7 +177,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfFingerprint");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.Fingerprint[].class;
+            cls = Fingerprint[].class;
             cachedSerClasses.add(cls);
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "Fingerprint");
             qName2 = new javax.xml.namespace.QName("http://xacttime.com/", "Fingerprint");
@@ -195,7 +195,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfLaborLevel");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.LaborLevel[].class;
+            cls = LaborLevel[].class;
             cachedSerClasses.add(cls);
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevel");
             qName2 = new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevel");
@@ -204,7 +204,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfLaborLevelDetail");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.LaborLevelDetail[].class;
+            cls = LaborLevelDetail[].class;
             cachedSerClasses.add(cls);
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevelDetail");
             qName2 = new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevelDetail");
@@ -213,7 +213,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfPunchData");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.PunchData[].class;
+            cls = PunchData[].class;
             cachedSerClasses.add(cls);
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "PunchData");
             qName2 = new javax.xml.namespace.QName("http://xacttime.com/", "PunchData");
@@ -222,7 +222,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "ArrayOfPunchStatus");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.PunchStatus[].class;
+            cls = PunchStatus[].class;
             cachedSerClasses.add(cls);
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "PunchStatus");
             qName2 = new javax.xml.namespace.QName("http://xacttime.com/", "PunchStatus");
@@ -231,70 +231,70 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "DateTimeOffset");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.DateTimeOffset.class;
+            cls = DateTimeOffset.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "Employee");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.Employee.class;
+            cls = Employee.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "Fingerprint");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.Fingerprint.class;
+            cls = Fingerprint.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "IdTypes");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.IdTypes.class;
+            cls = IdTypes.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(enumsf);
             cachedDeserFactories.add(enumdf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevel");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.LaborLevel.class;
+            cls = LaborLevel.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "LaborLevelDetail");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.LaborLevelDetail.class;
+            cls = LaborLevelDetail.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "Options");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.Options.class;
+            cls = Options.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "PunchData");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.PunchData.class;
+            cls = PunchData.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "PunchStatus");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.PunchStatus.class;
+            cls = PunchStatus.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://xacttime.com/", "TimeSlicePreType");
             cachedSerQNames.add(qName);
-            cls = com.xacttime.TimeSlicePreType.class;
+            cls = TimeSlicePreType.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(enumsf);
             cachedDeserFactories.add(enumdf);
@@ -365,7 +365,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         }
     }
 
-    public com.xacttime.PunchStatus recordPunch(java.lang.String webServicesKey, int terminalId, com.xacttime.PunchData punch) throws java.rmi.RemoteException {
+    public PunchStatus recordPunch(java.lang.String webServicesKey, int terminalId, PunchData punch) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -389,9 +389,9 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         else {
             extractAttachments(_call);
             try {
-                return (com.xacttime.PunchStatus) _resp;
+                return (PunchStatus) _resp;
             } catch (java.lang.Exception _exception) {
-                return (com.xacttime.PunchStatus) org.apache.axis.utils.JavaUtils.convert(_resp, com.xacttime.PunchStatus.class);
+                return (PunchStatus) org.apache.axis.utils.JavaUtils.convert(_resp, PunchStatus.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -399,7 +399,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 }
     }
 
-    public com.xacttime.PunchStatus[] recordPunches(java.lang.String webServicesKey, int terminalId, com.xacttime.PunchData[] punches) throws java.rmi.RemoteException {
+    public PunchStatus[] recordPunches(java.lang.String webServicesKey, int terminalId, PunchData[] punches) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -423,9 +423,9 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         else {
             extractAttachments(_call);
             try {
-                return (com.xacttime.PunchStatus[]) _resp;
+                return (PunchStatus[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (com.xacttime.PunchStatus[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.xacttime.PunchStatus[].class);
+                return (PunchStatus[]) org.apache.axis.utils.JavaUtils.convert(_resp, PunchStatus[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -433,7 +433,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 }
     }
 
-    public com.xacttime.Employee[] getEmployees(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException {
+    public Employee[] getEmployees(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -457,9 +457,9 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         else {
             extractAttachments(_call);
             try {
-                return (com.xacttime.Employee[]) _resp;
+                return (Employee[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (com.xacttime.Employee[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.xacttime.Employee[].class);
+                return (Employee[]) org.apache.axis.utils.JavaUtils.convert(_resp, Employee[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -467,7 +467,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 }
     }
 
-    public com.xacttime.LaborLevel[] getLaborLevels(java.lang.String webServicesKey) throws java.rmi.RemoteException {
+    public LaborLevel[] getLaborLevels(java.lang.String webServicesKey) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -491,9 +491,9 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         else {
             extractAttachments(_call);
             try {
-                return (com.xacttime.LaborLevel[]) _resp;
+                return (LaborLevel[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (com.xacttime.LaborLevel[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.xacttime.LaborLevel[].class);
+                return (LaborLevel[]) org.apache.axis.utils.JavaUtils.convert(_resp, LaborLevel[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -501,7 +501,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 }
     }
 
-    public com.xacttime.Options getOptions(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException {
+    public Options getOptions(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -525,9 +525,9 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         else {
             extractAttachments(_call);
             try {
-                return (com.xacttime.Options) _resp;
+                return (Options) _resp;
             } catch (java.lang.Exception _exception) {
-                return (com.xacttime.Options) org.apache.axis.utils.JavaUtils.convert(_resp, com.xacttime.Options.class);
+                return (Options) org.apache.axis.utils.JavaUtils.convert(_resp, Options.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -535,7 +535,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 }
     }
 
-    public com.xacttime.Fingerprint[] getFingerprints(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException {
+    public Fingerprint[] getFingerprints(java.lang.String webServicesKey, int terminalId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -559,9 +559,9 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
         else {
             extractAttachments(_call);
             try {
-                return (com.xacttime.Fingerprint[]) _resp;
+                return (Fingerprint[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (com.xacttime.Fingerprint[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.xacttime.Fingerprint[].class);
+                return (Fingerprint[]) org.apache.axis.utils.JavaUtils.convert(_resp, Fingerprint[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -569,7 +569,7 @@ public class SynergySoapStub extends org.apache.axis.client.Stub implements com.
 }
     }
 
-    public boolean setFingerprint(java.lang.String webServicesKey, com.xacttime.Fingerprint fingerprint) throws java.rmi.RemoteException {
+    public boolean setFingerprint(java.lang.String webServicesKey, Fingerprint fingerprint) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }

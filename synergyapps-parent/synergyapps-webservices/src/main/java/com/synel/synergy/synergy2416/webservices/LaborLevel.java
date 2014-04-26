@@ -5,14 +5,14 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package com.synel.synergy.synergy2416.webservices
+package com.synel.synergy.synergy2416.webservices;
 
 public class LaborLevel  implements java.io.Serializable {
     private int id;
 
     private java.lang.String name;
 
-    private com.xacttime.LaborLevelDetail[] details;
+    private LaborLevelDetail[] details;
 
     public LaborLevel() {
     }
@@ -20,7 +20,7 @@ public class LaborLevel  implements java.io.Serializable {
     public LaborLevel(
            int id,
            java.lang.String name,
-           com.xacttime.LaborLevelDetail[] details) {
+           LaborLevelDetail[] details) {
            this.id = id;
            this.name = name;
            this.details = details;
@@ -72,7 +72,7 @@ public class LaborLevel  implements java.io.Serializable {
      * 
      * @return details
      */
-    public com.xacttime.LaborLevelDetail[] getDetails() {
+    public LaborLevelDetail[] getDetails() {
         return details;
     }
 
@@ -82,7 +82,7 @@ public class LaborLevel  implements java.io.Serializable {
      * 
      * @param details
      */
-    public void setDetails(com.xacttime.LaborLevelDetail[] details) {
+    public void setDetails(LaborLevelDetail[] details) {
         this.details = details;
     }
 
