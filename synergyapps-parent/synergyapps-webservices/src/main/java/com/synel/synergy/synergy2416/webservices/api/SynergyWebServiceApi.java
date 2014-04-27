@@ -3,7 +3,10 @@ package com.synel.synergy.synergy2416.webservices.api;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import com.xacttime.ArrayOfPunchData;
 import com.xacttime.Employee;
+import com.xacttime.Fingerprint;
+import com.xacttime.LaborLevel;
 import com.xacttime.LaborLevelDetail;
 
 public interface SynergyWebServiceApi {
@@ -14,9 +17,9 @@ public interface SynergyWebServiceApi {
 	 * @param transactionTime milliseconds since epoch of time swipe from user with userID was received 
 	 * @param punchTypeNum NonWork or Transfer or StartLunch or StartBreak or ClockIn or ClockOut or EndLunch or EndBreak or PayAdjustment or SwipeAndGo or CallBack
 	 * @param laborLevelDetialIds array of indexes to the labor level detail table. 
-	 * @return 0 if successful, return negative number (-400) if failed, this will load the LogToFile Module
+	 * @return 0 if successful, return negative number (-400) if failed. Need to save data into persistent layer.
 	 */
-	public int sendPunchRt(int userID, long transactionTimeEpoch, int punchTypeNum , int[] lldetailIds) throws Exception;
+	public int sendPunchRt(int userID, long transactionTimeEpoch, int punchTypeNum , int[] lldetailIds);
 	
 	/**
 	 * When your module fails to keep or establish a connection to your web service end point the persistent layer class logs
@@ -26,11 +29,11 @@ public interface SynergyWebServiceApi {
 	 * When the servers connection is reestablished all of the punches that have not been uploaded to the server should be uploaded
 	 * this method is called by the clock program when your web service connection is reestablished.
 	 * 
-	 * This section should contain code that accesses the database and uploads the transaction that have not yet been uploaded
+	 * @param Array Of Punch Data
 	 * @return 0 if successful
 	 */
 	
-	public int sendPunchesBatch() throws Exception;
+	public int sendPunchesBatch(ArrayOfPunchData aopd);
 	
 	/**
 	 * Allows you to get finger prints from the server or web service. Finger print templates are typically stored as strings on
@@ -39,42 +42,40 @@ public interface SynergyWebServiceApi {
 	 * string to a web server. The Web Server can then store this string in a database for later retrieval by another terminal. The
 	 * terminal will then receive a series of Templates (encoded as strings) then the terminal will decode these back into template
 	 * files. 
-	 * @return Returns success message 0 if successful
-	 * @throws RemoteException if the server end point cannot be reached
+	 * @return Returns list of finger print object.
 	 */
 	
-	public int getFingerPrints() throws Exception;
+	public List<Fingerprint> getFingerPrints();
 	/**
 	 * Sends a finger print template in a base64 encoded representation (string) to the web server along with the userID for which the
 	 * finger print template belongs to
-	 * @param userID of the template 
+	 * @param userID of the template and the template as String
 	 * @return 0 if successful
 	 */
-	public int sendFingerPrint(long userID, int fingerNumber) throws Exception;
+	public int sendFingerPrint(int userID, String fingerprintTemplate);
 	
 	/**
 	 * Get the Employee data from the server 
 	 * This function is used when the clock initially boot and loading the database file about employees who are 
 	 * allowed to punch on the clock
-	 * @param int terminal id.
 	 * @return a list of employees
 	 */
-	public List<Employee> getEmployees(int deviceId) throws Exception;
+	public List<Employee> getEmployees();
 	
 	/**
 	 * Get the labor levels description
 	 * @param 
-	 * @return List of LaborLevel Details
+	 * @return List of LaborLevels
 	 * 
 	 */
-	public List<LaborLevelDetail> getLaborLevelDetails();
+	public List<LaborLevel> getLaborLevels();
 	
 	/**
 	 * Test purpose in general.
 	 * Used for the Heat beat time. This is not a recommended way to synchronize time as NTP is a preferred solution
 	 * @return 0 if successful
 	 */
-	public int getServerTime() throws Exception;
+	public int getServerTime();
 	
 	/**
 	 * Send the heartbeat signal to the server, can piggyback on other informations about the health of the hardware etc.

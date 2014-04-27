@@ -1,10 +1,16 @@
 package com.synel.synergy.synergy2416.webservices;
 
+import java.util.List;
+
+import com.xacttime.ArrayOfFingerprint;
+import com.xacttime.Fingerprint;
+
 import junit.framework.TestCase;
 
 public class SynergyWebServicesUnitTest extends TestCase {
 	
 	private SynergyWebServices mSws;
+	private List<Fingerprint> mFps;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -13,7 +19,7 @@ public class SynergyWebServicesUnitTest extends TestCase {
 
 	public void testSendPunchRt() {
 		try {
-			mSws.sendPunchRt(2,1398213377, 1 , new int[] {12,34,56,78});
+			mSws.sendPunchRt(4,1398213379, 2 , new int[] {12,11,16,9});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -25,18 +31,39 @@ public class SynergyWebServicesUnitTest extends TestCase {
 	}
 
 	public void testGetFingerPrints() {
-		fail("Not yet implemented");
+		try {
+			mFps = mSws.getFingerPrints();
+			showFingerprints(mFps);
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void showFingerprints(List<Fingerprint> aof) {
+		
+		for(Fingerprint fp:aof){
+			System.out.println("UID: "+fp.getUserId()+" Template: "+fp.getTemplate());
+		}
+		
 	}
 
 	public void testSendFingerPrint() {
-		fail("Not yet implemented");
+		mFps = mSws.getFingerPrints();
+		for(Fingerprint fp:mFps){
+			mSws.sendFingerPrint(fp.getUserId()+5, fp.getTemplate());
+		}
 	}
 
 	public void testGetEmployees() {
-		fail("Not yet implemented");
+		try {
+			mSws.getEmployees();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void testGetLaborLevelDetails() {
+	public void testGetLaborLevel() {
 		fail("Not yet implemented");
 	}
 

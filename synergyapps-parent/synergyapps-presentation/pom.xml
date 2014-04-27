@@ -9,7 +9,6 @@
   </parent>
   <groupId>com.synel.synergy.synergy2416.presentation</groupId>
   <artifactId>synergyapps-presentation</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>synergyapps-presentation</name>
   <url>http://maven.apache.org</url>
   <properties>

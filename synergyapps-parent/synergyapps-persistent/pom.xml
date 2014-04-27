@@ -9,7 +9,6 @@
   </parent>
   <groupId>com.synel.synergy.synergy2416.persistent</groupId>
   <artifactId>synergyapps-persistent</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>synergyapps-persistent</name>
   <url>http://maven.apache.org</url>
   <properties>

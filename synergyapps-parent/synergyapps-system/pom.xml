@@ -9,7 +9,6 @@
   </parent>
   <groupId>com.synel.synergy.synergy2416.system</groupId>
   <artifactId>synergyapps-system</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>synergyapps-system</name>
   <url>http://maven.apache.org</url>
   <properties>
