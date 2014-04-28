@@ -1,5 +1,7 @@
 package com.synel.synergy.synergy2416.persistent;
 
+import org.hibernate.Session;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -31,8 +33,10 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
+    
     public void testApp()
     {
-        assertTrue( true );
+        Session session = HibernateUtilities.getSessionFactory().openSession();
+        session.close();
     }
 }

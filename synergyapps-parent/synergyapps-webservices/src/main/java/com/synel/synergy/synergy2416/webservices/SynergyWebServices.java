@@ -104,7 +104,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		}
 	}
 
-	public List<LaborLevel> getLaborLevelDetails() {
+	public List<LaborLevel> getLaborLevels() {
 		try{
 			ArrayOfLaborLevel lld = mPort.getLaborLevels(mWebServicesKey);
 			return lld.getLaborLevel();

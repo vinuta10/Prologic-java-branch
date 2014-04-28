@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2014 4:10:45 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="com.synel.synergy.synergy2416.model.TransactionData" table="TRANSACTIONDATA">
+  <id name="id" type="long">
+   <column name="ID" not-null="true" unique="true"/>
+   <generator class="sequence"/>
+  </id>
+  <property generated="never" lazy="false" name="timestamp" type="long">
+   <column name="TIMESTAMP" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="uploaded" type="boolean">
+   <column name="UPLOADED"/>
+  </property>
+  <component name="punchData" class="com.xacttime.PunchData">
+    <parent name="com.synel.synergy.synergy2416.model.TransactionData" />
+  	<property name="userId" type="integer" column="USERID" />
+  	<component name="DateTimeOffset" class="com.xacttime.DateTimeOffset">
+  		<property name="TransactionTime" type="long" column="TRANSACTIONTIME"/>
+  	</component>
+  	<component name="PunchType" class="com.xacttime.TimeSlicePreType">
+  		<property name="punchtype" type="integer" column="PUNCHTYPE" />
+  	</component>
+  	<component name="LaborLevelDetailIds" class="com.xacttime.ArrayOfInt">
+  		<list name="llIds" table="LABOR_LEVEL_DETAIL_IDS">
+  		<key column ="USERID" />
+  		<list-index column="POSITION" />
+  			<element type="integer" column="LABOR_LEVEL_DETAIL_ID" />
+  		</list>
+  	</component>
+  </component>
+ </class>
+</hibernate-mapping>
