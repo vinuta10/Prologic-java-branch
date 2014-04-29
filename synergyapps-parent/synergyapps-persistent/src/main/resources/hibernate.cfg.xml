@@ -4,11 +4,11 @@
 <hibernate-configuration>
  <session-factory>
   <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-  <property name="hibernate.connection.url">jdbc:hsqldb:file:/home/admin/synergy/database/transactiondb</property>
+  <property name="hibernate.connection.url">jdbc:hsqldb:file:/home/admin/synergy/database/empdb</property>
   <property name="hibernate.connection.username">SA</property>
   <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
   <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
-  <mapping resource="com/synel/synergy/synergy2416/model/TransactionData.hbm.xml"/>
+  <property name="hibernate.hbm2ddl.auto">validate</property>
+  <mapping resource="Employee.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

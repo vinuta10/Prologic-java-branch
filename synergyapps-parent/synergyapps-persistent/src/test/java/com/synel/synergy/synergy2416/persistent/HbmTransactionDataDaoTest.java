@@ -1,6 +1,5 @@
 package com.synel.synergy.synergy2416.persistent;
 
-import com.synel.synergy.synergy2416.model.TransactionData;
 import com.xacttime.ArrayOfInt;
 import com.xacttime.PunchData;
 import com.xacttime.TimeSlicePreType;

@@ -1,4 +1,4 @@
-package com.synel.synergy.synergy2416.model;
+package com.synel.synergy.synergy2416.persistent;
 
 import com.xacttime.PunchData;
 

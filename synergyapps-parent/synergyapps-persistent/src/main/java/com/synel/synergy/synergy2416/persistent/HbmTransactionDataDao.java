@@ -2,8 +2,6 @@ package com.synel.synergy.synergy2416.persistent;
 
 import java.util.List;
 
-import com.synel.synergy.synergy2416.model.TransactionData;
-
 public class HbmTransactionDataDao extends HbmBaseDao<TransactionData> implements TransactionDataDao {
 
 	@Override

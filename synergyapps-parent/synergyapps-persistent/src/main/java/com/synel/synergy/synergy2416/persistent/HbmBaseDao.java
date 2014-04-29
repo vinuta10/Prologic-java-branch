@@ -15,8 +15,8 @@ import org.hibernate.Transaction;
 
 public class HbmBaseDao<T> {
 	
-	protected static Session msession = HibernateUtilities.getSessionFactory().openSession() ;
-	protected static final int BATCH_NUM = 42;
+	protected Session msession;
+	protected static final int BATCH_NUM = 50;
 	
 	@SuppressWarnings("unchecked")
 	protected Class<T> g() throws Exception {
@@ -24,16 +24,16 @@ public class HbmBaseDao<T> {
 		return (Class<T>) superclass.getActualTypeArguments()[0];
 	}
 
-	public static Session getMySession() {
+	public Session getMySession() {
 		return msession;
 	}
 
-	public static void setMySession(Session msession) {
-		HbmBaseDao.msession = msession;
+	public void setMySession(Session msession) {
+		this.msession = msession;
 	}
 	
-	public <T> void saveData(T data) {
-		if (msession == null){
+	public void saveData(T data) {
+		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();
 		}
 		Transaction tx = null;
@@ -52,9 +52,9 @@ public class HbmBaseDao<T> {
 		return;	
 	}
 	
-	public <T> void saveDataList(List<T> lldata)
+	public void saveDataList(List<T> lldata)
 	{
-		if (msession == null){
+		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();
 		}
 		Transaction tx = null;
@@ -79,17 +79,19 @@ public class HbmBaseDao<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T getData(int id)
+	public T getData(int id)
 	{
-		if (msession == null){
+		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();
 		}
 		T data = null;
 		try {
 			data = (T) msession.load(g(), id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		} finally {
+			msession.close();
 		}
 		return data;
 	}
