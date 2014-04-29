@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 10:55:36 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.synel.synergy.synergy2416.persistent.FingerPrintPOJO" table="FINGERPRINTPOJO">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="fingerNum" type="int">
+            <column name="FINGERNUM" />
+        </property>
+        <property name="template" type="java.lang.String">
+            <column name="TEMPLATE" />
+        </property>
+    </class>
+</hibernate-mapping>

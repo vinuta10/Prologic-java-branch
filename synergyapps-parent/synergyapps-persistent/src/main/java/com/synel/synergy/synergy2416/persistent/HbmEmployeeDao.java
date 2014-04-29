@@ -3,38 +3,35 @@ package com.synel.synergy.synergy2416.persistent;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Transaction;
-
-public class HbmEmployeeDao extends HbmBaseDao<Employee> implements EmployeeDao {
+public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements EmployeeDao {
 
 	@Override
-	public Employee findEmployeeById(int id) {
+	public EmployeePOJO findEmployeeById(int id) {
 		return this.getData(id);
 	}
 
 	@Override
-	public void saveEmployee(Employee emp) {
+	public void saveEmployee(EmployeePOJO emp) {
 		this.saveData(emp);
 	}
 
 	@Override
-	public List<Employee> getEmployeeList() {
+	public List<EmployeePOJO> getEmployeeList() {
 		return this.getEmployeeList();
 	}
 
 	@Override
-	public Employee findEmployeeByBadgeNumber(int BadgeNumber) {
-		String hql = "FROM Employee E WHERE E.badgeNumber = "+BadgeNumber;
+	public EmployeePOJO findEmployeeByBadgeNumber(int BadgeNumber) {
+		String hql = "FROM EmployeePOJO where badgeNumber = "+BadgeNumber;
 		System.out.println("executing query: "+hql);
-		List<?> res = QueryEmployee(hql);
+		List<?> res = HibernateUtilities.SelectQuery(hql);
 		return getEmployeeFromList(res);
 	}
 
 	@Override
-	public Employee findEmployeeByEmployeeNumber(String empNumber) {
-		String hql = "FROM Employee E WHERE E.employeeNumber = "+empNumber;
-		List<?> res = QueryEmployee(hql);
+	public EmployeePOJO findEmployeeByEmployeeNumber(String empNumber) {
+		String hql = "FROM EmployeePOJO where employeeNumber = "+empNumber;
+		List<?> res = HibernateUtilities.SelectQuery(hql);
 		return getEmployeeFromList(res);
 		
 	}
@@ -49,32 +46,11 @@ public class HbmEmployeeDao extends HbmBaseDao<Employee> implements EmployeeDao 
 		return findEmployeeByBadgeNumber(BadgeNumber).getLaborLevelMap();
 	}
 	
-	private List<?> QueryEmployee(String hql) {
-		if (msession == null || !msession.isOpen()){
-			msession = HibernateUtilities.getSessionFactory().openSession();
-		}
-		List<?> results;
-		Transaction tx = null;
-		System.out.println("before: creating query..."+hql);
-		Query qry = msession.createQuery(hql);
-		try {
-			System.out.println("Try transaction...");
-			tx = msession.beginTransaction();
-			results = qry.list();
-
-		}catch (Exception ex){
-			ex.printStackTrace();
-			return null;
-		}
-		tx.commit();
-		return results;
-	}
-	
-	private Employee getEmployeeFromList(List<?> emps){
-		Employee emp = null;
+	private EmployeePOJO getEmployeeFromList(List<?> emps){
+		EmployeePOJO emp = null;
 		for (Iterator<?> iterator = 
 					emps.iterator(); iterator.hasNext();){
-				emp = (Employee) iterator.next(); 
+				emp = (EmployeePOJO) iterator.next(); 
 			}
 		return emp;
 	}

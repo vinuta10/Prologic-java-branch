@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 10:55:36 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.synel.synergy.synergy2416.persistent.PunchDataPOJO" table="PUNCHDATAPOJO">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="transactionTime" type="long">
+            <column name="TRANSACTIONTIME" />
+        </property>
+        <property name="punchType" type="java.lang.String">
+            <column name="PUNCHTYPE" />
+        </property>
+        <primitive-array name="laborLevelDetailIds" table="PUNCHDATAPOJO">
+            <key>
+                <column name="USERID" />
+            </key>
+            <index></index>
+            <element type="int">
+                <column name="LABORLEVELDETAILIDS" />
+            </element>
+        </primitive-array>
+    </class>
+</hibernate-mapping>

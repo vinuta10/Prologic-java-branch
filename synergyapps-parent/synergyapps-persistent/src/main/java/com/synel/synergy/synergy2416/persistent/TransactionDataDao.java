@@ -4,12 +4,16 @@ import java.util.List;
 
 public interface TransactionDataDao {
 	
-	public void saveTransactionData(TransactionData td);
+	public void saveTransactionData(TransactionDataPOJO td);
 	
-	public void saveTransactionDataList(List<TransactionData> lltd);
+	public void saveTransactionDataList(List<TransactionDataPOJO> lltd);
 	
-	public TransactionData getTransactionDataById(int id);
+	public TransactionDataPOJO getTransactionDataById(int id);
 	
-	public List<TransactionData> getTransactionDataList();
+	public List<TransactionDataPOJO> getTransactionDataList(); //get the list of transactions 
+	
+	public List<TransactionDataPOJO> getTransactiondataListThatNeedUpload(); //get the list of transactions not uploaded
+	
+	public int cleanUpTransactionData(); //delete all records that were uploaded to the server
 
 }

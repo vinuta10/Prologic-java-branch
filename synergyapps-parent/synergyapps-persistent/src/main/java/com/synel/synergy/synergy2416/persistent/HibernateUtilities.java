@@ -1,6 +1,9 @@
 package com.synel.synergy.synergy2416.persistent;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,6 +17,7 @@ public class HibernateUtilities {
 	private static SessionFactory mSessionFactory;
 	private static ServiceRegistry mServiceRegistry;
 	private static Configuration mConf;
+	private static Session msession;
 	
 	static 
 	{
@@ -31,6 +35,44 @@ public class HibernateUtilities {
 	public static SessionFactory getSessionFactory()
 	{
 		return mSessionFactory;
+	}
+	
+	public static List<?> SelectQuery(String hql) {
+		if (msession == null || !msession.isOpen()){
+			msession = HibernateUtilities.getSessionFactory().openSession();
+		}
+		List<?> results;
+		Transaction tx = null;
+		Query qry = msession.createQuery(hql);
+		try {
+			tx = msession.beginTransaction();
+			results = qry.list();
+
+		}catch (Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
+		tx.commit();
+		return results;
+	} 
+	
+	public static int ExecUpdateQuery(String hql) {
+		if (msession == null || !msession.isOpen()){
+			msession = HibernateUtilities.getSessionFactory().openSession();
+		}
+		int result;
+		Transaction tx = null;
+		Query qry = msession.createQuery(hql);
+		try {
+			tx = msession.beginTransaction();
+			result = qry.executeUpdate();
+
+		}catch (Exception ex){
+			ex.printStackTrace();
+			return -1;
+		}
+		tx.commit();
+		return result;
 	}
 	
 	public static void createSchema(){

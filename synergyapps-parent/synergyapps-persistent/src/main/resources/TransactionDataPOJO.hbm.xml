@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 10:55:36 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.synel.synergy.synergy2416.persistent.TransactionDataPOJO" table="TRANSACTIONDATAPOJO">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="timestamp" type="long">
+            <column name="TIMESTAMP" />
+        </property>
+        <property name="uploaded" type="boolean">
+            <column name="UPLOADED" />
+        </property>
+        
+        <component class="com.synel.synergy.synergy2416.persistent.PunchDataPOJO" name="pd">
+   		<parent name="com.synel.synergy.synergy2416.persistent.TransactionDataPOJO"/>
+   			<property column="USERID" generated="never" lazy="false"
+    					name="userId" type="integer"/>
+    		<property column="TRANSACTIONTIME" generated="never" lazy="false"
+     					name="TransactionTime" type="long"/>
+    		<property column="PUNCHTYPE" generated="never" lazy="false"
+     					name="punchtype" type="string"/>
+    		<list name="llIds" table="LABOR_LEVEL_DETAIL_IDS">
+     			<key column="USERID"/>
+     			<list-index base="0" column="POSITION"/>
+     			<element column="LABOR_LEVEL_DETAIL_ID" type="integer"/>
+    		</list>
+  		 </component>
+    </class>
+</hibernate-mapping>

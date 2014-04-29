@@ -1,7 +1,5 @@
 package com.synel.synergy.synergy2416.persistent;
 
-import com.xacttime.Fingerprint;
-
 /*
  *    @XmlElement(name = "UserId")
     protected int userId;
@@ -11,7 +9,7 @@ import com.xacttime.Fingerprint;
 
 public interface FingerPrintDao {
 	
-	public Fingerprint getFingerprintbyUid(int uId);
+	public FingerPrintPOJO getFingerprint(int uId, int fingerNum);
 	
-	public void saveFingerprint(Fingerprint fp);
+	public void saveFingerprint(FingerPrintPOJO fp);
 }

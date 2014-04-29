@@ -23,17 +23,17 @@ public class HbmEmployeeDaoTest {
 
 	@Test
 	public void testSaveEmployee() {
-		Employee emp = new Employee();
-		emp.setId(1);
-		emp.setBadgeNumber(100);
-		emp.setEmployeeNumber("A100");
-		emp.setName("John Doe");
-		emp.setLaborLevelMap("12,04,06,08");
+		EmployeePOJO emp = new EmployeePOJO();
+		emp.setId(2);
+		emp.setBadgeNumber(200);
+		emp.setEmployeeNumber("A102");
+		emp.setName("John Doe2");
+		emp.setLaborLevelMap("02,04,06,08");
 		EmployeeDao empDao = new HbmEmployeeDao();
 		System.out.println("Saving employee: "+emp.getName());
 		empDao.saveEmployee(emp);
 		System.out.println("find this employee...");
-		System.out.println("employee "+empDao.findEmployeeByBadgeNumber(100).getName()+"saved to Database.");
+		System.out.println("employee "+empDao.findEmployeeByBadgeNumber(200).getName()+"saved to Database.");
 	}
 
 	@Test

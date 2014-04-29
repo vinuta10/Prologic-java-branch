@@ -16,20 +16,15 @@ public class HbmTransactionDataDaoTest extends TestCase {
 	}
 
 	public void testSaveTransactionData() {
-		PunchData pd = new PunchData();
+		PunchDataPOJO pd = new PunchDataPOJO();
 		pd.setUserId(2);
-		pd.setPunchType(TimeSlicePreType.CLOCK_IN);
-		ArrayOfInt aoi = new ArrayOfInt();
-		for(int i:new int[]{12,11,7,3})
-		aoi.getInt().add(i);
-		pd.setLaborLevelDetailIds(aoi);
-		
-		TransactionData td = new TransactionData();
+		pd.setPunchType("Clock_In");
+		pd.setLaborLevelDetailIds(new int[]{12,11,7,3});
+		TransactionDataPOJO td = new TransactionDataPOJO();
 		td.setTimestamp(System.currentTimeMillis());
 		td.setUploaded(false);
 		td.setPd(pd);
 		htdd.saveTransactionData(td);
-		
 	}
 
 	public void testGetTransactionDataById() {

@@ -14,7 +14,7 @@ protected String name;
 protected String laborLevelMap;
  */
 
-public class Employee {
+public class EmployeePOJO {
 	
 	private int id;
 	private int badgeNumber;
