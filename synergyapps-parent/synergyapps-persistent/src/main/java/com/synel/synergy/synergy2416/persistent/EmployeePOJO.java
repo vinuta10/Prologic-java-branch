@@ -81,4 +81,10 @@ public class EmployeePOJO {
 	public void setLaborLevelMap(String laborLevelMap) {
 		this.laborLevelMap = laborLevelMap;
 	}
+	
+	@Override
+	public String toString(){
+		return "Id: "+id+" Name: "+name+" BadgeNumber: "+badgeNumber+" EmployeeNumber: "+employeeNumber+" LaborLevelMap: "+laborLevelMap;
+	}
+	
 }

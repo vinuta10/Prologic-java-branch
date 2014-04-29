@@ -8,13 +8,15 @@ package com.synel.synergy.synergy2416.model;
 
 public interface FingerPrintManager {
 	
-	public Integer addFingerPrint(int uId,String template);
+	public Integer addFingerPrint(int uId, int fingerNum, String template);
 	
-	public void updateFingerPrint(int uId, String template);
+	public int updateFingerPrint(int uId, int fingerNum, String template);
 	
-	public void deleteFingerPrint(int uId);
+	public int deleteFingerPrint(int uId, int fingerNum);
 	
-	public void listFingerPrints();
+	public int deleteFingerPrints(int uId);
+	
+	public int listFingerPrints();
 	
 	public String getFingerprintByUserId(int uId);
 	

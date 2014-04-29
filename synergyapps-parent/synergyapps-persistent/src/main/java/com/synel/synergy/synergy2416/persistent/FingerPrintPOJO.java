@@ -41,4 +41,9 @@ public class FingerPrintPOJO {
 	public void setTemplate(String template) {
 		this.template = template;
 	}
+	
+	@Override
+	public String toString(){
+		return "UID: "+userId+" FingerNumber: "+fingerNum+" Template: "+template;
+	}
 }

@@ -57,5 +57,11 @@ public class TransactionDataPOJO {
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	@Override
+	public String toString(){
+		String res = "ID: "+id+" TimeStamp: "+timestamp+" Uploaded "+uploaded + "\n";
+		return res+" PunchData: "+pd.toString();
+	}
 
 }

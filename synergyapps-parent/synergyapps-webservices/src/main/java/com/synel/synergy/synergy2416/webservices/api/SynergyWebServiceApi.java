@@ -1,13 +1,11 @@
 package com.synel.synergy.synergy2416.webservices.api;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 import com.xacttime.ArrayOfPunchData;
 import com.xacttime.Employee;
 import com.xacttime.Fingerprint;
 import com.xacttime.LaborLevel;
-import com.xacttime.LaborLevelDetail;
 
 public interface SynergyWebServiceApi {
 	/**

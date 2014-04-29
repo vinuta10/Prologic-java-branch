@@ -16,5 +16,11 @@ public interface EmployeeDao {
 	
 	public void saveEmployee(EmployeePOJO emp);
 	
+	public void saveEmployees(List<EmployeePOJO> emps);
+	
 	public List<EmployeePOJO> getEmployeeList();
+	
+	public int deleteEmployeeByBadgeNumber(int BadgeNumber);
+	
+	public int deleteAllEmployees();
 }

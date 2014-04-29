@@ -14,16 +14,21 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	public void saveEmployee(EmployeePOJO emp) {
 		this.saveData(emp);
 	}
+	
+	public void saveEmployees(List<EmployeePOJO> emps){
+		this.saveDataList(emps);
+	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<EmployeePOJO> getEmployeeList() {
-		return this.getEmployeeList();
+		String hql = "FROM EmployeePOJO";
+		return (List<EmployeePOJO>) HibernateUtilities.SelectQuery(hql);
 	}
 
 	@Override
 	public EmployeePOJO findEmployeeByBadgeNumber(int BadgeNumber) {
 		String hql = "FROM EmployeePOJO where badgeNumber = "+BadgeNumber;
-		System.out.println("executing query: "+hql);
 		List<?> res = HibernateUtilities.SelectQuery(hql);
 		return getEmployeeFromList(res);
 	}
@@ -44,6 +49,18 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	@Override
 	public String getLaborLevelMapByBadgeNumber(int BadgeNumber) {
 		return findEmployeeByBadgeNumber(BadgeNumber).getLaborLevelMap();
+	}
+
+	@Override
+	public int deleteEmployeeByBadgeNumber(int BadgeNumber) {
+		String hql = "delete from EmployeePOJO where badgeNumber = "+BadgeNumber;
+		return HibernateUtilities.ExecUpdateQuery(hql);
+	}
+
+	@Override
+	public int deleteAllEmployees() {
+		String hql = "delete from EmployeePOJO";
+		return HibernateUtilities.ExecUpdateQuery(hql);
 	}
 	
 	private EmployeePOJO getEmployeeFromList(List<?> emps){

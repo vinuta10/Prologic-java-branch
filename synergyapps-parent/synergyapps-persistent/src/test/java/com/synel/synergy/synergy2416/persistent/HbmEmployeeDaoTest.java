@@ -2,6 +2,10 @@ package com.synel.synergy.synergy2416.persistent;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,17 +21,12 @@ public class HbmEmployeeDaoTest {
 	}
 
 	@Test
-	public void testFindEmployeeById() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testSaveEmployee() {
 		EmployeePOJO emp = new EmployeePOJO();
-		emp.setId(2);
-		emp.setBadgeNumber(200);
-		emp.setEmployeeNumber("A102");
-		emp.setName("John Doe2");
+		emp.setId(0);
+		emp.setBadgeNumber(100);
+		emp.setEmployeeNumber("A100");
+		emp.setName("John Doe");
 		emp.setLaborLevelMap("02,04,06,08");
 		EmployeeDao empDao = new HbmEmployeeDao();
 		System.out.println("Saving employee: "+emp.getName());
@@ -35,30 +34,86 @@ public class HbmEmployeeDaoTest {
 		System.out.println("find this employee...");
 		System.out.println("employee "+empDao.findEmployeeByBadgeNumber(200).getName()+"saved to Database.");
 	}
+	
+	@Test
+	public void testSaveEmployees() {
+		List<EmployeePOJO> emps = new ArrayList<EmployeePOJO>();
+		for(int i=1; i<100000; i++){
+			EmployeePOJO emp = new EmployeePOJO();
+			emp.setId(i);
+			emp.setBadgeNumber(i+100);
+			emp.setEmployeeNumber("P"+i*100+1);
+			emp.setName("Peter Pan"+i);
+			emp.setLaborLevelMap("00,01,02,03");
+			emps.add(emp);
+		}
+		EmployeeDao empDao = new HbmEmployeeDao();
+		empDao.saveEmployees(emps);
+		emps = empDao.getEmployeeList();
+		printList(emps);
+	}
 
 	@Test
 	public void testGetEmployeeList() {
-		fail("Not yet implemented");
+		List<EmployeePOJO> emps = new ArrayList<EmployeePOJO>();
+		EmployeeDao empDao = new HbmEmployeeDao();
+		emps = empDao.getEmployeeList();
+		printList(emps);
+	}
+	
+	@Test
+	public void testFindEmployeeById() {
+		EmployeeDao empDao = new HbmEmployeeDao();
+		EmployeePOJO emp = empDao.findEmployeeById(101);
+		System.out.println(emp.toString());
 	}
 
 	@Test
 	public void testFindEmployeeByBadgeNumber() {
-		fail("Not yet implemented");
+		EmployeeDao empDao = new HbmEmployeeDao();
+		EmployeePOJO emp = empDao.findEmployeeByBadgeNumber(101);
+		System.out.println(emp.toString());
 	}
 
 	@Test
 	public void testFindEmployeeByEmployeeNumber() {
-		fail("Not yet implemented");
+		EmployeeDao empDao = new HbmEmployeeDao();
+		EmployeePOJO emp = empDao.findEmployeeByEmployeeNumber("P100");
+		System.out.println(emp.toString());
 	}
 
 	@Test
 	public void testGetLaborLevelMapByEmployeeNumber() {
-		fail("Not yet implemented");
+		EmployeeDao empDao = new HbmEmployeeDao();
+		String llmap = empDao.getLaborLevelMapByEmployeeNumber("A100");
+		System.out.println(llmap);
 	}
 
 	@Test
 	public void testGetLaborLevelMapByBadgeNumber() {
-		fail("Not yet implemented");
+		EmployeeDao empDao = new HbmEmployeeDao();
+		String llmap = empDao.getLaborLevelMapByBadgeNumber(100);
+		System.out.println(llmap);
+	}
+	
+	@Test
+	public void testDeletEmployeeByBadgeNumber(){
+		EmployeeDao empDao = new HbmEmployeeDao();
+		int numOfRecords = empDao.deleteEmployeeByBadgeNumber(100);
+		System.out.println("Deleted "+numOfRecords+" Record(s)!");
+		assertEquals(numOfRecords,1);
+	}
+	
+	@Test
+	public void testDeleteAllEmployees(){
+		EmployeeDao empDao = new HbmEmployeeDao();
+		System.out.println("Deleted "+empDao.deleteAllEmployees()+"records!");
 	}
 
+	private void printList(List<EmployeePOJO> emps) {
+		for (Iterator<EmployeePOJO> iterator = 
+				emps.iterator(); iterator.hasNext();){
+			System.out.println(iterator.next().toString()); 
+		}
+	}
 }

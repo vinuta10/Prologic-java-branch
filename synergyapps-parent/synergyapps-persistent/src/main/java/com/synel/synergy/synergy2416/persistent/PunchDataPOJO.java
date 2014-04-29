@@ -1,5 +1,7 @@
 package com.synel.synergy.synergy2416.persistent;
 
+import java.util.Date;
+
 public class PunchDataPOJO {
 	
 	
@@ -65,5 +67,15 @@ public class PunchDataPOJO {
 	 */
 	public void setLaborLevelDetailIds(int[] laborLevelDetailIds) {
 		this.laborLevelDetailIds = laborLevelDetailIds;
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder sb=new StringBuilder();
+		sb.append("UID: "+userId+" TransactionTime: "+new Date(transactionTime)+" PunchType: "+punchType);
+		for (int i=0; i<laborLevelDetailIds.length; i++){
+			sb.append("\n LLID "+i+": "+laborLevelDetailIds[i]);
+		}
+		return sb.toString();
 	}
 }

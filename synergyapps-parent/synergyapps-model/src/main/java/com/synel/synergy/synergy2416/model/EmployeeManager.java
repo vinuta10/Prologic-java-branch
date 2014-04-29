@@ -11,18 +11,5 @@ public interface EmployeeManager {
 	public void deleteEmployee(Integer EmpId);
 	
 	public String getEmployeeLaborLevelsById(int id);
-	
-	/*
-	 *    @XmlElement(name = "Id")
-    protected int id;
-    @XmlElement(name = "BadgeNumber")
-    protected int badgeNumber;
-    @XmlElement(name = "EmployeeNumber")
-    protected String employeeNumber;
-    @XmlElement(name = "Name")
-    protected String name;
-    @XmlElement(name = "LaborLevelMap")
-    protected String laborLevelMap;
-	 */
 
 }

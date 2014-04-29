@@ -2,10 +2,9 @@ package com.synel.synergy.synergy2416.webservices;
 
 import java.util.List;
 
-import com.xacttime.ArrayOfFingerprint;
-import com.xacttime.Fingerprint;
-
 import junit.framework.TestCase;
+
+import com.xacttime.Fingerprint;
 
 public class SynergyWebServicesUnitTest extends TestCase {
 	
@@ -64,10 +63,6 @@ public class SynergyWebServicesUnitTest extends TestCase {
 	}
 
 	public void testGetLaborLevel() {
-		fail("Not yet implemented");
-	}
-
-	public void testGetServerTime() {
 		fail("Not yet implemented");
 	}
 
