@@ -16,6 +16,8 @@ import javax.swing.JTextField;
  */
 public class SynergyEventDispatcher {
 	
+	private static final String fpPath = "/home/admin/synergy/fingers/";
+	
 	
 	public enum SYNERGY_STATUS
 	{
@@ -59,7 +61,7 @@ public class SynergyEventDispatcher {
 	}
 	
 	public void initialize() {	  
-		while (FPU.openFPU("/root/fingers/") !=0 ){
+		while (FPU.openFPU(fpPath) !=0 ){
 		}
 		System.out.println("Changing clock status to ready ...");
   	  	m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;

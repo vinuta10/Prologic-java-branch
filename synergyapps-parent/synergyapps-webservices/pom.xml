@@ -59,7 +59,7 @@
             <execution>
               <phase>generate-sources</phase> 
               <configuration>
-                <sourceRoot>src/main/java</sourceRoot> 
+                <sourceRoot>src/generated-code</sourceRoot> 
                  <wsdlOptions>
                    <wsdlOption>
                      <wsdl>src/main/resources/xacttime_synergy_v2.wsdl</wsdl> 

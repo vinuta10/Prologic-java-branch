@@ -16,7 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SynergyAudioPool 
 {
-	private static final String ResPath = "/src/main/resources/multimedia/";
+	private static final String ResPath = "/multimedia/";
 
 	//private Runnable greetingsound;
 	private Runnable enrollsound;

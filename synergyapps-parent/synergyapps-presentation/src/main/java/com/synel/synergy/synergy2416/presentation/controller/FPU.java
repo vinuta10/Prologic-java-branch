@@ -12,7 +12,7 @@ public final class FPU {  //implements FingerPrintEnrollmentHandler, Employee{
 
 	static { 
 		System.out.println(System.getProperty("java.library.path"));
-		System.loadLibrary("synergy-mock"); //changeme to "synergy"->libsynergy.so for real device.
+		System.loadLibrary("synergy-mock"); //changeme to "synergy"->libsynergy.so for real device. place it in /home/admin/synergy/lib/.
 	}
 
 	private static class FPULoader {

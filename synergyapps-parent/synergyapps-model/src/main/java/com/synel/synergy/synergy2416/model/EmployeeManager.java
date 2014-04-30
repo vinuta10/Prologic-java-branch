@@ -2,14 +2,24 @@ package com.synel.synergy.synergy2416.model;
 
 public interface EmployeeManager {
 	
-	public Integer addEmployee(int uId,int BadgeNumber, String EmpNumber, String laborlevelmap);
+	/*
+	 * This method can be run periodically to sync the Employee Data with the server
+	 * or can be manually called to force the sync action.
+	 * it is also called in the constructor to initialize the Employee data
+	 * @return number of employees downloaded and saved to the persistence layer.
+	 */
+	public int syncEmployeesFromServer();
 	
-	public void listEmployees();
+	//public int addEmployee(int uId,int BadgeNumber, String EmpNumber, String laborlevelmap);
 	
-	public void updateEmployee(Integer EmpId, String laborlevelmap);
+	public int getEmployeeCount();
 	
-	public void deleteEmployee(Integer EmpId);
+	public void updateEmployeeLaborLevels(int EmpId, String laborlevelmap);
+	
+	public void deleteEmployeeById(int id);
 	
 	public String getEmployeeLaborLevelsById(int id);
+	
+	public String getEmployeeNameById(int id);
 
 }

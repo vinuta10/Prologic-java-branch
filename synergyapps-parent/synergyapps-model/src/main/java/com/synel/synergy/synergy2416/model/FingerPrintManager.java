@@ -7,8 +7,18 @@ package com.synel.synergy.synergy2416.model;
  */
 
 public interface FingerPrintManager {
+	/*
+	 * Download Fingerprint data from server in the background
+	 * save them to the local persistence layer.
+	 * send a signal when it is done.
+	 */
+	public int syncFingerPrintsFromServer();
 	
-	public Integer addFingerPrint(int uId, int fingerNum, String template);
+	public void uploadFingerPrint(int uId, String template);
+	
+	public void uploadFingerPrintBatch();
+	
+	public int addFingerPrint(int uId, int fingerNum, String template);
 	
 	public int updateFingerPrint(int uId, int fingerNum, String template);
 	
@@ -18,10 +28,8 @@ public interface FingerPrintManager {
 	
 	public int listFingerPrints();
 	
+	public int fingerprintCount();
+	
 	public String getFingerprintByUserId(int uId);
-	
-	public void uploadFingerPrint(int uId,String template);
-	
-	public void uploadFingerPrintBatch();
 
 }
