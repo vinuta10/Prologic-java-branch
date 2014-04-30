@@ -31,7 +31,6 @@ public class MainWindow extends JFrame {
 	/**
 	 *  This is the main entrance of the Application follow MVC pattern
 	 */
-	private static final long serialVersionUID = 8210857356700426265L;
 	private static SynergyEventController m_sec;
 	private static SynergyEventDispatcher m_sed;
 	private static SynergyAudioPool m_sap;

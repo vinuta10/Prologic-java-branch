@@ -16,18 +16,24 @@
         </property>
         
         <component class="com.synel.synergy.synergy2416.persistent.PunchDataPOJO" name="pd">
-   		<parent name="com.synel.synergy.synergy2416.persistent.TransactionDataPOJO"/>
-   			<property column="USERID" generated="never" lazy="false"
-    					name="userId" type="integer"/>
-    		<property column="TRANSACTIONTIME" generated="never" lazy="false"
-     					name="TransactionTime" type="long"/>
-    		<property column="PUNCHTYPE" generated="never" lazy="false"
-     					name="punchtype" type="string"/>
-    		<list name="llIds" table="LABOR_LEVEL_DETAIL_IDS">
-     			<key column="USERID"/>
-     			<list-index base="0" column="POSITION"/>
-     			<element column="LABOR_LEVEL_DETAIL_ID" type="integer"/>
-    		</list>
-  		 </component>
+        <property name="userId" type="int">
+            <column name="USERID" />
+        </property>
+        <property name="transactionTime" type="long">
+            <column name="TRANSACTIONTIME" />
+        </property>
+        <property name="punchType" type="java.lang.String">
+            <column name="PUNCHTYPE" />
+        </property>
+        <list name="laborLevelDetailIds" inverse="false" table="laborLevelDetailTbl" lazy="true">
+            <key>
+                <column name="UID" />
+            </key>
+            <list-index base="0" column="POSITION"/>
+            <element type="java.lang.Integer">
+                <column name="LABORLEVELDETAILIDS" />
+            </element>
+        </list>
+  		</component>
     </class>
 </hibernate-mapping>

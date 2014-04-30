@@ -11,7 +11,7 @@
         <property name="fingerNum" type="int">
             <column name="FINGERNUM" />
         </property>
-        <property name="template" type="java.lang.String">
+        <property name="template" type="text" length = "4096">
             <column name="TEMPLATE" />
         </property>
     </class>

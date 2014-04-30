@@ -1,6 +1,7 @@
 package com.synel.synergy.synergy2416.persistent;
 
 import java.util.Date;
+import java.util.List;
 
 public class PunchDataPOJO {
 	
@@ -11,7 +12,7 @@ public class PunchDataPOJO {
    
     private String punchType;
    
-    private int[] laborLevelDetailIds;
+    private List<Integer> laborLevelDetailIds;
 
 	/**
 	 * @return the userId
@@ -54,27 +55,29 @@ public class PunchDataPOJO {
 	public void setPunchType(String punchType) {
 		this.punchType = punchType;
 	}
-
+	
 	/**
 	 * @return the laborLevelDetailIds
 	 */
-	public int[] getLaborLevelDetailIds() {
+	public List<Integer> getLaborLevelDetailIds() {
 		return laborLevelDetailIds;
 	}
 
 	/**
 	 * @param laborLevelDetailIds the laborLevelDetailIds to set
 	 */
-	public void setLaborLevelDetailIds(int[] laborLevelDetailIds) {
+	public void setLaborLevelDetailIds(List<Integer> laborLevelDetailIds) {
 		this.laborLevelDetailIds = laborLevelDetailIds;
 	}
-	
+
 	@Override
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("UID: "+userId+" TransactionTime: "+new Date(transactionTime)+" PunchType: "+punchType);
-		for (int i=0; i<laborLevelDetailIds.length; i++){
-			sb.append("\n LLID "+i+": "+laborLevelDetailIds[i]);
+		int i=0;
+		for (Integer id:laborLevelDetailIds){
+			sb.append("\n LLID "+i+": "+id.toString());
+			++i;
 		}
 		return sb.toString();
 	}

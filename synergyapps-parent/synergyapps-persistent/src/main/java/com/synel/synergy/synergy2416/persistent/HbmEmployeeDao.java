@@ -35,7 +35,7 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 
 	@Override
 	public EmployeePOJO findEmployeeByEmployeeNumber(String empNumber) {
-		String hql = "FROM EmployeePOJO where employeeNumber = "+empNumber;
+		String hql = "FROM EmployeePOJO where employeeNumber = "+"\'"+empNumber+"\'";
 		List<?> res = HibernateUtilities.SelectQuery(hql);
 		return getEmployeeFromList(res);
 		

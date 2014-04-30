@@ -1,8 +1,7 @@
 package com.synel.synergy.synergy2416.persistent;
 
-import com.xacttime.ArrayOfInt;
-import com.xacttime.PunchData;
-import com.xacttime.TimeSlicePreType;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import junit.framework.TestCase;
 
@@ -19,7 +18,7 @@ public class HbmTransactionDataDaoTest extends TestCase {
 		PunchDataPOJO pd = new PunchDataPOJO();
 		pd.setUserId(2);
 		pd.setPunchType("Clock_In");
-		pd.setLaborLevelDetailIds(new int[]{12,11,7,3});
+		pd.setLaborLevelDetailIds(new ArrayList<Integer>(Arrays.asList(12,2,3,11)));
 		TransactionDataPOJO td = new TransactionDataPOJO();
 		td.setTimestamp(System.currentTimeMillis());
 		td.setUploaded(false);

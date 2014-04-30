@@ -6,6 +6,7 @@
     <groupId>com.synel.synergy.multiapps</groupId>
     <artifactId>synergyapps-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../synergyapps-parent</relativePath>
   </parent>
   <groupId>com.synel.synergy.synergy2416.persistent</groupId>
   <artifactId>synergyapps-persistent</artifactId>

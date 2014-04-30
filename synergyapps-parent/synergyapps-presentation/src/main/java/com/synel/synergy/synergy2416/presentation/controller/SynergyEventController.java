@@ -22,7 +22,7 @@ import com.synel.synergy.synergy2416.presentation.view.SynergyWelcomeForm;
 
 
 public class SynergyEventController implements SynergyStatusListener {
-private static final String ResPath = "/com/synel/clocks/synergy2416/res/";
+private static final String ResPath = "/multimedia/";
 	
 	private MainWindow m_frame;
 	private SYNERGY_STATUS m_curStatus = SynergyEventDispatcher.SYNERGY_STATUS.SYNERGYSTATUS_UNINITIALIZED;

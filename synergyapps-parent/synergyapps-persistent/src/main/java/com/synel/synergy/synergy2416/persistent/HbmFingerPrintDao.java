@@ -7,7 +7,7 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 
 	@Override
 	public FingerPrintPOJO getFingerprint(int uId, int fingerNum) {
-		String hql = "FROM FingerPrintPOJO F WHERE F.uId = "+uId+" AND F.fingerNum = "+fingerNum;
+		String hql = "from FingerPrintPOJO where userId = "+uId+" and fingerNum = "+fingerNum;
 		List<?> res = HibernateUtilities.SelectQuery(hql);
 		return getFingerPrintFromList(res);
 	}
@@ -17,6 +17,11 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 		this.saveData(fp);
 	}
 
+	@Override
+	public void saveFingerprints(List<FingerPrintPOJO> fps) {
+		this.saveDataList(fps);
+	}
+	
 	private FingerPrintPOJO getFingerPrintFromList(List<?> res) {
 		FingerPrintPOJO fp = null;
 		for (Iterator<?> iterator = 

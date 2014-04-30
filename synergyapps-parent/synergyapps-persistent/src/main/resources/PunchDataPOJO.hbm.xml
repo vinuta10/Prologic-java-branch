@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 28, 2014 10:55:36 PM by Hibernate Tools 3.4.0.CR1 -->
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 30, 2014 12:21:46 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.synel.synergy.synergy2416.persistent.PunchDataPOJO" table="PUNCHDATAPOJO">
         <id name="userId" type="int">
@@ -14,14 +14,14 @@
         <property name="punchType" type="java.lang.String">
             <column name="PUNCHTYPE" />
         </property>
-        <primitive-array name="laborLevelDetailIds" table="PUNCHDATAPOJO">
+        <list name="laborLevelDetailIds" table="LABORLEVELDETAILIDS">
             <key>
                 <column name="USERID" />
             </key>
-            <index></index>
-            <element type="int">
-                <column name="LABORLEVELDETAILIDS" />
+            <list-index base="0" column="POSITION"/>
+            <element type="java.lang.Integer">
+                <column name="LLIDS" />
             </element>
-        </primitive-array>
+        </list>
     </class>
-</hibernate-mapping>
+</hibernate-mapping> 

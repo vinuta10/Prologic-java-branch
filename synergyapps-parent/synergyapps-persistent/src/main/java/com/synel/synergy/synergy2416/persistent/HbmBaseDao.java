@@ -86,7 +86,7 @@ public class HbmBaseDao<T> {
 		}
 		T data = null;
 		try {
-			data = (T) msession.load(g(), id);
+			data = (T) msession.get(g(), id); //notice the difference between 'session.get' and 'session.load'
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;

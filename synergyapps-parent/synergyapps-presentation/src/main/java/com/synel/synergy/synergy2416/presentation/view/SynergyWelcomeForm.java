@@ -27,7 +27,7 @@ import com.synel.synergy.synergy2416.presentation.controller.SynergyEventDispatc
 
 public class SynergyWelcomeForm extends JPanel {
 	private static final long serialVersionUID = 319089484632562510L;
-	private static final String ResPath = "/com/synel/clocks/synergy2416/res/";
+	private static final String ResPath = "/multimedia/";
 	private JLabel m_lblWelcomeLabel;
 	private JLabel m_lblText;
 	private JLayeredPane m_pMsg;

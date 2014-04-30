@@ -11,7 +11,8 @@ public final class FPU {  //implements FingerPrintEnrollmentHandler, Employee{
 	private static boolean m_bFingerisEnrolling = false;
 
 	static { 
-		System.loadLibrary("synergy2416-sim"); 
+		System.out.println(System.getProperty("java.library.path"));
+		System.loadLibrary("synergysim"); 
 	}
 
 	private static class FPULoader {
