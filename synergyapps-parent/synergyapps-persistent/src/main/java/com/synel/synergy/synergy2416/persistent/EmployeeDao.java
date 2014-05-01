@@ -23,4 +23,8 @@ public interface EmployeeDao {
 	public int deleteEmployeeByBadgeNumber(int BadgeNumber);
 	
 	public int deleteAllEmployees();
+
+	public int getEmployeeCount();
+
+	public int updateLaborLevelMapByBadgeNumber(int BadgeNumber, String llmap);
 }

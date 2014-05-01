@@ -37,7 +37,7 @@ public class HibernateUtilities {
 		return mSessionFactory;
 	}
 	
-	public static List<?> SelectQuery(String hql) {
+	public static List<?> SelectQueryList(String hql) {
 		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();
 		}
@@ -55,6 +55,14 @@ public class HibernateUtilities {
 		tx.commit();
 		return results;
 	} 
+	
+	public static int SelectQueryUniqueInt(String hql) {
+		if (msession == null || !msession.isOpen()){
+			msession = HibernateUtilities.getSessionFactory().openSession();
+		}
+		Query qry = msession.createQuery(hql);
+		return ((Number) qry.uniqueResult()).intValue();
+	}
 	
 	public static int ExecUpdateQuery(String hql) {
 		if (msession == null || !msession.isOpen()){

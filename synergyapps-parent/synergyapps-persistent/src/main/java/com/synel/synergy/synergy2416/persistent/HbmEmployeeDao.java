@@ -23,20 +23,20 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	@Override
 	public List<EmployeePOJO> getEmployeeList() {
 		String hql = "FROM EmployeePOJO";
-		return (List<EmployeePOJO>) HibernateUtilities.SelectQuery(hql);
+		return (List<EmployeePOJO>) HibernateUtilities.SelectQueryList(hql);
 	}
 
 	@Override
 	public EmployeePOJO findEmployeeByBadgeNumber(int BadgeNumber) {
 		String hql = "FROM EmployeePOJO where badgeNumber = "+BadgeNumber;
-		List<?> res = HibernateUtilities.SelectQuery(hql);
+		List<?> res = HibernateUtilities.SelectQueryList(hql);
 		return getEmployeeFromList(res);
 	}
 
 	@Override
 	public EmployeePOJO findEmployeeByEmployeeNumber(String empNumber) {
 		String hql = "FROM EmployeePOJO where employeeNumber = "+"\'"+empNumber+"\'";
-		List<?> res = HibernateUtilities.SelectQuery(hql);
+		List<?> res = HibernateUtilities.SelectQueryList(hql);
 		return getEmployeeFromList(res);
 		
 	}
@@ -70,6 +70,23 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 				emp = (EmployeePOJO) iterator.next(); 
 			}
 		return emp;
+	}
+
+	@Override
+	public int getEmployeeCount() {
+		int res = 0;
+		String hql = "select count(e) from EmployeePOJO e";
+		res = HibernateUtilities.SelectQueryUniqueInt(hql);
+		return res;
+	}
+
+	@Override
+	public int updateLaborLevelMapByBadgeNumber(int BadgeNumber, String llmap) {
+		//TODO test
+		int res = 0;
+		String hql = "update EmployeePOJO e set e.laborlevelmap=llmap where e.badgeNumber = BadgeNumber";
+		res = HibernateUtilities.ExecUpdateQuery(hql);
+		return res;
 	}
 
 }

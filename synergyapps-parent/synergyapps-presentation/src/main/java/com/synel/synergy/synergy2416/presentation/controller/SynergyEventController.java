@@ -295,6 +295,7 @@ private static final String ResPath = "/multimedia/";
 			
 			loadSysInforForm();
 			break;
+			
 		case SYNERGYSTATUS_READY:
 		case SYNERGYSTATUS_MENU:
 		default:
@@ -303,10 +304,21 @@ private static final String ResPath = "/multimedia/";
 		}
 	}
 	
+	/*
+	 * pragma here is all the "SLOT" function go to 
+	 * (non-Javadoc)
+	 * @see com.synel.synergy.synergy2416.presentation.controller.SynergyStatusListener#synergyStatusChanged(com.synel.synergy.synergy2416.presentation.controller.SynergyEventDispatcher.SYNERGY_STATUS)
+	 */
+	
 	// This correspond to the "SLOT" part of the QT's signal slot idiom...
 	public void synergyStatusChanged(SYNERGY_STATUS ss) {
 		//System.out.println("clock status changed to ..."+cs.toString());
   		m_curStatus = ss;
   		returnToMain();
+	}
+	
+	public void onFingerprintEnrollmentSuccess(String strBadgeNum, int nFingerNum){
+		String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
+		//save it to persistent layer.
 	}
 }

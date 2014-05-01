@@ -34,6 +34,6 @@ public class HbmTransactionDataDao extends HbmBaseDao<TransactionDataPOJO> imple
 	@Override
 	public List<TransactionDataPOJO> getTransactiondataListThatNeedUpload() {
 	    String hql = "From TransactionDataPOJO where uploaded = 'false'";
-		return (List<TransactionDataPOJO>) HibernateUtilities.SelectQuery(hql);
+		return (List<TransactionDataPOJO>) HibernateUtilities.SelectQueryList(hql);
 	}
 }

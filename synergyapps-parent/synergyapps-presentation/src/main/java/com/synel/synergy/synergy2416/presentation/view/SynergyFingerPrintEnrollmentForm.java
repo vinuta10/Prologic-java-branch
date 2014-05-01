@@ -60,11 +60,13 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 	        @Override
 	        protected void done() {
 	            try { 
+	            	//fp enrollment done
 	            	String strResult = get();
 	                m_txtEnrollmentResult.setText("<html><font color=black>"+strResult+"<br>Press Enter to Restart "+"<br>Press MENU to the main menu</font><html>");
 	                m_lblEnrollmentStatus.setText("Enroll Employee ID: "+m_strEmployeeNum+" Finger: "+m_nFingerNum);
 	                if (strResult.compareTo("Succeed!") == 0) {
-	                	
+	                	//send signal to event dispatcher
+	                	SynergyFingerPrintEnrollmentForm.this.m_mw.get_Sec().onFingerprintEnrollmentSuccess(m_strEmployeeNum,m_nFingerNum);
 	                	FPU.Light.RED.off();
 	                	FPU.Light.GREEN.on();
 	                	MainWindow.get_Sap().playEnrollSound();

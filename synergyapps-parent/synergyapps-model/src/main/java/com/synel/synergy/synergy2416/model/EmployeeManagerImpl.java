@@ -1,18 +1,32 @@
 package com.synel.synergy.synergy2416.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.synel.synergy.synergy2416.persistent.EmployeeDao;
+import com.synel.synergy.synergy2416.persistent.EmployeePOJO;
+import com.synel.synergy.synergy2416.persistent.HbmEmployeeDao;
 import com.synel.synergy.synergy2416.webservices.SynergyWebServices;
+import com.synel.synergy.synergy2416.webservices.api.SynergyWebServiceApi;
+import com.xacttime.Employee;
 
 
-public class EmployeeManagerImpl implements EmployeeManager, Runnable{
+public class EmployeeManagerImpl implements EmployeeManager {
 	
 	private static EmployeeManagerImpl mInstance = null;
 	
 	private EmployeeDao empDao;
-	private SynergyWebServices mSws;
+	private SynergyWebServiceApi mSws;
+	private List<EmployeePOJO> mEmps;
+	
+	//implement the "radio station to signal the db ready status
+	//
 	
 	private EmployeeManagerImpl(){
 		//initialize variables and start the sync on class start up.
+		empDao = new HbmEmployeeDao();
+		mSws = new SynergyWebServices();
+		mEmps = new ArrayList<EmployeePOJO>();
 	} 
 	
 	public static EmployeeManagerImpl getInstance(){
@@ -26,46 +40,72 @@ public class EmployeeManagerImpl implements EmployeeManager, Runnable{
 	public int syncEmployeesFromServer() {
 		// first download the employee data from the server
 		// second save it in the persistent layer
-		// send a signal slot when done.
-		int res = 0;
+		// the caller shall do this in future thread and
+		// check the future.get for result or error
 		
+		int res = -1;
+		//Do it in Future thread example:
+//		ExecutorService executorService = Executors.newSingleThreadExecutor();
+//		Future future = executorService.submit(new Callable(){
+//		    public Object call() throws Exception {
+//		        return mSws.getEmployees();
+//		    }
+//		});
+
+		//System.out.println("future.get() = " + future.get().toString());
+		try {
+			mEmps = convertToEmployeePOJOList(mSws.getEmployees());
+		} catch (Exception ex){
+			ex.printStackTrace();
+			return -1;
+		}
+		empDao.saveEmployees(mEmps);
+		res = 0;
 		return res;
 	}
 
 	@Override
 	public int getEmployeeCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return empDao.getEmployeeCount();
 	}
 
 	@Override
 	public void updateEmployeeLaborLevels(int EmpId, String laborlevelmap) {
-		// TODO Auto-generated method stub
-		
+		empDao.updateLaborLevelMapByBadgeNumber(EmpId, laborlevelmap);
 	}
 
 	@Override
 	public void deleteEmployeeById(int id) {
-		// TODO Auto-generated method stub
-		
+		//Id is badgenumber in this case.
+		empDao.deleteEmployeeByBadgeNumber(id);
 	}
 
 	@Override
 	public String getEmployeeLaborLevelsById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return empDao.getLaborLevelMapByBadgeNumber(id);
 	}
 
 	@Override
 	public String getEmployeeNameById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return empDao.findEmployeeByBadgeNumber(id).getName();
 	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	
+	private List<EmployeePOJO> convertToEmployeePOJOList(List<Employee> employees) {
+		List<EmployeePOJO> dbEmps = new ArrayList<EmployeePOJO>();
+		for (Employee emp:employees){
+			dbEmps.add(convertToEmployeePOJO(emp));
+		}
+		return dbEmps;
+	}
+	
+	private EmployeePOJO convertToEmployeePOJO(Employee emp){
+		EmployeePOJO dbEmp = new EmployeePOJO();
+		dbEmp.setBadgeNumber(emp.getBadgeNumber());
+		dbEmp.setEmployeeNumber(emp.getEmployeeNumber());
+		dbEmp.setId(emp.getId());
+		dbEmp.setName(emp.getName());
+		dbEmp.setLaborLevelMap(emp.getLaborLevelMap());
+		return dbEmp;
 	}
 
 }

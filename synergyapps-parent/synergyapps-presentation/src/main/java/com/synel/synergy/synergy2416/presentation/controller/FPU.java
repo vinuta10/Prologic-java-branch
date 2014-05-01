@@ -219,6 +219,11 @@ public final class FPU {  //implements FingerPrintEnrollmentHandler, Employee{
 		m_bFingerisEnrolling = false;
 		return app_msgConvert(enrollMessage);
 	}
+	
+	public static String encodedTemplate(String strBadgeNum, int nFingerNum){
+		return FPU.FP_GET_TEMPLATE(strBadgeNum, nFingerNum);
+	}
+	
 	public static String enrollCount() {
 		return app_msgConvert(FPU.FP_GET_ENROLECOUNT());
 	}

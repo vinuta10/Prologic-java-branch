@@ -30,7 +30,8 @@ public class SynergyEventDispatcher {
 	    SYNERGYSTATUS_FINGERPRINT_CONTROL,
 	    SYNERGYSTATUS_SYSINFO,
 	    SYNERGYSTATUS_MENU,
-	    SYNERGYSTATUS_READY
+	    SYNERGYSTATUS_READY, 
+	    SYNERGYSTATUS_FPENROLLSUCCESS
 	}
 	
 	private static SYNERGY_STATUS m_prestatus;
@@ -163,4 +164,6 @@ public class SynergyEventDispatcher {
 //        }
 //		return false;
 //	}
+	//connect (signal ("fpsuccess"), slot fpready());
+	
 }
