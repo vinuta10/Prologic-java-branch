@@ -14,7 +14,7 @@ public interface FingerPrintManager {
 	 */
 	public int syncFingerPrintsFromServer();
 	
-	public void uploadFingerPrint(int uId, String template);
+	public void uploadFingerPrintRt(int uId, String template);
 	
 	public void uploadFingerPrintBatch();
 	
@@ -25,8 +25,6 @@ public interface FingerPrintManager {
 	public int deleteFingerPrint(int uId, int fingerNum);
 	
 	public int deleteFingerPrints(int uId);
-	
-	public int listFingerPrints();
 	
 	public int fingerprintCount();
 	

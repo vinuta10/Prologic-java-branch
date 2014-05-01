@@ -74,6 +74,7 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 
 	@Override
 	public int getEmployeeCount() {
+		//TODO test
 		int res = 0;
 		String hql = "select count(e) from EmployeePOJO e";
 		res = HibernateUtilities.SelectQueryUniqueInt(hql);

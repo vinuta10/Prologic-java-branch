@@ -39,7 +39,7 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 	public int syncFingerPrintsFromServer() {
 		int res = -1;
 		try {
-			mFps = convertToFingerPrintPOJOList(mSws.getFingerPrints());
+			mFps = EntityMapUtility.mapToFingerPrintPOJOList(mSws.getFingerPrints());
 		} catch (Exception ex){
 			ex.printStackTrace();
 			return -1;
@@ -51,19 +51,20 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 	}
 
 	@Override
-	public void uploadFingerPrint(int uId, String template) {
+	public void uploadFingerPrintRt(int uId, String template) {
 		mSws.sendFingerPrint(uId, template);
 	}
 
 	@Override
 	public void uploadFingerPrintBatch() {
 		// TODO Auto-generated method stub
+		//go through the finger print db and upload those that are not synced already
 	}
 
 	@Override
 	public int addFingerPrint(int uId, int fingerNum, String template) {
 		FingerPrintPOJO fp = new FingerPrintPOJO();
-		fp.setFingerNum(0);
+		fp.setFingerNum(0);//it is always #0 for this version, will expand in the future
 		fp.setUserId(uId);
 		fp.setTemplate(template);
 		mFpDao.saveFingerprint(fp);
@@ -72,54 +73,26 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 
 	@Override
 	public int updateFingerPrint(int uId, int fingerNum, String template) {
-		//TODO Auto-generated method stub
-		return 0;
+		return mFpDao.updateFingerPrint(uId,fingerNum,template);
 	}
 
 	@Override
 	public int deleteFingerPrint(int uId, int fingerNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mFpDao.deleteFingerPrint(uId, fingerNum);
 	}
 
 	@Override
 	public int deleteFingerPrints(int uId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int listFingerPrints() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mFpDao.deleteFingerPrints(uId);
 	}
 
 	@Override
 	public int fingerprintCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mFpDao.getFingerPrintCount();
 	}
 
 	@Override
 	public String getFingerprintByUserId(int uId) {
-		// TODO Auto-generated method stub
-		return null;
+		return mFpDao.getFingerprint(uId, 0).getTemplate();
 	}
-	
-	private List<FingerPrintPOJO> convertToFingerPrintPOJOList(List<Fingerprint> fps) {
-		List<FingerPrintPOJO> aofp = new ArrayList<FingerPrintPOJO>();
-		for(Fingerprint fp:fps){
-			aofp.add(convertToFingerPrintPOJO(fp));
-		}
-		return aofp;
-	}
-	
-	private FingerPrintPOJO convertToFingerPrintPOJO(Fingerprint fp){
-		FingerPrintPOJO f = new FingerPrintPOJO();
-		f.setUserId(fp.getUserId());
-		f.setFingerNum(0);
-		f.setTemplate(fp.getTemplate());
-		return f;
-	}
-
 }

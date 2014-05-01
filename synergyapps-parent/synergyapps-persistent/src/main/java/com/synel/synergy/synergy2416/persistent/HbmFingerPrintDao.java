@@ -30,4 +30,40 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 			}
 		return fp;
 	}
+
+	@Override
+	public int updateFingerPrint(int uId, int fingerNum, String template) {
+		//TODO test
+		int res = 0;
+		String hql = "update FingerPrintPOJO f set f.template=template where f.uId = uId and f.fingerNum = fingerNum";
+		res = HibernateUtilities.ExecUpdateQuery(hql);
+		return res;
+	}
+
+	@Override
+	public int deleteFingerPrint(int uId, int fingerNum) {
+		//TODO test
+		int res = 0;
+		String hql = "delete FingerPrintPOJO f where f.uId = uId and f.fingerNum = fingerNum";
+		res = HibernateUtilities.ExecUpdateQuery(hql);
+		return res;
+	}
+
+	@Override
+	public int deleteFingerPrints(int uId) {
+		//TODO test
+		int res = 0;
+		String hql = "delete FingerPrintPOJO f where f.uId = uId";
+		res = HibernateUtilities.ExecUpdateQuery(hql);
+		return res;
+	}
+
+	@Override
+	public int getFingerPrintCount() {
+		//TODO test
+		int res = 0;
+		String hql = "select count(f) from FingerPrintPOJO f";
+		res = HibernateUtilities.SelectQueryUniqueInt(hql);
+		return res;
+	}
 }

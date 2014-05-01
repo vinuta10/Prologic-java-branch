@@ -16,4 +16,12 @@ public interface FingerPrintDao {
 	public void saveFingerprint(FingerPrintPOJO fp);
 	
 	public void saveFingerprints(List<FingerPrintPOJO> fps);
+
+	public int updateFingerPrint(int uId, int fingerNum, String template);
+
+	public int deleteFingerPrint(int uId, int fingerNum);
+
+	public int deleteFingerPrints(int uId);
+
+	public int getFingerPrintCount();
 }

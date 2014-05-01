@@ -37,6 +37,7 @@ private static TransactionDataManagerImpl mInstance = null;
 	@Override
 	public void uploadTransactionRt(int id, long epoch, int uId, String eId,
 			int punchType, String lldetails) {
+		//mSws.sendPunchRt(uId, epoch, punchType, lldetailIds)
 //		PunchDataPOJO pd = new PunchDataPOJO();
 //		pd.setPunchType(convertToPunchTypeString(punchType));
 //		pd.setTransactionTime(epoch);
@@ -58,7 +59,8 @@ private static TransactionDataManagerImpl mInstance = null;
 
 	@Override
 	public void uploadTransactionBatch() {
-		// TODO Auto-generated method stub
+		// go through the transaction database and upload all the are not uploaded to the server
+		// TODO test
 		
 	}
 

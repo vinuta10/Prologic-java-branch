@@ -54,7 +54,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
 
 		//System.out.println("future.get() = " + future.get().toString());
 		try {
-			mEmps = convertToEmployeePOJOList(mSws.getEmployees());
+			mEmps = EntityMapUtility.mapToEmployeePOJOList(mSws.getEmployees());
 		} catch (Exception ex){
 			ex.printStackTrace();
 			return -1;
@@ -89,23 +89,4 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	public String getEmployeeNameById(int id) {
 		return empDao.findEmployeeByBadgeNumber(id).getName();
 	}
-	
-	private List<EmployeePOJO> convertToEmployeePOJOList(List<Employee> employees) {
-		List<EmployeePOJO> dbEmps = new ArrayList<EmployeePOJO>();
-		for (Employee emp:employees){
-			dbEmps.add(convertToEmployeePOJO(emp));
-		}
-		return dbEmps;
-	}
-	
-	private EmployeePOJO convertToEmployeePOJO(Employee emp){
-		EmployeePOJO dbEmp = new EmployeePOJO();
-		dbEmp.setBadgeNumber(emp.getBadgeNumber());
-		dbEmp.setEmployeeNumber(emp.getEmployeeNumber());
-		dbEmp.setId(emp.getId());
-		dbEmp.setName(emp.getName());
-		dbEmp.setLaborLevelMap(emp.getLaborLevelMap());
-		return dbEmp;
-	}
-
 }
