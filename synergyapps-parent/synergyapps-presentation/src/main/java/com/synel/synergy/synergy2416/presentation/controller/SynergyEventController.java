@@ -5,6 +5,11 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -15,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.synel.synergy.synergy2416.model.FingerPrintManager;
+import com.synel.synergy.synergy2416.model.FingerPrintManagerImpl;
 import com.synel.synergy.synergy2416.presentation.controller.SynergyEventDispatcher.SYNERGY_STATUS;
 import com.synel.synergy.synergy2416.presentation.view.MainWindow;
 import com.synel.synergy.synergy2416.presentation.view.SynergyFingerPrintEnrollmentForm;
@@ -22,7 +29,10 @@ import com.synel.synergy.synergy2416.presentation.view.SynergyWelcomeForm;
 
 
 public class SynergyEventController implements SynergyStatusListener {
-private static final String ResPath = "/multimedia/";
+	
+	private FingerPrintManager mFpMgr = FingerPrintManagerImpl.getInstance();
+	
+	private static final String ResPath = "/multimedia/";
 	
 	private MainWindow m_frame;
 	private SYNERGY_STATUS m_curStatus = SynergyEventDispatcher.SYNERGY_STATUS.SYNERGYSTATUS_UNINITIALIZED;
@@ -299,13 +309,12 @@ private static final String ResPath = "/multimedia/";
 		case SYNERGYSTATUS_READY:
 		case SYNERGYSTATUS_MENU:
 		default:
-			//DemoVideo.closeVideo();
 			loadWelcomeForm();		
 		}
 	}
 	
 	/*
-	 * pragma here is all the "SLOT" function go to 
+	 * pragma here is all the "SLOT" function go
 	 * (non-Javadoc)
 	 * @see com.synel.synergy.synergy2416.presentation.controller.SynergyStatusListener#synergyStatusChanged(com.synel.synergy.synergy2416.presentation.controller.SynergyEventDispatcher.SYNERGY_STATUS)
 	 */
@@ -319,6 +328,29 @@ private static final String ResPath = "/multimedia/";
 	
 	public void onFingerprintEnrollmentSuccess(String strBadgeNum, int nFingerNum){
 		String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
-		//save it to persistent layer.
+		//save it to persistent layer. and/or upload to the server (in the background thread of course).
+		mFpMgr.addFingerPrint(Integer.parseInt(strBadgeNum), 0, template);
+		uploadFingerPrintBatch();
+	}
+	
+	public void uploadFingerPrintBatch() {
+		//int res = mFpMgr.uploadFingerPrintBatch();
+		//System.out.println("upload return code: "+res);
+		//using async method
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		Future future = executorService.submit(new Callable(){
+		    public Object call() throws Exception {
+		        return mFpMgr.uploadFingerPrintBatch();
+		    }
+		});
+		try {
+			System.out.println("upload future.get() = " + future.get());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

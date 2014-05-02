@@ -235,44 +235,6 @@ public class SynergyFingerPrintValidationForm extends JPanel{
         //add(card2,DEMO_FPN);
         add(card3,DEMO_STATUS);
     }
-
-//	public void setStepCount(int count) {
-//		// TODO Auto-generated method stub
-//		System.out.println("Start");
-//		System.out.println("Please place finger "+ count + " times");
-//		m_lblStatus.setText("\nPlease place finger "+ count + " times");
-//		
-//	}
-//
-//	public void onReadyForFinger(int step, boolean repeatOnReaderError) {
-//		// TODO Auto-generated method stub
-//		switch(step){
-//		case 1:
-//			//MainWindow.placefingersound.start();
-//			System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
-//			m_lblStatus.setText("\nPlease place finger Step: "+ step);
-//			break;
-//		case 2:
-//			//MainWindow.placefingeragainsound.start();
-//			System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
-//			m_lblStatus.setText("\nPlease place finger Step: "+ step );
-//			break;
-//		case 3:
-//			//MainWindow.placefingeragainsound.start();
-//			System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
-//			m_lblStatus.setText("\nPlease place finger Step: "+ step );
-//			break;
-//		}
-//		
-//	}
-//
-//	public void onFingerPrintRead(int step) {
-//		// TODO Auto-generated method stub
-//		//MainWindow.successbuzzersound.start();
-//		System.out.println("Please Remove Finger Step: "+ step + "  ");
-//		m_lblStatus.setText("\nPlease Remove finger Step: "+ step + " ");
-//		
-//	}
 	
 	@SuppressWarnings("serial")
 	public void goDemo() {

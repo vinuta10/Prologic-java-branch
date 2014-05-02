@@ -55,10 +55,11 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	
 	@Test
 	public void masterTestSuites(){
-      testSaveFingerprint();
+        testSaveFingerprint();
 		testSaveFingerprints();
 		testGetFingerPrintCount();
 		testGetDirtyFingerPrints();
+		testGetAllFingerPrints();
 		testUpdateFingerPrintSyncStatus();
 		testGetDirtyFingerPrints();
 		testUpdateFingerPrintTemplate();
@@ -66,6 +67,13 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 		testGetFingerPrintCount();	
 	    testDeleteFingerPrint();
 	    testGetFingerPrintCount();
+	}
+    
+	@Test
+	public void testGetAllFingerPrints() {
+		FingerPrintDao fpDao = new HbmFingerPrintDao();
+		List<FingerPrintPOJO> fps = fpDao.getAllFingerPrints();
+		printListOfFingerPrints(fps);
 	}
 
 	@Test

@@ -14,9 +14,9 @@ public interface FingerPrintManager {
 	 */
 	public int syncFingerPrintsFromServer();
 	
-	public void uploadFingerPrintRt(int uId, String template);
+	public int uploadFingerPrintRt(int uId, String template);
 	
-	public void uploadFingerPrintBatch();
+	public int uploadFingerPrintBatch();
 	
 	public int addFingerPrint(int uId, int fingerNum, String template);
 	
@@ -31,5 +31,13 @@ public interface FingerPrintManager {
 	public int fingerprintCount();
 	
 	public String getFingerprintByUserId(int uId);
+	
+	public int enrollFingerPrint(); //via JNI calls to the fp device
+	
+	public int sendFingerPrintToFPU();
+	
+	public int deleteFingerPrintFromFPU();
+	
+	public int verifyFingerPrintFromFPU();
 
 }

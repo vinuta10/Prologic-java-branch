@@ -23,6 +23,38 @@ public class EmployeeManagerImplTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	@Test
+	public void testMasterSuite(){
+		System.out.println("===========================Begin Test 1==========================================");
+		testSyncEmployeesFromServer();
+		
+		System.out.println("===========================Begin Test 2==========================================");
+		testGetEmployeeCount();
+		
+		System.out.println("===========================Begin Test 3==========================================");
+		testGetEmployeeLaborLevelsById();
+		
+		System.out.println("===========================Begin Test 4==========================================");
+		testGetEmployeeNameById();
+		
+		System.out.println("===========================Begin Test 5==========================================");
+		testUpdateEmployeeLaborLevels();
+		
+		System.out.println("===========================Begin Test 6==========================================");
+		testGetEmployeeLaborLevelsById();
+		
+		System.out.println("===========================Begin Test 7==========================================");
+		testGetEmployeeNameById();
+		
+		System.out.println("===========================Begin Test 8==========================================");
+		testDeleteEmployeeById();
+		
+		System.out.println("===========================Begin Test 9==========================================");
+		testGetEmployeeCount();
+		
+		System.out.println("===========================  End Test ==========================================");
+	}
 
 	@Test
 	public void testSyncEmployeesFromServer() {
@@ -46,27 +78,28 @@ public class EmployeeManagerImplTest {
 
 	@Test
 	public void testGetEmployeeCount() {
-		fail("Not yet implemented");
+		System.out.println("Employee Count: "+mEmpMgr.getEmployeeCount());
 	}
 
 	@Test
 	public void testUpdateEmployeeLaborLevels() {
-		fail("Not yet implemented");
+		System.out.println("updated "+mEmpMgr.updateEmployeeLaborLevels(101, "01,02,03,04")+" record ");
 	}
 
 	@Test
 	public void testDeleteEmployeeById() {
-		fail("Not yet implemented");
+		int res = mEmpMgr.deleteEmployeeById(101);
+		System.out.println("Deleted "+res+" record 101");
 	}
 
 	@Test
 	public void testGetEmployeeLaborLevelsById() {
-		fail("Not yet implemented");
+		System.out.println("LaborLevels for employee 101 is : "+mEmpMgr.getEmployeeLaborLevelsById(101));
 	}
 
 	@Test
 	public void testGetEmployeeNameById() {
-		fail("Not yet implemented");
+		System.out.println("Employee #101 name is: "+mEmpMgr.getEmployeeNameById(101));
 	}
 
 }

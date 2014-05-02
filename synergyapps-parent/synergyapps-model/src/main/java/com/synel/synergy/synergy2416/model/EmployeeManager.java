@@ -14,12 +14,12 @@ public interface EmployeeManager {
 	
 	public int getEmployeeCount();
 	
-	public void updateEmployeeLaborLevels(int EmpId, String laborlevelmap);
+	public int updateEmployeeLaborLevels(int EmpId, String laborlevelmap);
 	
-	public void deleteEmployeeById(int id);
+	public int deleteEmployeeById(int badgenum);
 	
-	public String getEmployeeLaborLevelsById(int id);
+	public String getEmployeeLaborLevelsById(int badgenum);
 	
-	public String getEmployeeNameById(int id);
+	public String getEmployeeNameById(int badgenum);
 
 }

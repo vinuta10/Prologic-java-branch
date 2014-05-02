@@ -8,7 +8,6 @@ import com.synel.synergy.synergy2416.persistent.EmployeePOJO;
 import com.synel.synergy.synergy2416.persistent.HbmEmployeeDao;
 import com.synel.synergy.synergy2416.webservices.SynergyWebServices;
 import com.synel.synergy.synergy2416.webservices.api.SynergyWebServiceApi;
-import com.xacttime.Employee;
 
 
 public class EmployeeManagerImpl implements EmployeeManager {
@@ -70,23 +69,23 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	}
 
 	@Override
-	public void updateEmployeeLaborLevels(int EmpId, String laborlevelmap) {
-		empDao.updateLaborLevelMapByBadgeNumber(EmpId, laborlevelmap);
+	public int updateEmployeeLaborLevels(int badgenum, String laborlevelmap) {
+		return empDao.updateLaborLevelMapByBadgeNumber(badgenum, laborlevelmap);
 	}
 
 	@Override
-	public void deleteEmployeeById(int id) {
+	public int deleteEmployeeById(int badgenum) {
 		//Id is badgenumber in this case.
-		empDao.deleteEmployeeByBadgeNumber(id);
+		return empDao.deleteEmployeeByBadgeNumber(badgenum);
 	}
 
 	@Override
-	public String getEmployeeLaborLevelsById(int id) {
-		return empDao.getLaborLevelMapByBadgeNumber(id);
+	public String getEmployeeLaborLevelsById(int badgenum) {
+		return empDao.getLaborLevelMapByBadgeNumber(badgenum);
 	}
 
 	@Override
-	public String getEmployeeNameById(int id) {
-		return empDao.findEmployeeByBadgeNumber(id).getName();
+	public String getEmployeeNameById(int badgenum) {
+		return empDao.findEmployeeByBadgeNumber(badgenum).getName();
 	}
 }

@@ -29,4 +29,6 @@ public interface FingerPrintDao {
 			boolean isSynced);
 
 	public List<FingerPrintPOJO> getDirtyFingerPrints();
+	
+	public List<FingerPrintPOJO> getAllFingerPrints();
 }

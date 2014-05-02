@@ -202,7 +202,7 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 		public void setStepCount(int count) {
 			// TODO Auto-generated method stub
 			//System.out.println("Start");
-			System.out.println("Please place finger "+ count + " times");
+			//System.out.println("Please place finger "+ count + " times");
 			m_lblEnrollmentStatus.setText("\nPlease place finger "+ count + " times");
 			
 		}
@@ -212,17 +212,17 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 			switch(step){
 			case 1:
 				//MainWindow.placefingersound.start();
-				System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+				//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
 				m_lblEnrollmentStatus.setText("\nPlease place finger Step: "+ step);
 				break;
 			case 2:
 				//MainWindow.placefingeragainsound.start();
-				System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+				//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
 				m_lblEnrollmentStatus.setText("\nPlease place finger Step: "+ step );
 				break;
 			case 3:
 				//MainWindow.placefingeragainsound.start();
-				System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+				//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
 				m_lblEnrollmentStatus.setText("\nPlease place finger Step: "+ step );
 				break;
 			}
@@ -232,7 +232,7 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 		public void onFingerPrintRead(int step) {
 			// TODO Auto-generated method stub
 			//MainWindow.successbuzzersound.start();
-			System.out.println("Please Remove Finger Step: "+ step + "  ");
+			//System.out.println("Please Remove Finger Step: "+ step + "  ");
 			m_lblEnrollmentStatus.setText("\nPlease Remove finger Step: "+ step + " ");
 			
 		}

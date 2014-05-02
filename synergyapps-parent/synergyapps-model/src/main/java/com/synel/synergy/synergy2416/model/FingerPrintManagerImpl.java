@@ -52,18 +52,26 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 	}
 
 	@Override
-	public void uploadFingerPrintRt(int uId, String template) {
-		mSws.sendFingerPrint(uId, template);
+	public int uploadFingerPrintRt(int uId, String template) {
+		return mSws.sendFingerPrint(uId, template);
 	}
 
 	@Override
-	public void uploadFingerPrintBatch() {
+	public int uploadFingerPrintBatch() {
 		// TODO Auto-generated method stub
 		//go through the finger print db and upload those that are not synced already
-		List<Fingerprint> fps = EntityMapUtility.mapToFingerPrintList(mFpDao.getDirtyFingerPrints());
-		
-		
-		
+		List<FingerPrintPOJO> fps = mFpDao.getDirtyFingerPrints();
+		int uId =0;
+		String template;
+		for(FingerPrintPOJO fp:fps){
+			uId = fp.getUserId();
+			template = fp.getTemplate();
+			if (0 == mSws.sendFingerPrint(uId, template)){
+				 updateFingerPrintSyncStatus(uId, 0, true);
+				//or: fp.setSynced(true); mFpDao.saveFingerprint(fp);
+			}
+		}
+		return 0;
 	}
 
 	@Override
@@ -78,16 +86,19 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 
 	@Override
 	public int updateFingerPrint(int uId, int fingerNum, String template) {
+		//TODO need to set the synced flag to false
 		return mFpDao.updateFingerPrintTemplate(uId,fingerNum,template);
 	}
 
 	@Override
 	public int deleteFingerPrint(int uId, int fingerNum) {
+		//TODO need to add a web method to delete the corresponding record on the server as well.
 		return mFpDao.deleteFingerPrint(uId, fingerNum);
 	}
 
 	@Override
 	public int deleteFingerPrints(int uId) {
+		//TODO need to add a web method to delete the corresponding record on the server as well.
 		return mFpDao.deleteFingerPrints(uId);
 	}
 
@@ -98,15 +109,44 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 
 	@Override
 	public String getFingerprintByUserId(int uId) {
-		return mFpDao.getFingerprint(uId, 0).getTemplate();
+		//return result can be null
+		String res = null;
+		FingerPrintPOJO fp = mFpDao.getFingerprint(uId, 0);
+		if (null != fp){
+			res = fp.getTemplate();
+		}
+		return res;
 	}
 
 	@Override
 	public int updateFingerPrintSyncStatus(int uId, int fingerNum,
 			boolean isSynced) {
-		// TODO Auto-generated method stub
 		int res= -1;
 		res = mFpDao.updateFingerPrintSyncStatus(uId, fingerNum, isSynced);
 		return res;
+	}
+
+	@Override
+	public int enrollFingerPrint() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int sendFingerPrintToFPU() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteFingerPrintFromFPU() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int verifyFingerPrintFromFPU() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

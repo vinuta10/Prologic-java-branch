@@ -76,19 +76,26 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 	@Override
 	public List<FingerPrintPOJO> getDirtyFingerPrints() {
 		
-		//TODO test
 		String hql = "from FingerPrintPOJO where synced = 'false' ";
+		List<FingerPrintPOJO> res = (List<FingerPrintPOJO>)HibernateUtilities.SelectQueryList(hql);
+		return res;
+	}
+
+	@Override
+	public List<FingerPrintPOJO> getAllFingerPrints() {
+		String hql = "from FingerPrintPOJO ";
+		@SuppressWarnings("unchecked")
 		List<FingerPrintPOJO> res = (List<FingerPrintPOJO>)HibernateUtilities.SelectQueryList(hql);
 		return res;
 	}
 	
 	//Private section
-	private FingerPrintPOJO getFingerPrintFromList(List<?> res) {
-		FingerPrintPOJO fp = null;
-		for (Iterator<?> iterator = 
-					res.iterator(); iterator.hasNext();){
-				fp = (FingerPrintPOJO) iterator.next(); 
-			}
-		return fp;
-	}
+		private FingerPrintPOJO getFingerPrintFromList(List<?> res) {
+			FingerPrintPOJO fp = null;
+			for (Iterator<?> iterator = 
+						res.iterator(); iterator.hasNext();){
+					fp = (FingerPrintPOJO) iterator.next(); 
+				}
+			return fp;
+		}
 }
