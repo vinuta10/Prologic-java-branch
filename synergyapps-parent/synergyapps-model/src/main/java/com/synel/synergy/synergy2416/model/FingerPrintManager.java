@@ -34,10 +34,10 @@ public interface FingerPrintManager {
 	
 	public int enrollFingerPrint(); //via JNI calls to the fp device
 	
-	public int sendFingerPrintToFPU();
+	public int sendFingerPrintToFPU();//this is for sending the fp from the db to the fp reader mem
 	
-	public int deleteFingerPrintFromFPU();
+	public int deleteFingerPrintFromFPU();// 
 	
-	public int verifyFingerPrintFromFPU();
+	public int verifyFingerPrintFromFPU(int badgeNum, int fingerNum); //calling FPU return 0 on success. call validateEmployee(String strBadgeNum, int nFingerNum)
 
 }

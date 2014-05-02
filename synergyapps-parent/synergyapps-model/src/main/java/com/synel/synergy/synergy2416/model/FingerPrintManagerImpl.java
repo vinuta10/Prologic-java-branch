@@ -145,7 +145,7 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 	}
 
 	@Override
-	public int verifyFingerPrintFromFPU() {
+	public int verifyFingerPrintFromFPU(int bagdeNum, int fingerNum) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
