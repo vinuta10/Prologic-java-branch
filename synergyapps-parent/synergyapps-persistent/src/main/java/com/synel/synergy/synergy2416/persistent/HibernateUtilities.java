@@ -51,6 +51,8 @@ public class HibernateUtilities {
 		}catch (Exception ex){
 			ex.printStackTrace();
 			return null;
+		}finally {
+			msession.close();
 		}
 		tx.commit();
 		return results;
@@ -61,7 +63,15 @@ public class HibernateUtilities {
 			msession = HibernateUtilities.getSessionFactory().openSession();
 		}
 		Query qry = msession.createQuery(hql);
-		return ((Number) qry.uniqueResult()).intValue();
+		int res = -1;
+		try {
+			res = ((Number) qry.uniqueResult()).intValue();
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}finally {
+			msession.close();
+		}
+		return res;
 	}
 	
 	public static int ExecUpdateQuery(String hql) {
@@ -78,6 +88,8 @@ public class HibernateUtilities {
 		}catch (Exception ex){
 			ex.printStackTrace();
 			return -1;
+		}finally {
+			msession.close();
 		}
 		tx.commit();
 		return result;
@@ -89,6 +101,12 @@ public class HibernateUtilities {
 		SchemaExport schema = new SchemaExport(mConf);
 		schema.execute(false,true,false,true);
 		//session.close();
+	}
+	
+	public static void closeDbSession() {
+		if (msession != null && msession.isOpen()) {
+			msession.close();
+		}
 	}
 
 }

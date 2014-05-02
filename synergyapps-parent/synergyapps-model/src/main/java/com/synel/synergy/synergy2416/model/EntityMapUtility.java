@@ -73,6 +73,13 @@ public class EntityMapUtility {
 		pd.setLaborLevelDetailIds(toLaborLevelDetailIds(dbpd.getLaborLevelDetailIds()));
 		return pd;
 	}
+	
+	public static void updateFingerPrintPOJOStatusList(List<FingerPrintPOJO> fps,boolean isSync){
+		//TODO test
+		for(FingerPrintPOJO fp:fps){
+			fp.setSynced(isSync);
+		}
+	}
 
 	private static ArrayOfInt toLaborLevelDetailIds(
 			List<Integer> laborLevelDetailIds) {
@@ -91,5 +98,21 @@ public class EntityMapUtility {
 
 	private static TimeSlicePreType toPunchType(String punchType) {
 		return TimeSlicePreType.fromValue(punchType);
+	}
+
+	public static List<Fingerprint> mapToFingerPrintList(
+			List<FingerPrintPOJO> dbfps) {
+		List<Fingerprint> aofp = new ArrayList<Fingerprint>();
+		for(FingerPrintPOJO dbfp:dbfps){
+			aofp.add(mapToFingerPrint(dbfp));
+		}
+		return aofp;
+	}
+	
+	public static Fingerprint mapToFingerPrint(FingerPrintPOJO dbfp){
+		Fingerprint f = new Fingerprint();
+		f.setUserId(dbfp.getUserId());
+		f.setTemplate(dbfp.getTemplate());
+		return f;
 	}
 }

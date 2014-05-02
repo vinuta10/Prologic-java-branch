@@ -5,6 +5,7 @@ public class FingerPrintPOJO {
     private int userId; //foreign key to employee table id
     private int fingerNum; //together with userId form a unique key combo
     private String template; //base64 encoded finger print data
+    private boolean synced = false; //indicator whether this record synced with server
 	/**
 	 * @return the userId
 	 */
@@ -42,8 +43,15 @@ public class FingerPrintPOJO {
 		this.template = template;
 	}
 	
+	public boolean isSynced() {
+		return synced;
+	}
+	public void setSynced(boolean synced) {
+		this.synced = synced;
+	}
 	@Override
 	public String toString(){
-		return "UID: "+userId+" FingerNumber: "+fingerNum+" Template: "+template;
+		String sync = synced?"True":"False";
+		return "UID: "+userId+" FingerNumber: "+fingerNum+" Synced: "+sync+ " Template: "+template;
 	}
 }

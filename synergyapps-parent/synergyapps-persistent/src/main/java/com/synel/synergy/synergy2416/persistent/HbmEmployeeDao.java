@@ -85,7 +85,8 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	public int updateLaborLevelMapByBadgeNumber(int BadgeNumber, String llmap) {
 		//TODO test
 		int res = 0;
-		String hql = "update EmployeePOJO e set e.laborlevelmap=llmap where e.badgeNumber = BadgeNumber";
+		String hql = "update EmployeePOJO e set e.laborLevelMap="+"\'"+llmap+"\'"+" where e.badgeNumber ="+ BadgeNumber;
+		System.out.println("updating..."+hql);
 		res = HibernateUtilities.ExecUpdateQuery(hql);
 		return res;
 	}

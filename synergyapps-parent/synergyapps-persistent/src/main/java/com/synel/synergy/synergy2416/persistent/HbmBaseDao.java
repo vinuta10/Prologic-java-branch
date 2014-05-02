@@ -39,7 +39,7 @@ public class HbmBaseDao<T> {
 		Transaction tx = null;
 		try {
 			tx = msession.beginTransaction();
-			msession.save(data);
+			msession.saveOrUpdate(data);
 			msession.flush();
 			msession.clear();
 			tx.commit();
@@ -62,7 +62,7 @@ public class HbmBaseDao<T> {
 			tx = msession.beginTransaction();
 			int i = 0;
 			for(T data:lldata){
-				msession.save(data);
+				msession.saveOrUpdate(data);
 				if (0 == ++i % BATCH_NUM) {
 					msession.flush();
 					msession.clear();

@@ -22,6 +22,8 @@ public interface FingerPrintManager {
 	
 	public int updateFingerPrint(int uId, int fingerNum, String template);
 	
+	public int updateFingerPrintSyncStatus(int uId, int fingerNum, boolean isSynced);
+	
 	public int deleteFingerPrint(int uId, int fingerNum);
 	
 	public int deleteFingerPrints(int uId);

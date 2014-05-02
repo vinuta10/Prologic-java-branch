@@ -40,6 +40,7 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 		int res = -1;
 		try {
 			mFps = EntityMapUtility.mapToFingerPrintPOJOList(mSws.getFingerPrints());
+			EntityMapUtility.updateFingerPrintPOJOStatusList(mFps, true); //TODO test
 		} catch (Exception ex){
 			ex.printStackTrace();
 			return -1;
@@ -59,6 +60,10 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 	public void uploadFingerPrintBatch() {
 		// TODO Auto-generated method stub
 		//go through the finger print db and upload those that are not synced already
+		List<Fingerprint> fps = EntityMapUtility.mapToFingerPrintList(mFpDao.getDirtyFingerPrints());
+		
+		
+		
 	}
 
 	@Override
@@ -73,7 +78,7 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 
 	@Override
 	public int updateFingerPrint(int uId, int fingerNum, String template) {
-		return mFpDao.updateFingerPrint(uId,fingerNum,template);
+		return mFpDao.updateFingerPrintTemplate(uId,fingerNum,template);
 	}
 
 	@Override
@@ -94,5 +99,14 @@ public class FingerPrintManagerImpl implements FingerPrintManager{
 	@Override
 	public String getFingerprintByUserId(int uId) {
 		return mFpDao.getFingerprint(uId, 0).getTemplate();
+	}
+
+	@Override
+	public int updateFingerPrintSyncStatus(int uId, int fingerNum,
+			boolean isSynced) {
+		// TODO Auto-generated method stub
+		int res= -1;
+		res = mFpDao.updateFingerPrintSyncStatus(uId, fingerNum, isSynced);
+		return res;
 	}
 }

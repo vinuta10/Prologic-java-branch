@@ -15,10 +15,46 @@ public class HbmEmployeeDaoTest {
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("setup the test...");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void testMasterSuites(){
+		System.out.println("================== Begin test suite 1===================================");
+		testSaveEmployee();
+		System.out.println("================== Begin test suite 2===================================");
+		testSaveEmployees();
+		System.out.println("================== Begin test suite 3===================================");
+		testGetEmployeeList();
+		System.out.println("================== Begin test suite 4===================================");
+		testFindEmployeeById();
+		System.out.println("================== Begin test suite 5===================================");
+		testFindEmployeeByBadgeNumber();
+		System.out.println("================== Begin test suite 6===================================");
+		testFindEmployeeByEmployeeNumber();
+		System.out.println("================== Begin test suite 7===================================");
+		testGetLaborLevelMapByEmployeeNumber();
+		System.out.println("================== Begin test suite 8===================================");
+		testGetLaborLevelMapByBadgeNumber();
+		System.out.println("================== Begin test suite 9===================================");
+		testUpdateLaborLevelMapByBadgeNumber();
+		System.out.println("================== Begin test suite 10===================================");
+		testGetLaborLevelMapByBadgeNumber();
+		System.out.println("================== Begin test suite 11===================================");
+		testGetEmployeeCount();
+		System.out.println("================== Begin test suite 12===================================");
+		testDeleteEmployeeByBadgeNumber();
+		System.out.println("================== Begin test suite 13===================================");
+		testGetEmployeeCount();
+		System.out.println("================== Begin test suite 14===================================");
+		testDeleteAllEmployees();
+		System.out.println("================== Begin test suite 15===================================");
+		testGetEmployeeCount();	
+		System.out.println("================== End test suite ===================================");
 	}
 
 	@Test
@@ -89,7 +125,7 @@ public class HbmEmployeeDaoTest {
 		EmployeeDao empDao = new HbmEmployeeDao();
 		String llmap = empDao.getLaborLevelMapByEmployeeNumber("A100");
 		assertNotNull(llmap);
-		//System.out.println(llmap);
+		System.out.println(llmap);
 	}
 
 	@Test
@@ -97,13 +133,13 @@ public class HbmEmployeeDaoTest {
 		EmployeeDao empDao = new HbmEmployeeDao();
 		String llmap = empDao.getLaborLevelMapByBadgeNumber(100);
 		assertNotNull(llmap);
-		//System.out.println(llmap);
+		System.out.println(llmap);
 	}
 	
 	@Test
 	public void testDeleteEmployeeByBadgeNumber(){
 		EmployeeDao empDao = new HbmEmployeeDao();
-		int numOfRecords = empDao.deleteEmployeeByBadgeNumber(101);
+		int numOfRecords = empDao.deleteEmployeeByBadgeNumber(100);
 		System.out.println("Deleted "+numOfRecords+" Record(s)!");
 		//assertEquals(numOfRecords,1);
 	}
@@ -113,7 +149,22 @@ public class HbmEmployeeDaoTest {
 		EmployeeDao empDao = new HbmEmployeeDao();
 		System.out.println("Deleted "+empDao.deleteAllEmployees()+"records!");
 	}
+	
+	@Test
+	public void testGetEmployeeCount() {
+		
+		EmployeeDao empDao = new HbmEmployeeDao();
+		int res = empDao.getEmployeeCount();
+		System.out.println("Employee Count: "+res);
+	}
 
+	@Test
+	public void testUpdateLaborLevelMapByBadgeNumber() {
+		EmployeeDao empDao = new HbmEmployeeDao();
+		int res = empDao.updateLaborLevelMapByBadgeNumber(100,"01,03,04,05");
+		System.out.println("updateResult: "+res);
+	}
+	
 	private void printList(List<EmployeePOJO> emps) {
 		for (Iterator<EmployeePOJO> iterator = 
 				emps.iterator(); iterator.hasNext();){
