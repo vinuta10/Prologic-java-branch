@@ -1,12 +1,12 @@
 package com.synel.synergy.synergy2416.webservices;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import junit.framework.TestCase;
 
 import com.xacttime.ArrayOfInt;
-import com.xacttime.ArrayOfLaborLevelDetail;
 import com.xacttime.ArrayOfPunchData;
 import com.xacttime.DateTimeOffset;
 import com.xacttime.Employee;
@@ -30,14 +30,14 @@ public class SynergyWebServicesUnitTest extends TestCase {
 
 	public void testSendPunchRt() {
 		try {
-			mSws.sendPunchRt(3,System.currentTimeMillis(), new Random().nextInt(5) , new int[] {12,11,16,9});
+			mSws.sendPunchRt(3,System.currentTimeMillis(), punchTypeStringFromNum(new Random().nextInt(5)) , generateListOfInt(new int[] {12,11,16,9}));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void testSendPunchesBatch() {
-		ArrayOfPunchData aopd = new ArrayOfPunchData();
+		List<PunchData> aopd = new ArrayList<PunchData>();
 		for(int i = 0; i<10000; i++){
 			PunchData pd = new PunchData();
 			Random rdg = new Random();
@@ -46,9 +46,9 @@ public class SynergyWebServicesUnitTest extends TestCase {
 			pd.setTransactionTime(new DateTimeOffset(System.currentTimeMillis()));
 			pd.setLaborLevelDetailIds(generateLLDetailIds(new int[] {rdg.nextInt(15),rdg.nextInt(15),rdg.nextInt(15), rdg.nextInt(15)}));
 			System.out.println("punched: "+pd.getUserId()+" punchtype: "+pd.getPunchType()+" timestamp: "+pd.getTransactionTime().getMyepoch()+" llids: "+pd.getLaborLevelDetailIds().toString());
-			aopd.getPunchData().add(pd);
+			aopd.add(pd);
 		}
-		System.out.println("sending "+aopd.getPunchData().size()+ " punchData ...");
+		System.out.println("sending "+aopd.size()+ " punchData ...");
 		int res=-1;
 		try {
 			res = mSws.sendPunchesBatch(aopd);
@@ -111,6 +111,10 @@ public class SynergyWebServicesUnitTest extends TestCase {
     		return TimeSlicePreType.PAY_ADJUSTMENT;
     	case 8:
     		return TimeSlicePreType.NON_WORK;
+    	case 9:
+    		return TimeSlicePreType.TRANSFER;
+    	case 10:
+    		return TimeSlicePreType.CALL_BACK;
     	default:
     		return TimeSlicePreType.SWIPE_AND_GO;
 		}
@@ -151,5 +155,63 @@ public class SynergyWebServicesUnitTest extends TestCase {
 			System.out.println("LaborLevel : "+ld.getId()+" Code: "+ld.getCode()+ " Description: "+ld.getDescription());
 		}
 	}
-
+	
+	private List<Integer> generateListOfInt(int[] lldetailIds){
+		List<Integer> aoi = new ArrayList<Integer>();
+		for(Integer i:lldetailIds){
+			aoi.add(i);
+		}
+		return aoi;
+	}
+	
+	private String punchTypeStringFromNum(int punchNum) {
+		switch(punchNum){
+		/*
+		 *  @XmlEnumValue("NonWork")
+    NON_WORK("NonWork"),
+    @XmlEnumValue("Transfer")
+    TRANSFER("Transfer"),
+    @XmlEnumValue("StartLunch")
+    START_LUNCH("StartLunch"),
+    @XmlEnumValue("StartBreak")
+    START_BREAK("StartBreak"),
+    @XmlEnumValue("ClockIn")
+    CLOCK_IN("ClockIn"),
+    @XmlEnumValue("ClockOut")
+    CLOCK_OUT("ClockOut"),
+    @XmlEnumValue("EndLunch")
+    END_LUNCH("EndLunch"),
+    @XmlEnumValue("EndBreak")
+    END_BREAK("EndBreak"),
+    @XmlEnumValue("PayAdjustment")
+    PAY_ADJUSTMENT("PayAdjustment"),
+    @XmlEnumValue("SwipeAndGo")
+    SWIPE_AND_GO("SwipeAndGo"),
+    @XmlEnumValue("CallBack")
+    CALL_BACK("CallBack");
+		 */
+    	case 1:
+    		return "ClockIn";
+    	case 2:
+    		return "ClockOut";
+    	case 3:
+    		return "StartBreak";
+    	case 4:
+    		return "StartLunch";
+    	case 5:
+    		return "EndBreak";
+    	case 6:
+    		return "EndLunch";
+    	case 7:
+    		return "PayAdjustment";
+    	case 8:
+    		return "NonWork";
+    	case 9:
+    		return "Transfer";
+    	case 10:
+    		return "CallBack";
+    	default:
+    		return "SwipeAndGo";
+		}
+	}
 }

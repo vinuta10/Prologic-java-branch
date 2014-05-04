@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.synel.synergy.synergy2416.persistent.HbmTransactionDataDao;
+import com.synel.synergy.synergy2416.persistent.PunchDataPOJO;
 import com.synel.synergy.synergy2416.persistent.TransactionDataDao;
 import com.synel.synergy.synergy2416.persistent.TransactionDataPOJO;
 import com.synel.synergy.synergy2416.webservices.SynergyWebServices;
 import com.synel.synergy.synergy2416.webservices.api.SynergyWebServiceApi;
+import com.xacttime.PunchData;
 
 public class TransactionDataManagerImpl implements TransactionDataManager {
 	
@@ -35,33 +37,40 @@ private static TransactionDataManagerImpl mInstance = null;
 	}
 
 	@Override
-	public void uploadTransactionRt(int id, long epoch, int uId, String eId,
-			int punchType, String lldetails) {
-		//mSws.sendPunchRt(uId, epoch, punchType, lldetailIds)
-//		PunchDataPOJO pd = new PunchDataPOJO();
-//		pd.setPunchType(convertToPunchTypeString(punchType));
-//		pd.setTransactionTime(epoch);
-//		pd.setLaborLevelDetailIds(lldetails);
+	public int uploadTransactionRt(PunchDataPOJO pd) {
+		//int id, long epoch, int uId, String eId,
+		// int punchType, String lldetails
+		int uId = pd.getUserId();
+		long epoch = pd.getTransactionTime();
+		String punchType = pd.getPunchType();
+		List<Integer>lldetailIds = pd.getLaborLevelDetailIds();
+		return mSws.sendPunchRt(uId, epoch, punchType, lldetailIds);
 	}
 
 	@Override
-	public void saveTransaction(int id, long epoch, int uId, String eId,
-			int punchType, String lldetails) {
-		// TODO Auto-generated method stub
-		
+	public long saveTransaction(TransactionDataPOJO td) {
+		return mTdDao.saveTransactionData(td);
 	}
 
 	@Override
-	public void cleanupTransactions() {
-		// TODO Auto-generated method stub
-		
+	public int cleanupTransactions() {
+		return mTdDao.cleanUpTransactionData();
 	}
 
 	@Override
-	public void uploadTransactionBatch() {
+	public int uploadTransactionBatch() { //make it run in a thread pool?
 		// go through the transaction database and upload all the are not uploaded to the server
 		// TODO test
-		
+		mTds = mTdDao.getTransactiondataListThatNeedUpload();
+		List<PunchData> lopd = EntityMapUtility.mapToPunchDataListFromTransactionDataListPOJO(mTds);
+		int res = -1;
+		res = mSws.sendPunchesBatch(lopd);
+		//update the sync status of each record in the db accordingly
+		if ( res == 0 ){
+			for (TransactionDataPOJO td: mTds) {
+				mTdDao.updateTransactionDataSyncStatus(td.id, true);
+			}
+		}
+		return res;
 	}
-
 }

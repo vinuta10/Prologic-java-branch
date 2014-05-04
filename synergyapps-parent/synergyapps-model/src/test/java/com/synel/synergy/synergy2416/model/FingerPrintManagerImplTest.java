@@ -1,7 +1,5 @@
 package com.synel.synergy.synergy2416.model;
 
-import static org.junit.Assert.*;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -10,6 +8,7 @@ import java.util.concurrent.Future;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FingerPrintManagerImplTest {
@@ -60,6 +59,7 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testSyncFingerPrintsFromServer() {
 		ExecutorService executorService = Executors.newSingleThreadExecutor();
 		Future future = executorService.submit(new Callable(){
@@ -79,6 +79,7 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUploadFingerPrintRt() {
 		String template = mFpMgr.getFingerprintByUserId(2);
 		int res = mFpMgr.uploadFingerPrintRt(2, template);
@@ -86,6 +87,7 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUploadFingerPrintBatch() {
 		//int res = mFpMgr.uploadFingerPrintBatch();
 		//System.out.println("upload return code: "+res);
@@ -108,6 +110,7 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testAddFingerPrint() {
 		String template = mFpMgr.getFingerprintByUserId(2);
 		int res = mFpMgr.addFingerPrint(100, 0, template);
@@ -115,6 +118,7 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUpdateFingerPrint() {
 		//TODO do fingerprint enrollment action here via FPU JNI call
 		String template = mFpMgr.getFingerprintByUserId(2);
@@ -123,23 +127,27 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testDeleteFingerPrint() {
 		int res = mFpMgr.deleteFingerPrint(2, 0);
 		System.out.println("Deleted: fingerprint uId 2 fig 0 with result: "+res);
 	}
 
 	@Test
+	@Ignore
 	public void testDeleteFingerPrints() {
 		int res = mFpMgr.deleteFingerPrint(2, 0);
 		System.out.println("Deleted: fingerprints uId 2 with result: "+res);
 	}
 
 	@Test
+	@Ignore
 	public void testFingerprintCount() {
 		System.out.println("FingerPrint count: "+mFpMgr.fingerprintCount());
 	}
 
 	@Test
+	@Ignore
 	public void testGetFingerprintByUserId() {
 		String res = mFpMgr.getFingerprintByUserId(2);
 		if (res != null){
@@ -150,6 +158,7 @@ public class FingerPrintManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUpdateFingerPrintSyncStatus() {
 		int res = mFpMgr.updateFingerPrintSyncStatus(2, 0, true);
 		System.out.println("FingerPrint sync updated with result: "+res);

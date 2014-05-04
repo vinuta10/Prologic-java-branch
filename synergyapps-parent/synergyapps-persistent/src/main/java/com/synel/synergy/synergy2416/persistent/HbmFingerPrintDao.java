@@ -24,7 +24,7 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 
 	@Override
 	public int updateFingerPrintTemplate(int uId, int fingerNum, String template) {
-		//TODO test
+		
 		int res = 0;
 		String hql = "update FingerPrintPOJO f set f.template = "+"\'"+template+"\'"+" where f.userId = "+ uId +" and f.fingerNum = "+ fingerNum;
 		System.out.println("updating..."+hql);
@@ -34,7 +34,7 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 
 	@Override
 	public int deleteFingerPrint(int uId, int fingerNum) {
-		//TODO test
+		
 		int res = 0;
 		String hql = "delete FingerPrintPOJO f where f.userId = "+uId+" and f.fingerNum = "+ fingerNum;
 		System.out.println("updating..."+hql);
@@ -44,7 +44,7 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 
 	@Override
 	public int deleteFingerPrints(int uId) {
-		//TODO test
+	
 		int res = 0;
 		String hql = "delete FingerPrintPOJO f where f.userId = "+ uId;
 		System.out.println("updating..."+hql);
@@ -54,7 +54,7 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 
 	@Override
 	public int getFingerPrintCount() {
-		//TODO test
+	
 		int res = 0;
 		String hql = "select count(f) from FingerPrintPOJO f";
 		res = HibernateUtilities.SelectQueryUniqueInt(hql);
@@ -64,7 +64,6 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 	@Override
 	public int updateFingerPrintSyncStatus(int uId, int fingerNum,
 			boolean isSynced) {
-		//TODO test
 		int res = -1;
 		String hql = "update FingerPrintPOJO f set f.synced= "+"\'"+isSynced+"\'"+" where f.userId = "+uId+" and f.fingerNum = "+ fingerNum;
 		System.out.println("now updating ..."+hql);

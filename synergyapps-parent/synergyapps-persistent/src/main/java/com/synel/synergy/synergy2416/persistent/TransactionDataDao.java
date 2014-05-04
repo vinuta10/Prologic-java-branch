@@ -15,5 +15,8 @@ public interface TransactionDataDao {
 	public List<TransactionDataPOJO> getTransactiondataListThatNeedUpload(); //get the list of transactions not uploaded
 	
 	public int cleanUpTransactionData(); //delete all records that were uploaded to the server
+	
+	public int updateTransactionDataSyncStatus(long id, boolean isUploaded); //mark records uploaded to the server
 
+	public int getNumberOfTransactionDataThatNeedUpload();
 }

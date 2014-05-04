@@ -6,6 +6,7 @@ import java.util.List;
 import com.synel.synergy.synergy2416.persistent.EmployeePOJO;
 import com.synel.synergy.synergy2416.persistent.FingerPrintPOJO;
 import com.synel.synergy.synergy2416.persistent.PunchDataPOJO;
+import com.synel.synergy.synergy2416.persistent.TransactionDataPOJO;
 import com.xacttime.ArrayOfInt;
 import com.xacttime.DateTimeOffset;
 import com.xacttime.Employee;
@@ -115,4 +116,11 @@ public class EntityMapUtility {
 		f.setTemplate(dbfp.getTemplate());
 		return f;
 	}
+
+	public static List<PunchData> mapToPunchDataListFromTransactionDataListPOJO(
+			List<TransactionDataPOJO> mTds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -34,9 +34,20 @@ public class HbmTransactionDataDaoTest extends TestCase {
 		System.out.println("================== Begin test suite 5===================================");
 		testGetTransactiondataListThatNeedUpload();
 		System.out.println("================== Begin test suite 6===================================");
+		testUpdateTransactionDataSyncStatus();
+		System.out.println("================== Begin test suite 7===================================");
 		testCleanUpTransactionData();
+		System.out.println("================== Begin test suite 8===================================");
+		testGetNumberOfTransactionDataThatNeedUpload();
 		System.out.println("================== End test suite ===================================");
 		
+	}
+
+	@Test
+	@Ignore
+	public void testGetNumberOfTransactionDataThatNeedUpload() {
+		int res = htdd.getNumberOfTransactionDataThatNeedUpload();
+		System.out.println("There are "+res+" records that need to be uploaded to the server.");
 	}
 
 	@Test
@@ -44,7 +55,7 @@ public class HbmTransactionDataDaoTest extends TestCase {
 	public void testSaveTransactionData() {
 		PunchDataPOJO pd = new PunchDataPOJO();
 		pd.setUserId(2);
-		pd.setPunchType("Clock_In");
+		pd.setPunchType("ClockIn");
 		pd.setLaborLevelDetailIds(new ArrayList<Integer>(Arrays.asList(12,2,3,11)));
 		TransactionDataPOJO td = new TransactionDataPOJO();
 		td.setTimestamp(System.currentTimeMillis());
@@ -66,7 +77,7 @@ public class HbmTransactionDataDaoTest extends TestCase {
 			td.setTimestamp(System.currentTimeMillis());
 			td.setPd(pd);
 			pd.setUserId(rdg.nextInt(i+1));
-			pd.setPunchType(getPunchType(i%9));
+			pd.setPunchType(punchTypeStringFromNum(i%9));
 			pd.setTransactionTime(System.currentTimeMillis());
 			pd.setLaborLevelDetailIds(generateLLDetailIds(new int[] {rdg.nextInt(15),rdg.nextInt(15),rdg.nextInt(15), rdg.nextInt(15)}));
 			System.out.println("punched: "+pd.getUserId()+" punchtype: "+pd.getPunchType()+" timestamp: "+pd.getTransactionTime()+" llids: "+pd.getLaborLevelDetailIds().toString());
@@ -109,33 +120,67 @@ public class HbmTransactionDataDaoTest extends TestCase {
 	}
 	
 	@Test
+	public void testUpdateTransactionDataSyncStatus(){
+		int res = htdd.updateTransactionDataSyncStatus(mId, true);
+		System.out.println("Updated id: "+mId+" with status: "+res);
+	}
+	
+	@Test
 	public void testCleanUpTransactionData(){
 		int res = htdd.cleanUpTransactionData();
 		System.out.println("records cleaned: "+res);
 	}
 	
 	
-	private String getPunchType(int punchNum) {
-		switch(punchNum){
-    	case 1:
-    		return "CLOCK_IN";
-    	case 2:
-    		return "CLOCK_OUT";
-    	case 3:
-    		return "START_BREAK";
-    	case 4:
-    		return "START_LUNCH";
-    	case 5:
-    		return "END_BREAK";
-    	case 6:
-    		return "END_LUNCH";
-    	case 7:
-    		return "PAY_ADJUSTMENT";
-    	case 8:
-    		return "NON_WORK";
-    	default:
-    		return "SWIPE_AND_GO";
-		}
+	private String punchTypeStringFromNum(int punchNum) {
+			switch(punchNum){
+			/*
+			 *  @XmlEnumValue("NonWork")
+	    NON_WORK("NonWork"),
+	    @XmlEnumValue("Transfer")
+	    TRANSFER("Transfer"),
+	    @XmlEnumValue("StartLunch")
+	    START_LUNCH("StartLunch"),
+	    @XmlEnumValue("StartBreak")
+	    START_BREAK("StartBreak"),
+	    @XmlEnumValue("ClockIn")
+	    CLOCK_IN("ClockIn"),
+	    @XmlEnumValue("ClockOut")
+	    CLOCK_OUT("ClockOut"),
+	    @XmlEnumValue("EndLunch")
+	    END_LUNCH("EndLunch"),
+	    @XmlEnumValue("EndBreak")
+	    END_BREAK("EndBreak"),
+	    @XmlEnumValue("PayAdjustment")
+	    PAY_ADJUSTMENT("PayAdjustment"),
+	    @XmlEnumValue("SwipeAndGo")
+	    SWIPE_AND_GO("SwipeAndGo"),
+	    @XmlEnumValue("CallBack")
+	    CALL_BACK("CallBack");
+			 */
+	    	case 1:
+	    		return "ClockIn";
+	    	case 2:
+	    		return "ClockOut";
+	    	case 3:
+	    		return "StartBreak";
+	    	case 4:
+	    		return "StartLunch";
+	    	case 5:
+	    		return "EndBreak";
+	    	case 6:
+	    		return "EndLunch";
+	    	case 7:
+	    		return "PayAdjustment";
+	    	case 8:
+	    		return "NonWork";
+	    	case 9:
+	    		return "Transfer";
+	    	case 10:
+	    		return "CallBack";
+	    	default:
+	    		return "SwipeAndGo";
+			}
 	}
 	
 	private List<Integer> generateLLDetailIds(int[] lldetailIds){

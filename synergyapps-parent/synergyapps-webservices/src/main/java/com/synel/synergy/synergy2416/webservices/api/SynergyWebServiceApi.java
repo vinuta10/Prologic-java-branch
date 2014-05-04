@@ -6,6 +6,7 @@ import com.xacttime.ArrayOfPunchData;
 import com.xacttime.Employee;
 import com.xacttime.Fingerprint;
 import com.xacttime.LaborLevel;
+import com.xacttime.PunchData;
 
 public interface SynergyWebServiceApi {
 	/**
@@ -17,7 +18,7 @@ public interface SynergyWebServiceApi {
 	 * @param laborLevelDetialIds array of indexes to the labor level detail table. 
 	 * @return 0 if successful, return negative number (-400) if failed. Need to save data into persistent layer.
 	 */
-	public int sendPunchRt(int userID, long transactionTimeEpoch, int punchTypeNum , int[] lldetailIds);
+	public int sendPunchRt(int userID, long transactionTimeEpoch, String punchType , List<Integer> lldetailIds);
 	
 	/**
 	 * When your module fails to keep or establish a connection to your web service end point the persistent layer class logs
@@ -31,7 +32,7 @@ public interface SynergyWebServiceApi {
 	 * @return 0 if successful
 	 */
 	
-	public int sendPunchesBatch(ArrayOfPunchData aopd);
+	public int sendPunchesBatch(List<PunchData> lopd);
 	
 	/**
 	 * Allows you to get finger prints from the server or web service. Finger print templates are typically stored as strings on

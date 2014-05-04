@@ -38,8 +38,9 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		mTerminalId = SystemInformation.getTerminalId();
 	}
 	
+	@Override
 	public int sendPunchRt(int userID, long transactionTimeEpoch,
-			int punchNum, int[] lldetailIds) {
+			String punchType, List<Integer> lldetailIds) {
 		PunchData pd = new PunchData();
 		pd.setUserId(userID);
 		ArrayOfInt aoi = new ArrayOfInt();
@@ -47,7 +48,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 			aoi.getInt().add(i);
 		}
 		pd.setLaborLevelDetailIds(aoi);
-		pd.setPunchType(getPunchType(punchNum));
+		pd.setPunchType(getPunchType(punchType));
 		pd.setTransactionTime(new DateTimeOffset(transactionTimeEpoch));
 		System.out.println("Sending punch data realtime for terminalId: "+mTerminalId + " puchType: "+pd.getPunchType().toString());
 		PunchStatus ps = mPort.recordPunch(mWebServicesKey, mTerminalId, pd);
@@ -55,7 +56,12 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		return ps.isSuccess()?0:-1;
 	}
 
-	public int sendPunchesBatch(ArrayOfPunchData aopd) {
+	@Override
+	public int sendPunchesBatch(List<PunchData> lopd) {
+		ArrayOfPunchData aopd = new ArrayOfPunchData();
+		for(PunchData pd:lopd){
+			aopd.getPunchData().add(pd);
+		}
 		try{
 			ArrayOfPunchStatus ps = mPort.recordPunches(mWebServicesKey, mTerminalId, aopd);
 			System.out.println(ps.toString());
@@ -65,6 +71,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		return 0;
 	}
 
+	@Override
 	public List<Fingerprint> getFingerPrints() {
 		ArrayOfFingerprint aof;
 		try {
@@ -76,6 +83,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		return aof.getFingerprint();
 	}
 
+	@Override
 	public int sendFingerPrint(int userID, String fingerTemplate) {
 		
 		boolean success = false;
@@ -90,6 +98,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		return success?0:-1;
 	}
 
+	@Override
 	public List<Employee> getEmployees() {
 		
 		try {
@@ -101,6 +110,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		}
 	}
 
+	@Override
 	public List<LaborLevel> getLaborLevels() {
 		try{
 			ArrayOfLaborLevel lld = mPort.getLaborLevels(mWebServicesKey);
@@ -110,11 +120,13 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		}
 	}
 
+	@Override
 	public int getServerTime() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
 	public String sendHeartBeat() {
 		// TODO Auto-generated method stub
 		return null;
@@ -129,6 +141,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private TimeSlicePreType getPunchType(int punchNum) {
 		switch(punchNum){
     	case 1:
@@ -150,6 +163,10 @@ public class SynergyWebServices implements SynergyWebServiceApi {
     	default:
     		return TimeSlicePreType.SWIPE_AND_GO;
 		}
+	}
+	
+	private TimeSlicePreType getPunchType(String punchType) {
+		return TimeSlicePreType.fromValue(punchType);
 	}
 
 }

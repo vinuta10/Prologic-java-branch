@@ -38,4 +38,22 @@ public class HbmTransactionDataDao extends HbmBaseDao<TransactionDataPOJO> imple
 	    String hql = "From TransactionDataPOJO where uploaded = 'false'";
 		return (List<TransactionDataPOJO>) HibernateUtilities.SelectQueryList(hql);
 	}
+
+	@Override
+	public int updateTransactionDataSyncStatus(long id, boolean isUploaded) {
+	//TODO test
+		int res = -1;
+		String hql = "update TransactionDataPOJO t set t.uploaded= "+"\'"+isUploaded+"\'"+" where t.id = "+id;
+		System.out.println("now updating ..."+hql);
+		res = HibernateUtilities.ExecUpdateQuery(hql);
+		return res;
+	}
+    
+	@Override
+	public int getNumberOfTransactionDataThatNeedUpload() {
+		int res = 0;
+		String hql = "select count(t) from TransactionDataPOJO t where t.uploaded = 'false'";
+		res = HibernateUtilities.SelectQueryUniqueInt(hql);
+		return res;
+	}
 }
