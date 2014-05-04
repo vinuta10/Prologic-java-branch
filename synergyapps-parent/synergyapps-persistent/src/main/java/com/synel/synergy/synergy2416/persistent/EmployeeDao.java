@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EmployeeDao {
 	
-	public EmployeePOJO findEmployeeById(int id);
+	public EmployeePOJO findEmployeeById(long id);
 	
 	public EmployeePOJO findEmployeeByBadgeNumber(int BadgeNumber);
 	

@@ -11,8 +11,13 @@ public final class FPU {  //implements FingerPrintEnrollmentHandler, Employee{
 	private static boolean m_bFingerisEnrolling = false;
 
 	static { 
-		System.out.println(System.getProperty("java.library.path"));
-		System.loadLibrary("synergy-mock"); //changeme to "synergy"->libsynergy.so for real device. place it in /home/admin/synergy/lib/.
+		System.out.println(System.getProperty("os.arch"));
+		if (System.getProperty("os.arch").compareTo("i386") == 0) {
+			System.loadLibrary("synergy-mock"); //changeme to "synergy"->libsynergy.so for real device. place it in /home/admin/synergy/lib/.
+		} else {
+			System.loadLibrary("synergy2416"); //changeme to "synergy"->libsynergy.so for real device. place it in /home/admin/synergy/lib/.
+		}
+		
 	}
 
 	private static class FPULoader {

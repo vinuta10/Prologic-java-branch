@@ -14,12 +14,12 @@ public class HbmFingerPrintDao extends HbmBaseDao<FingerPrintPOJO> implements Fi
 	
 	@Override
 	public void saveFingerprint(FingerPrintPOJO fp) {
-		this.saveData(fp);
+		this.saveOrUpdateData(fp);
 	}
 
 	@Override
 	public void saveFingerprints(List<FingerPrintPOJO> fps) {
-		this.saveDataList(fps);
+		this.saveOrUpdateDataList(fps);
 	}
 
 	@Override

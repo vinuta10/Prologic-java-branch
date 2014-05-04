@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DateTimeOffset")
 public class DateTimeOffset {
-	
-	private long myepoch;
+
+private long myepoch;
 	
 	public DateTimeOffset(){
 		
@@ -43,6 +43,5 @@ public class DateTimeOffset {
 	public void setMyepoch(long myepoch) {
 		this.myepoch = myepoch;
 	}
-
-
+	
 }

@@ -6,17 +6,17 @@ import java.util.List;
 public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements EmployeeDao {
 
 	@Override
-	public EmployeePOJO findEmployeeById(int id) {
+	public EmployeePOJO findEmployeeById(long id) {
 		return this.getData(id);
 	}
 
 	@Override
 	public void saveEmployee(EmployeePOJO emp) {
-		this.saveData(emp);
+		this.saveOrUpdateData(emp);
 	}
 	
 	public void saveEmployees(List<EmployeePOJO> emps){
-		this.saveDataList(emps);
+		this.saveOrUpdateDataList(emps);
 	}
 
 	@SuppressWarnings("unchecked")

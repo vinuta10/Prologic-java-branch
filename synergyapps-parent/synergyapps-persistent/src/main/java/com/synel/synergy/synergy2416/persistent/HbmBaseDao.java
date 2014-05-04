@@ -1,6 +1,7 @@
 package com.synel.synergy.synergy2416.persistent;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -32,7 +33,28 @@ public class HbmBaseDao<T> {
 		this.msession = msession;
 	}
 	
-	public void saveData(T data) {
+	public long saveData(T data) {
+		if (msession == null || !msession.isOpen()){
+			msession = HibernateUtilities.getSessionFactory().openSession();
+		}
+		Transaction tx = null;
+		long id = -1;
+		try {
+			tx = msession.beginTransaction();
+			id = (Long) msession.save(data);
+			msession.flush();
+			msession.clear();
+			tx.commit();
+		} catch (HibernateException ex) {
+			if (tx != null) tx.rollback();
+			ex.printStackTrace();
+		} finally {
+			msession.close();
+		}
+		return id;	
+	}
+	
+	public void saveOrUpdateData(T data) {
 		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();
 		}
@@ -52,7 +74,34 @@ public class HbmBaseDao<T> {
 		return;	
 	}
 	
-	public void saveDataList(List<T> lldata)
+	public List<Long> saveDataList(List<T> lldata)
+	{
+		if (msession == null || !msession.isOpen()){
+			msession = HibernateUtilities.getSessionFactory().openSession();
+		}
+		List<Long> Ids = new ArrayList<Long>() ;
+		Transaction tx = null;
+		try {
+			tx = msession.beginTransaction();
+			int i = 0;
+			for(T data:lldata){
+				Ids.add((Long) msession.save(data));
+				if (0 == ++i % BATCH_NUM) {
+					msession.flush();
+					msession.clear();
+				}
+			}
+			tx.commit();
+		} catch (HibernateException ex) {
+			if (tx != null) tx.rollback();
+			ex.printStackTrace();
+		} finally {
+			msession.close();
+		}
+		return Ids;
+	}
+	
+	public void saveOrUpdateDataList(List<T> lldata)
 	{
 		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();
@@ -79,7 +128,7 @@ public class HbmBaseDao<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T getData(int id)
+	public T getData(long id)
 	{
 		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();

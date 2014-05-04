@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface TransactionDataDao {
 	
-	public void saveTransactionData(TransactionDataPOJO td);
+	public long saveTransactionData(TransactionDataPOJO td); //id is generated automatically by db
 	
-	public void saveTransactionDataList(List<TransactionDataPOJO> lltd);
+	public List<Long> saveTransactionDataList(List<TransactionDataPOJO> lltd);
 	
-	public TransactionDataPOJO getTransactionDataById(int id);
+	public TransactionDataPOJO getTransactionDataById(long id);
 	
 	public List<TransactionDataPOJO> getTransactionDataList(); //get the list of transactions 
 	

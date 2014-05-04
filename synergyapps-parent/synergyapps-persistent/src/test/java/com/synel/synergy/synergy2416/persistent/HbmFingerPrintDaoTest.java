@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class HbmFingerPrintDaoTest {
@@ -70,6 +71,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
     
 	@Test
+	@Ignore
 	public void testGetAllFingerPrints() {
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
 		List<FingerPrintPOJO> fps = fpDao.getAllFingerPrints();
@@ -77,6 +79,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 
 	@Test
+	@Ignore
 	public void testGetFingerprint() {
 		
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
@@ -85,6 +88,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 	
 	@Test
+	@Ignore
 	public void testSaveFingerprint(){
 		
 		System.out.println("Template len: "+fpsamples[0].length());
@@ -97,6 +101,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 
 	@Test
+	@Ignore
 	public void testSaveFingerprints() {
 		
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
@@ -104,6 +109,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 	
 	@Test
+	@Ignore
 	public void testUpdateFingerPrintSyncStatus() {
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
 		int res = fpDao.updateFingerPrintSyncStatus(2, 0, true);
@@ -111,6 +117,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 	
 	@Test
+	@Ignore
 	public void testUpdateFingerPrintTemplate() {
 		
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
@@ -120,6 +127,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 
 	@Test
+	@Ignore
 	public void testDeleteFingerPrint() {
 		
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
@@ -128,6 +136,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 
 	@Test
+	@Ignore
 	public void testDeleteFingerPrints() {
 		
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
@@ -136,6 +145,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 
 	@Test
+	@Ignore
 	public void testGetFingerPrintCount() {
 		
 		FingerPrintDao fpDao = new HbmFingerPrintDao();
@@ -145,6 +155,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
 	}
 
 	@Test
+	@Ignore
 	public void testGetDirtyFingerPrints() {
 	
 		FingerPrintDao fpDao = new HbmFingerPrintDao();

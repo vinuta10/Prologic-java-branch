@@ -5,23 +5,25 @@ import java.util.List;
 public class HbmTransactionDataDao extends HbmBaseDao<TransactionDataPOJO> implements TransactionDataDao {
 
 	@Override
-	public void saveTransactionData(TransactionDataPOJO td) {
-		this.saveData(td);
+	public long saveTransactionData(TransactionDataPOJO td) {
+		return (this.saveData(td));
 	}
 
 	@Override
-	public TransactionDataPOJO getTransactionDataById(int id) {
+	public TransactionDataPOJO getTransactionDataById(long id) {
 		return this.getData(id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TransactionDataPOJO> getTransactionDataList() {
-		return this.getTransactionDataList();
+		String hql = "From TransactionDataPOJO";
+		return (List<TransactionDataPOJO>) HibernateUtilities.SelectQueryList(hql);
 	}
 
 	@Override
-	public void saveTransactionDataList(List<TransactionDataPOJO> lltd) {
-		this.saveDataList(lltd);
+	public List<Long> saveTransactionDataList(List<TransactionDataPOJO> lltd) {
+		return (this.saveDataList(lltd));
 	}
 
 	@Override
