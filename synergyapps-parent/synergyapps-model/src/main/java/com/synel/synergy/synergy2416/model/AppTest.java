@@ -6,8 +6,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.junit.Ignore;
-import org.junit.Test;
 
 public class AppTest {
 
@@ -73,33 +71,27 @@ public class AppTest {
 		
 	}
 
-	@Test
-	@Ignore
+	
 	public static void testGetEmployeeCount() {
 		System.out.println("Employee Count: "+mEmpMgr.getEmployeeCount());
 	}
 
-	@Test
-	@Ignore
+	
 	public static void testUpdateEmployeeLaborLevels() {
 		System.out.println("updated "+mEmpMgr.updateEmployeeLaborLevels(101, "01,02,03,04")+" record ");
 	}
 
-	@Test
-	@Ignore
 	public static void testDeleteEmployeeById() {
 		int res = mEmpMgr.deleteEmployeeById(101);
 		System.out.println("Deleted "+res+" record 101");
 	}
 
-	@Test
-	@Ignore
+	
 	public static void testGetEmployeeLaborLevelsById() {
 		System.out.println("LaborLevels for employee 101 is : "+mEmpMgr.getEmployeeLaborLevelsById(101));
 	}
 
-	@Test
-	@Ignore
+	
 	public static void testGetEmployeeNameById() {
 		System.out.println("Employee #101 name is: "+mEmpMgr.getEmployeeNameById(101));
 	}
