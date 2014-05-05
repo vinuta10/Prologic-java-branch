@@ -219,6 +219,11 @@ public class SynergyEventController implements SynergyStatusListener {
 	    System.out.println("Loading InitializingForm");
 	}
 	
+	public void loadingDataBaseForm()
+	{
+		System.out.println("Loading DataBase from Server,Please wait...");
+	}
+	
 	public void loadWelcomeForm()
 	{
 	    System.out.println("Loading WelcomeForm");
@@ -284,7 +289,10 @@ public class SynergyEventController implements SynergyStatusListener {
 			break;
 		case SYNERGYSTATUS_UNINITIALIZED:
 			loadInitializingForm();
-			break;	
+			break;
+		case SYNERGYSTATUS_LOADINGDATABASE:
+			loadingDataBaseForm();
+			break;
 		case SYNERGYSTATUS_VIDEO:
 			
 			loadPlayVideoForm();

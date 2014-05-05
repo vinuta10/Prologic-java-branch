@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
 	private static SynergyAudioPool m_sap;
 
 	static void renderSplashFrame(Graphics2D g, int frame) {
-        final String[] comps = {"camera", "fingerprintreader", "keypad"};
+        final String[] comps = {"database", "fingerprintreader", "keypad"};
         g.setComposite(AlphaComposite.Clear);
         g.fillRect(120,140,200,40);
         g.setPaintMode();

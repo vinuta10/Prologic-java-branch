@@ -12,6 +12,7 @@ import java.util.concurrent.Future;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.synel.synergy.synergy2416.persistent.PunchDataPOJO;
@@ -31,6 +32,7 @@ public class TransactionDataManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUploadTransactionRt() {
 		PunchDataPOJO pd = new PunchDataPOJO();
 		pd.setUserId(3);
@@ -42,6 +44,7 @@ public class TransactionDataManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testSaveTransaction() {
 		TransactionDataPOJO td = new TransactionDataPOJO();
 		PunchDataPOJO pd = new PunchDataPOJO();
@@ -57,6 +60,7 @@ public class TransactionDataManagerImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testUploadTransactionBatch() {
 		//int res = mFpMgr.uploadFingerPrintBatch();
 		//System.out.println("upload return code: "+res);
@@ -78,8 +82,25 @@ public class TransactionDataManagerImplTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testCleanupTransactions() {
 		int res = mTdm.cleanupTransactions();
 		System.out.println("Cleaned Up the transaction table with result: "+res);
+	}
+
+	@Test
+	public void testMasterSuite() {
+		System.out.println("===========================Begin Test 1==========================================");
+		testUploadTransactionRt();
+		
+		System.out.println("===========================Begin Test 2==========================================");
+		testUploadTransactionBatch();
+		
+		System.out.println("===========================Begin Test 3==========================================");
+		testSaveTransaction();
+		
+		System.out.println("===========================Begin Test 5==========================================");
+		testCleanupTransactions();
+		
 	}
 }

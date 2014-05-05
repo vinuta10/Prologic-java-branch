@@ -4,8 +4,16 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.swing.JTextField;
+
+import com.synel.synergy.synergy2416.model.EmployeeManager;
+import com.synel.synergy.synergy2416.model.EmployeeManagerImpl;
 
 /**
  * @author chaol
@@ -23,6 +31,7 @@ public class SynergyEventDispatcher {
 	{
 	    SYNERGYSTATUS_FAULT,
 	    SYNERGYSTATUS_UNINITIALIZED,
+	    SYNERGYSTATUS_LOADINGDATABASE,
 	    SYNERGYSTATUS_VIDEO,
 	    SYNERGYSTATUS_WEBCAM,
 	    SYNERGYSTATUS_LED,
@@ -37,6 +46,7 @@ public class SynergyEventDispatcher {
 	private static SYNERGY_STATUS m_prestatus;
 	private SYNERGY_STATUS m_status;
 	List<SynergyStatusListener> listeners = new ArrayList<SynergyStatusListener>();
+	private EmployeeManager mEmpMgr = EmployeeManagerImpl.getInstance();
 	
 	public void addListener(SynergyStatusListener sl) {
 		listeners.add(sl);
@@ -64,11 +74,10 @@ public class SynergyEventDispatcher {
 	public void initialize() {	  
 		while (FPU.openFPU(fpPath) !=0 ){
 		}
-		System.out.println("Changing clock status to ready ...");
-  	  	m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
-  	  	//diffAndEmit(m_status);
+		System.out.println("LOADING DATABASE FROM SERVER ...");
+		m_status = SYNERGY_STATUS.SYNERGYSTATUS_LOADINGDATABASE;
   	  	emit(m_status);
-  	  	System.out.println("Changing clock status to ready done.");
+  	    syncEmployeesFromServer(); //will emit ready when database sync is done
 	}
 
 	public void handlekeyPressed(KeyEvent e) {
@@ -146,6 +155,35 @@ public class SynergyEventDispatcher {
 
 	public static void set_prestatus(SYNERGY_STATUS m_prestatus) {
 		SynergyEventDispatcher.m_prestatus = m_prestatus;
+	}
+	
+	public void syncEmployeesFromServer() {
+		int res = -1;
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
+		Future future = executorService.submit(new Callable(){
+
+			public Object call() throws Exception {
+		        return mEmpMgr.syncEmployeesFromServer();
+		    }
+		});
+		try {
+			res = (Integer) future.get();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (res == 0) {
+			m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
+	  	  	//diffAndEmit(m_status);
+	  	  	emit(m_status);
+	  	  	System.out.println("Changing clock status to ready done.");
+		}
+		
 	}
 
 //	@Override
