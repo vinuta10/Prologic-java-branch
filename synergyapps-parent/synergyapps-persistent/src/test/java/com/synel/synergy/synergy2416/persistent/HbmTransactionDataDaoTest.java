@@ -120,12 +120,14 @@ public class HbmTransactionDataDaoTest extends TestCase {
 	}
 	
 	@Test
+	@Ignore
 	public void testUpdateTransactionDataSyncStatus(){
 		int res = htdd.updateTransactionDataSyncStatus(mId, true);
 		System.out.println("Updated id: "+mId+" with status: "+res);
 	}
 	
 	@Test
+	@Ignore
 	public void testCleanUpTransactionData(){
 		int res = htdd.cleanUpTransactionData();
 		System.out.println("records cleaned: "+res);

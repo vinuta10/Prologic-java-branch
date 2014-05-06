@@ -7,7 +7,7 @@ package com.synel.synergy.synergy2416.presentation.controller;
 
 import com.synel.synergy.synergy2416.presentation.api.FingerPrintEnrollmentHandler;
 
-public final class FPU {  //implements FingerPrintEnrollmentHandler, Employee{
+public final class FPU implements FingerPrintEnrollmentHandler {  //implements FingerPrintEnrollmentHandler, Employee{
 	private static boolean m_bFingerisEnrolling = false;
 
 	static { 
@@ -272,5 +272,52 @@ public final class FPU {  //implements FingerPrintEnrollmentHandler, Employee{
 
 		}
 		return app_msgConvert(nRet);
+	}
+	
+	public static void main (String args[]){
+		System.out.println("Open FPU");
+		System.out.println(FPU.openFPU("/root/templates"));
+		System.out.println(FPU.enroll("1234", 0, FPU.getInstance()));
+	}
+	@Override
+	public void onReadyForFinger(int step, boolean repeatOnReaderError) {
+		// TODO Auto-generated method stub
+		switch(step){
+		case 1:
+			//MainWindow.placefingersound.start();
+			//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+			System.out.println("Please place finger Step: "+ step);
+			break;
+		case 2:
+			//MainWindow.placefingeragainsound.start();
+			//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+			System.out.println("\nPlease place finger Step: "+ step );
+			break;
+		case 3:
+			//MainWindow.placefingeragainsound.start();
+			//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+			System.out.println("\nPlease place finger Step: "+ step );
+			break;
+		}
+		
+	}
+
+
+	@Override
+	public void onFingerPrintRead(int step) {
+		// TODO Auto-generated method stub
+		//MainWindow.successbuzzersound.start();
+		//System.out.println("Please Remove Finger Step: "+ step + "  ");
+		System.out.println("\nPlease Remove finger Step: "+ step + " ");
+		
+	}
+
+	@Override
+	public void setStepCount(int count) {
+		// TODO Auto-generated method stub
+		//System.out.println("Start");
+		//System.out.println("Please place finger "+ count + " times");
+		System.out.println("\nPlease place finger "+ count + " times");
+		
 	}
 }

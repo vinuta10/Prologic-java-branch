@@ -46,6 +46,26 @@ public interface SynergySoap {
     /**
      * 
      * @param terminalId
+     * @param punch
+     * @param webServicesKey
+     * @return
+     *     returns com.xacttime.PunchStatus
+     */
+    @WebMethod(operationName = "SynergyRecordPunch", action = "http://xacttime.com/SynergyRecordPunch")
+    @WebResult(name = "SynergyRecordPunchResult", targetNamespace = "http://xacttime.com/")
+    @RequestWrapper(localName = "SynergyRecordPunch", targetNamespace = "http://xacttime.com/", className = "com.xacttime.SynergyRecordPunch")
+    @ResponseWrapper(localName = "SynergyRecordPunchResponse", targetNamespace = "http://xacttime.com/", className = "com.xacttime.SynergyRecordPunchResponse")
+    public PunchStatus synergyRecordPunch(
+        @WebParam(name = "webServicesKey", targetNamespace = "http://xacttime.com/")
+        String webServicesKey,
+        @WebParam(name = "terminalId", targetNamespace = "http://xacttime.com/")
+        int terminalId,
+        @WebParam(name = "punch", targetNamespace = "http://xacttime.com/")
+        SynergyPunchData punch);
+
+    /**
+     * 
+     * @param terminalId
      * @param webServicesKey
      * @param punches
      * @return
@@ -62,6 +82,26 @@ public interface SynergySoap {
         int terminalId,
         @WebParam(name = "punches", targetNamespace = "http://xacttime.com/")
         ArrayOfPunchData punches);
+
+    /**
+     * 
+     * @param terminalId
+     * @param webServicesKey
+     * @param punches
+     * @return
+     *     returns com.xacttime.ArrayOfPunchStatus
+     */
+    @WebMethod(operationName = "SynergyRecordPunches", action = "http://xacttime.com/SynergyRecordPunches")
+    @WebResult(name = "SynergyRecordPunchesResult", targetNamespace = "http://xacttime.com/")
+    @RequestWrapper(localName = "SynergyRecordPunches", targetNamespace = "http://xacttime.com/", className = "com.xacttime.SynergyRecordPunches")
+    @ResponseWrapper(localName = "SynergyRecordPunchesResponse", targetNamespace = "http://xacttime.com/", className = "com.xacttime.SynergyRecordPunchesResponse")
+    public ArrayOfPunchStatus synergyRecordPunches(
+        @WebParam(name = "webServicesKey", targetNamespace = "http://xacttime.com/")
+        String webServicesKey,
+        @WebParam(name = "terminalId", targetNamespace = "http://xacttime.com/")
+        int terminalId,
+        @WebParam(name = "punches", targetNamespace = "http://xacttime.com/")
+        ArrayOfSynergyPunchData punches);
 
     /**
      * 

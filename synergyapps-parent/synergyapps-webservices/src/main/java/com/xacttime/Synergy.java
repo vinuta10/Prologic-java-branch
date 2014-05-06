@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "Synergy", targetNamespace = "http://xacttime.com/", wsdlLocation = "https://xacttime.taserver.com/site/webservices/v2/synergy.asmx?WSDL")
+@WebServiceClient(name = "Synergy", targetNamespace = "http://xacttime.com/", wsdlLocation = "http://dev6511/XactTime/webservices/v2/synergy.asmx?WSDL")
 public class Synergy
     extends Service
 {
@@ -30,18 +30,14 @@ public class Synergy
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://xacttime.taserver.com/site/webservices/v2/synergy.asmx?WSDL");
+            url = new URL("http://dev6511/XactTime/webservices/v2/synergy.asmx?WSDL");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
         SYNERGY_WSDL_LOCATION = url;
         SYNERGY_EXCEPTION = e;
     }
-    
-    /*
-     * from v2
-     * 
-     */
+
     public Synergy() {
         super(__getWsdlLocation(), SYNERGY_QNAME);
     }
@@ -65,12 +61,6 @@ public class Synergy
     public Synergy(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
-    
-    
-    
-    /*end v2
-     * 
-     */
 
     /**
      * 

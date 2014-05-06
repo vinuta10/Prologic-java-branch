@@ -28,6 +28,11 @@
     	<artifactId>synergyapps-system</artifactId>
     	<version>1.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    	<groupId>joda-time</groupId>
+    	<artifactId>joda-time</artifactId>
+    	<version>2.3</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -45,7 +50,7 @@
             <configuration>
               <executable>${tool.wsimport}</executable>
               <wsdlUrls>
-                <wsdlUrl>https://xacttime.taserver.com/site/webservices/v2/synergy.asmx?WSDL</wsdlUrl>
+                <wsdlUrl>http://dev6511/XactTime/webservices/v2/synergy.asmx?WSDL</wsdlUrl>
               </wsdlUrls>
                <!-- The name of your generated source package -->
           		<packageName>com.xacttime</packageName>

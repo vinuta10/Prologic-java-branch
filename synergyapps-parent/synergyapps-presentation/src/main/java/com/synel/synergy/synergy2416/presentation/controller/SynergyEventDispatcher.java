@@ -72,12 +72,13 @@ public class SynergyEventDispatcher {
 	}
 	
 	public void initialize() {	  
-		while (FPU.openFPU(fpPath) !=0 ){
-		}
+		
 		System.out.println("LOADING DATABASE FROM SERVER ...");
 		m_status = SYNERGY_STATUS.SYNERGYSTATUS_LOADINGDATABASE;
   	  	emit(m_status);
   	    syncEmployeesFromServer(); //will emit ready when database sync is done
+  	    while (FPU.openFPU(fpPath) !=0 ){
+		}
 	}
 
 	public void handlekeyPressed(KeyEvent e) {
@@ -158,31 +159,41 @@ public class SynergyEventDispatcher {
 	}
 	
 	public void syncEmployeesFromServer() {
-		int res = -1;
-		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		@SuppressWarnings("rawtypes")
-		Future future = executorService.submit(new Callable(){
-
-			public Object call() throws Exception {
-		        return mEmpMgr.syncEmployeesFromServer();
-		    }
-		});
-		try {
-			res = (Integer) future.get();
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (res == 0) {
-			m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
-	  	  	//diffAndEmit(m_status);
-	  	  	emit(m_status);
-	  	  	System.out.println("Changing clock status to ready done.");
-		}
+		
+		//mock code
+		m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
+  	  	//diffAndEmit(m_status);
+  	  	emit(m_status);
+  	  	System.out.println("Changing clock status to ready done.");
+		return;
+		//end of mock code
+		
+		
+//		int res = -1;
+//		ExecutorService executorService = Executors.newSingleThreadExecutor();
+//		@SuppressWarnings("rawtypes")
+//		Future future = executorService.submit(new Callable(){
+//
+//			public Object call() throws Exception {
+//		        return mEmpMgr.syncEmployeesFromServer();
+//		    }
+//		});
+//		try {
+//			res = (Integer) future.get();
+//			
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if (res == 0) {
+//			m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
+//	  	  	//diffAndEmit(m_status);
+//	  	  	emit(m_status);
+//	  	  	System.out.println("Changing clock status to ready done.");
+//		}
 		
 	}
 

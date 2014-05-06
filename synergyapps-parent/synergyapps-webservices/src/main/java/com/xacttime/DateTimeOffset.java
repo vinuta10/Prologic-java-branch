@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.joda.time.DateTime;
+
 
 /**
  * <p>Java class for DateTimeOffset complex type.
@@ -25,23 +27,22 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DateTimeOffset")
 public class DateTimeOffset {
-
-private long myepoch;
+	private DateTime myTime;
 	
 	public DateTimeOffset(){
 		
 	}
 	
-	public DateTimeOffset(long epoch) {
-		setMyepoch(epoch);
+	public DateTimeOffset(DateTime dt){
+		myTime = dt;
 	}
 
-	public long getMyepoch() {
-		return myepoch;
+	public DateTime getMyTime() {
+		return myTime;
 	}
 
-	public void setMyepoch(long myepoch) {
-		this.myepoch = myepoch;
+	public void setMyTime(DateTime myTime) {
+		this.myTime = myTime;
 	}
-	
+
 }

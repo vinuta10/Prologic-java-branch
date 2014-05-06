@@ -335,30 +335,30 @@ public class SynergyEventController implements SynergyStatusListener {
 	}
 	
 	public void onFingerprintEnrollmentSuccess(String strBadgeNum, int nFingerNum){
-		String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
+		//String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
 		//save it to persistent layer. and/or upload to the server (in the background thread of course).
-		mFpMgr.addFingerPrint(Integer.parseInt(strBadgeNum), 0, template);
-		uploadFingerPrintBatch();
+		//mFpMgr.addFingerPrint(Integer.parseInt(strBadgeNum), 0, template);
+		//uploadFingerPrintBatch();
 	}
 	
-	public void uploadFingerPrintBatch() {
-		//int res = mFpMgr.uploadFingerPrintBatch();
-		//System.out.println("upload return code: "+res);
-		//using async method
-		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		Future future = executorService.submit(new Callable(){
-		    public Object call() throws Exception {
-		        return mFpMgr.uploadFingerPrintBatch();
-		    }
-		});
-		try {
-			System.out.println("upload future.get() = " + future.get());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void uploadFingerPrintBatch() {
+//		//int res = mFpMgr.uploadFingerPrintBatch();
+//		//System.out.println("upload return code: "+res);
+//		//using async method
+//		ExecutorService executorService = Executors.newSingleThreadExecutor();
+//		Future future = executorService.submit(new Callable(){
+//		    public Object call() throws Exception {
+//		        return mFpMgr.uploadFingerPrintBatch();
+//		    }
+//		});
+//		try {
+//			System.out.println("upload future.get() = " + future.get());
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

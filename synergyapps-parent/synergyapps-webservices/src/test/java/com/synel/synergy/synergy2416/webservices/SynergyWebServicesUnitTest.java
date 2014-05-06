@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.joda.time.DateTime;
+
 import junit.framework.TestCase;
 
 import com.xacttime.ArrayOfInt;
-import com.xacttime.ArrayOfPunchData;
 import com.xacttime.DateTimeOffset;
 import com.xacttime.Employee;
 import com.xacttime.Fingerprint;
@@ -43,9 +44,9 @@ public class SynergyWebServicesUnitTest extends TestCase {
 			Random rdg = new Random();
 			pd.setUserId(rdg.nextInt(i+1));
 			pd.setPunchType(getPunchType(i%9));
-			pd.setTransactionTime(new DateTimeOffset(System.currentTimeMillis()));
+			pd.setTransactionTime(new DateTimeOffset(new DateTime()));
 			pd.setLaborLevelDetailIds(generateLLDetailIds(new int[] {rdg.nextInt(15),rdg.nextInt(15),rdg.nextInt(15), rdg.nextInt(15)}));
-			System.out.println("punched: "+pd.getUserId()+" punchtype: "+pd.getPunchType()+" timestamp: "+pd.getTransactionTime().getMyepoch()+" llids: "+pd.getLaborLevelDetailIds().toString());
+			System.out.println("punched: "+pd.getUserId()+" punchtype: "+pd.getPunchType()+" timestamp: "+pd.getTransactionTime()+" llids: "+pd.getLaborLevelDetailIds().toString());
 			aopd.add(pd);
 		}
 		System.out.println("sending "+aopd.size()+ " punchData ...");

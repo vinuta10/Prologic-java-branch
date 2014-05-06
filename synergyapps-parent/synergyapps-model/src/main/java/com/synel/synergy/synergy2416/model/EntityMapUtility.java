@@ -3,6 +3,8 @@ package com.synel.synergy.synergy2416.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import com.synel.synergy.synergy2416.persistent.EmployeePOJO;
 import com.synel.synergy.synergy2416.persistent.FingerPrintPOJO;
 import com.synel.synergy.synergy2416.persistent.PunchDataPOJO;
@@ -93,7 +95,7 @@ public class EntityMapUtility {
 
 	private static DateTimeOffset toTransactionTime(long transactionTime) {
 		DateTimeOffset dtos = new DateTimeOffset();
-		dtos.setMyepoch(transactionTime);
+		dtos.setMyTime(new DateTime(transactionTime));
 		return dtos;
 	}
 

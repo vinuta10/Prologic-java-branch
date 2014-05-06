@@ -30,11 +30,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SynergyRecordPunches }
+     * 
+     */
+    public SynergyRecordPunches createSynergyRecordPunches() {
+        return new SynergyRecordPunches();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfSynergyPunchData }
+     * 
+     */
+    public ArrayOfSynergyPunchData createArrayOfSynergyPunchData() {
+        return new ArrayOfSynergyPunchData();
+    }
+
+    /**
      * Create an instance of {@link GetOptions }
      * 
      */
     public GetOptions createGetOptions() {
         return new GetOptions();
+    }
+
+    /**
+     * Create an instance of {@link SynergyRecordPunchesResponse }
+     * 
+     */
+    public SynergyRecordPunchesResponse createSynergyRecordPunchesResponse() {
+        return new SynergyRecordPunchesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfPunchStatus }
+     * 
+     */
+    public ArrayOfPunchStatus createArrayOfPunchStatus() {
+        return new ArrayOfPunchStatus();
     }
 
     /**
@@ -78,19 +110,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetEmployees }
-     * 
-     */
-    public GetEmployees createGetEmployees() {
-        return new GetEmployees();
-    }
-
-    /**
      * Create an instance of {@link GetFingerprints }
      * 
      */
     public GetFingerprints createGetFingerprints() {
         return new GetFingerprints();
+    }
+
+    /**
+     * Create an instance of {@link SynergyRecordPunch }
+     * 
+     */
+    public SynergyRecordPunch createSynergyRecordPunch() {
+        return new SynergyRecordPunch();
+    }
+
+    /**
+     * Create an instance of {@link SynergyPunchData }
+     * 
+     */
+    public SynergyPunchData createSynergyPunchData() {
+        return new SynergyPunchData();
+    }
+
+    /**
+     * Create an instance of {@link GetEmployees }
+     * 
+     */
+    public GetEmployees createGetEmployees() {
+        return new GetEmployees();
     }
 
     /**
@@ -110,6 +158,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SynergyRecordPunchResponse }
+     * 
+     */
+    public SynergyRecordPunchResponse createSynergyRecordPunchResponse() {
+        return new SynergyRecordPunchResponse();
+    }
+
+    /**
+     * Create an instance of {@link PunchStatus }
+     * 
+     */
+    public PunchStatus createPunchStatus() {
+        return new PunchStatus();
+    }
+
+    /**
      * Create an instance of {@link GetLaborLevels }
      * 
      */
@@ -123,14 +187,6 @@ public class ObjectFactory {
      */
     public RecordPunchResponse createRecordPunchResponse() {
         return new RecordPunchResponse();
-    }
-
-    /**
-     * Create an instance of {@link PunchStatus }
-     * 
-     */
-    public PunchStatus createPunchStatus() {
-        return new PunchStatus();
     }
 
     /**
@@ -187,14 +243,6 @@ public class ObjectFactory {
      */
     public RecordPunchesResponse createRecordPunchesResponse() {
         return new RecordPunchesResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfPunchStatus }
-     * 
-     */
-    public ArrayOfPunchStatus createArrayOfPunchStatus() {
-        return new ArrayOfPunchStatus();
     }
 
     /**

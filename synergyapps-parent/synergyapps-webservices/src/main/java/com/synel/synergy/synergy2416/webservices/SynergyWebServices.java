@@ -17,6 +17,7 @@ import com.xacttime.LaborLevel;
 import com.xacttime.PunchData;
 import com.xacttime.PunchStatus;
 import com.xacttime.Synergy;
+import com.xacttime.SynergyPunchData;
 import com.xacttime.SynergySoap;
 import com.xacttime.TimeSlicePreType;
 
@@ -41,7 +42,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 	@Override
 	public int sendPunchRt(int userID, long transactionTimeEpoch,
 			String punchType, List<Integer> lldetailIds) {
-		PunchData pd = new PunchData();
+		SynergyPunchData pd = new SynergyPunchData();
 		pd.setUserId(userID);
 		ArrayOfInt aoi = new ArrayOfInt();
 		for(Integer i:lldetailIds){
@@ -49,9 +50,9 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		}
 		pd.setLaborLevelDetailIds(aoi);
 		pd.setPunchType(getPunchType(punchType));
-		pd.setTransactionTime(new DateTimeOffset(transactionTimeEpoch));
+		pd.setTransactionTime(System.currentTimeMillis());
 		System.out.println("Sending punch data realtime for terminalId: "+mTerminalId + " puchType: "+pd.getPunchType().toString());
-		PunchStatus ps = mPort.recordPunch(mWebServicesKey, mTerminalId, pd);
+		PunchStatus ps = mPort.synergyRecordPunch(mWebServicesKey, mTerminalId, pd);
 		System.out.println(ps.toString());
 		return ps.isSuccess()?0:-1;
 	}
