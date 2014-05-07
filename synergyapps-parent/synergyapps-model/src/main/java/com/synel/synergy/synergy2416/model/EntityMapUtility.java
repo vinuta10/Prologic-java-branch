@@ -2,6 +2,7 @@ package com.synel.synergy.synergy2416.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.joda.time.DateTime;
 
@@ -36,7 +37,7 @@ public class EntityMapUtility {
 	
 	public static EmployeePOJO mapToEmployeePOJO(Employee emp){
 		EmployeePOJO dbEmp = new EmployeePOJO();
-		dbEmp.setBadgeNumber(emp.getBadgeNumber());
+		dbEmp.setBadgeNumber(String.valueOf(emp.getBadgeNumber()));
 		dbEmp.setEmployeeNumber(emp.getEmployeeNumber());
 		dbEmp.setId(emp.getId());
 		dbEmp.setName(emp.getName());
@@ -123,6 +124,24 @@ public class EntityMapUtility {
 			List<TransactionDataPOJO> mTds) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static List<Integer> mapToLaborLevelDetailIds(
+			String employeeLaborLevelsById) {
+		List<Integer> llids = new ArrayList<Integer>();
+		/*
+		 * ==================================
+ 			Id: 2 BadgeNumber: 101 EmpNo: 101 Name: Alpha Zebra LaborLevelDetails: [1,2,*],[2,11,*],[3,16,*],[4,21,*],[5,26,*]
+			==================================
+			==================================
+ 			Id: 3 BadgeNumber: 102 EmpNo: 102 Name: Bravo Yoke LaborLevelDetails: [1,7,(2,7,31)],[2,11,(3,11)],[3,15,(4,15)],[4,19,(5,19)],[5,23,(6,23)]
+		 */
+		StringTokenizer st = new StringTokenizer(employeeLaborLevelsById,",");
+	     while (st.hasMoreTokens()) {
+	    	 String token = st.nextToken();
+	         llids.add(Integer.parseInt(token));
+	     }
+		return llids;
 	}
 
 }

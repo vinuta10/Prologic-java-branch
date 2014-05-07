@@ -14,12 +14,14 @@ public interface EmployeeManager {
 	
 	public int getEmployeeCount();
 	
-	public int updateEmployeeLaborLevels(int EmpId, String laborlevelmap);
+	public int updateEmployeeLaborLevels(String badgenum, String laborlevelmap);
 	
-	public int deleteEmployeeById(int badgenum);
+	public int deleteEmployeeById(String badgenum); //currently the Id is the "badgeNum string", we can add EmployeeNumber as Id or the key UID as search index
 	
-	public String getEmployeeLaborLevelsById(int badgenum);
+	public String getEmployeeLaborLevelsById(String badgenum);
 	
-	public String getEmployeeNameById(int badgenum);
+	public String getEmployeeNameById(String badgenum);
+
+	public int getuIdByBadgeNum(String badgeNum);
 
 }

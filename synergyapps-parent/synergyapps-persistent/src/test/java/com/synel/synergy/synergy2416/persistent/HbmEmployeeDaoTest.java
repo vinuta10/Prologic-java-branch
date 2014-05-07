@@ -63,7 +63,7 @@ public class HbmEmployeeDaoTest {
 	public void testSaveEmployee() {
 		EmployeePOJO emp = new EmployeePOJO();
 		emp.setId(1);
-		emp.setBadgeNumber(100);
+		emp.setBadgeNumber("100");
 		emp.setEmployeeNumber("A100");
 		emp.setName("John Doe");
 		emp.setLaborLevelMap("02,04,06,08");
@@ -71,7 +71,7 @@ public class HbmEmployeeDaoTest {
 		System.out.println("Saving employee: "+emp.getName());
 		empDao.saveEmployee(emp);
 		System.out.println("find this employee...");
-		System.out.println("employee "+empDao.findEmployeeByBadgeNumber(100).toString()+" saved to Database.");
+		System.out.println("employee "+empDao.findEmployeeByBadgeNumber("100").toString()+" saved to Database.");
 	}
 	
 	@Test
@@ -81,7 +81,7 @@ public class HbmEmployeeDaoTest {
 		for(int i=2; i<1000; i++){
 			EmployeePOJO emp = new EmployeePOJO();
 			emp.setId(i);
-			emp.setBadgeNumber(i+100);
+			emp.setBadgeNumber(String.valueOf(i+100));
 			emp.setEmployeeNumber("P"+i*100+1);
 			emp.setName("Peter Pan"+i);
 			emp.setLaborLevelMap("00,01,02,03");
@@ -118,7 +118,7 @@ public class HbmEmployeeDaoTest {
 	@Ignore
 	public void testFindEmployeeByBadgeNumber() {
 		EmployeeDao empDao = new HbmEmployeeDao();
-		EmployeePOJO emp = empDao.findEmployeeByBadgeNumber(100);
+		EmployeePOJO emp = empDao.findEmployeeByBadgeNumber("100");
 		if (emp != null){
 			System.out.println(emp.toString());
 		}else {
@@ -154,7 +154,7 @@ public class HbmEmployeeDaoTest {
 	@Ignore
 	public void testGetLaborLevelMapByBadgeNumber() {
 		EmployeeDao empDao = new HbmEmployeeDao();
-		String llmap = empDao.getLaborLevelMapByBadgeNumber(100);
+		String llmap = empDao.getLaborLevelMapByBadgeNumber("100");
 		if (llmap != null){
 			System.out.println(llmap);
 		}else {
@@ -166,7 +166,7 @@ public class HbmEmployeeDaoTest {
 	@Ignore
 	public void testDeleteEmployeeByBadgeNumber(){
 		EmployeeDao empDao = new HbmEmployeeDao();
-		int numOfRecords = empDao.deleteEmployeeByBadgeNumber(100);
+		int numOfRecords = empDao.deleteEmployeeByBadgeNumber("100");
 		System.out.println("Deleted "+numOfRecords+" Record(s)!");
 		//assertEquals(numOfRecords,1);
 	}
@@ -191,7 +191,7 @@ public class HbmEmployeeDaoTest {
 	@Ignore
 	public void testUpdateLaborLevelMapByBadgeNumber() {
 		EmployeeDao empDao = new HbmEmployeeDao();
-		int res = empDao.updateLaborLevelMapByBadgeNumber(100,"01,03,04,05");
+		int res = empDao.updateLaborLevelMapByBadgeNumber("100","01,03,04,05");
 		System.out.println("updateResult: "+res);
 	}
 	

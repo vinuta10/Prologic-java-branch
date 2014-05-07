@@ -4,15 +4,15 @@ import java.util.List;
 
 public interface EmployeeDao {
 	
-	public EmployeePOJO findEmployeeById(long id);
+	public EmployeePOJO findEmployeeById(int id);
 	
-	public EmployeePOJO findEmployeeByBadgeNumber(int BadgeNumber);
+	public EmployeePOJO findEmployeeByBadgeNumber(String badgenum);
 	
 	public EmployeePOJO findEmployeeByEmployeeNumber(String empNumber);
 	
 	public String getLaborLevelMapByEmployeeNumber(String empNumber);
 	
-	public String getLaborLevelMapByBadgeNumber(int BadgeNumber);
+	public String getLaborLevelMapByBadgeNumber(String badgenum);
 	
 	public void saveEmployee(EmployeePOJO emp);
 	
@@ -20,11 +20,12 @@ public interface EmployeeDao {
 	
 	public List<EmployeePOJO> getEmployeeList();
 	
-	public int deleteEmployeeByBadgeNumber(int BadgeNumber);
+	public int deleteEmployeeByBadgeNumber(String badgenum);
 	
 	public int deleteAllEmployees();
 
 	public int getEmployeeCount();
 
-	public int updateLaborLevelMapByBadgeNumber(int BadgeNumber, String llmap);
+	public int updateLaborLevelMapByBadgeNumber(String BadgeNumber, String llmap);
+
 }

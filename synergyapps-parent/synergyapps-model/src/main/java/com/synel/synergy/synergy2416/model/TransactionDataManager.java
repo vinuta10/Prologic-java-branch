@@ -1,11 +1,15 @@
 package com.synel.synergy.synergy2416.model;
 
+import java.util.List;
+
 import com.synel.synergy.synergy2416.persistent.PunchDataPOJO;
 import com.synel.synergy.synergy2416.persistent.TransactionDataPOJO;
 
 public interface TransactionDataManager {
 	
 	public int uploadTransactionRt(PunchDataPOJO pd); //upload the single punch to the web server real time, return success or error code
+	
+	public int uploadTransactionRt(String badgeNum, String punchType, long timestamp, List<Integer> lldetailIds);
 	
 	public long saveTransaction(TransactionDataPOJO td);//log data to the persistent layer, return the id given by persistent layer
 	

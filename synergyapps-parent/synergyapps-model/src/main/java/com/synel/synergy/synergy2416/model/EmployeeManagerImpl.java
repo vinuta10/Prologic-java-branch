@@ -69,23 +69,28 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	}
 
 	@Override
-	public int updateEmployeeLaborLevels(int badgenum, String laborlevelmap) {
+	public int updateEmployeeLaborLevels(String badgenum, String laborlevelmap) {
 		return empDao.updateLaborLevelMapByBadgeNumber(badgenum, laborlevelmap);
 	}
 
 	@Override
-	public int deleteEmployeeById(int badgenum) {
+	public int deleteEmployeeById(String badgenum) {
 		//Id is badgenumber in this case.
 		return empDao.deleteEmployeeByBadgeNumber(badgenum);
 	}
 
 	@Override
-	public String getEmployeeLaborLevelsById(int badgenum) {
+	public String getEmployeeLaborLevelsById(String badgenum) {
 		return empDao.getLaborLevelMapByBadgeNumber(badgenum);
 	}
 
 	@Override
-	public String getEmployeeNameById(int badgenum) {
+	public String getEmployeeNameById(String badgenum) {
 		return empDao.findEmployeeByBadgeNumber(badgenum).getName();
+	}
+
+	@Override
+	public int getuIdByBadgeNum(String badgeNum) {
+		return empDao.findEmployeeByBadgeNumber(badgeNum).getId();
 	}
 }

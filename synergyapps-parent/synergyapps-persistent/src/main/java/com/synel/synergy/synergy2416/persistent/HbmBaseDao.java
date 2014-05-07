@@ -128,7 +128,25 @@ public class HbmBaseDao<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T getData(long id)
+	public T getData(int id)
+	{
+		if (msession == null || !msession.isOpen()){
+			msession = HibernateUtilities.getSessionFactory().openSession();
+		}
+		T data = null;
+		try {
+			data = (T) msession.get(g(), id); //notice the difference between 'session.get' and 'session.load'
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		} finally {
+			msession.close();
+		}
+		return data;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T getDataWithLongId(long id)
 	{
 		if (msession == null || !msession.isOpen()){
 			msession = HibernateUtilities.getSessionFactory().openSession();

@@ -150,8 +150,7 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 
 	private static String app_msgConvert(int nRet){
 		switch (nRet){
-		case 0:
-			return "Succeed!";
+		
 		case -100:
 			return "The data supplied to the function, Badge Number, finger number or Template format is incorrect."; //The template was not enrolled and not saved to a file.";
 		case -101:
@@ -270,8 +269,8 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 				e.printStackTrace();
 			}
 			if(!m_bFingerisEnrolling){
-				System.out.println("identifying employee");
 				nRet = FPU.FP_IDENTIFY_EMPLOYEE();
+				System.out.println("identifying employee: "+nRet);
 			}
 
 		}
@@ -281,9 +280,10 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	public static void main (String args[]){
 		System.out.println("Open FPU");
 		System.out.println(FPU.openFPU("/root/templates"));
-		String fpnum = args[0]==null?args[0]:"4321";
-		System.out.println("enrolling employee... "+fpnum);
-		System.out.println(FPU.enroll(fpnum, 0, FPU.getInstance()));
+//		String fpnum = args[0]==null?args[0]:"4321";
+//		System.out.println("enrolling employee... "+fpnum);
+//		System.out.println(FPU.enroll(fpnum, 0, FPU.getInstance()));
+		System.out.println("employee id is: "+FPU.identifyEmployee());
 	}
 	@Override
 	public void onReadyForFinger(int step, boolean repeatOnReaderError) {

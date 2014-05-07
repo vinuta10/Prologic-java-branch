@@ -6,7 +6,7 @@ import java.util.List;
 public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements EmployeeDao {
 
 	@Override
-	public EmployeePOJO findEmployeeById(long id) {
+	public EmployeePOJO findEmployeeById(int id) {
 		return this.getData(id);
 	}
 
@@ -27,8 +27,8 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	}
 
 	@Override
-	public EmployeePOJO findEmployeeByBadgeNumber(int BadgeNumber) {
-		String hql = "FROM EmployeePOJO where badgeNumber = "+BadgeNumber;
+	public EmployeePOJO findEmployeeByBadgeNumber(String BadgeNumber) {
+		String hql = "FROM EmployeePOJO where badgeNumber = "+"\'"+BadgeNumber+"\'";
 		List<?> res = HibernateUtilities.SelectQueryList(hql);
 		return getEmployeeFromList(res);
 	}
@@ -47,13 +47,13 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	}
 
 	@Override
-	public String getLaborLevelMapByBadgeNumber(int BadgeNumber) {
+	public String getLaborLevelMapByBadgeNumber(String BadgeNumber) {
 		return findEmployeeByBadgeNumber(BadgeNumber).getLaborLevelMap();
 	}
 
 	@Override
-	public int deleteEmployeeByBadgeNumber(int BadgeNumber) {
-		String hql = "delete from EmployeePOJO where badgeNumber = "+BadgeNumber;
+	public int deleteEmployeeByBadgeNumber(String BadgeNumber) {
+		String hql = "delete from EmployeePOJO where badgeNumber = "+"\'"+BadgeNumber+"\'";
 		return HibernateUtilities.ExecUpdateQuery(hql);
 	}
 
@@ -82,11 +82,10 @@ public class HbmEmployeeDao extends HbmBaseDao<EmployeePOJO> implements Employee
 	}
 
 	@Override
-	public int updateLaborLevelMapByBadgeNumber(int BadgeNumber, String llmap) {
+	public int updateLaborLevelMapByBadgeNumber(String BadgeNumber, String llmap) {
 		//TODO test
 		int res = 0;
-		String hql = "update EmployeePOJO e set e.laborLevelMap="+"\'"+llmap+"\'"+" where e.badgeNumber ="+ BadgeNumber;
-		System.out.println("updating..."+hql);
+		String hql = "update EmployeePOJO e set e.laborLevelMap="+"\'"+llmap+"\'"+" where e.badgeNumber = "+"\'"+BadgeNumber+"\'";
 		res = HibernateUtilities.ExecUpdateQuery(hql);
 		return res;
 	}

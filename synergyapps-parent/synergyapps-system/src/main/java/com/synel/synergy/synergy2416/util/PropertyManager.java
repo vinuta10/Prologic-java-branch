@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 
 public final class PropertyManager {
 
-	private static String rootpath = "/home/admin/synergy/etc/configs/";
+	private static String rootpath = "/home/admin/synergy/resources/";
 	private static final String mPropBundleName = "sysconfig.properties";
 	private static Properties mSysResourceBundle;
 	private static Properties mAppResourceBundle;
@@ -26,7 +26,7 @@ public final class PropertyManager {
 
 	static{
 		try {
-			System.out.println(rootpath);
+			System.out.println(rootpath+System.getProperty("user.dir"));
 			mPropReader = new FileInputStream(rootpath+mPropBundleName);
 			mSysResourceBundle = new Properties();
 			mSysResourceBundle.load(mPropReader);

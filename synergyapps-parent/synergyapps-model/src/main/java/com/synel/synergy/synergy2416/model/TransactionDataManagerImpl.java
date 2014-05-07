@@ -18,6 +18,7 @@ private static TransactionDataManagerImpl mInstance = null;
 	private TransactionDataDao mTdDao;
 	private SynergyWebServiceApi mSws;
 	private List<TransactionDataPOJO> mTds;
+	private EmployeeManager mEmpMgr;
 	
 	//implement the "radio station to signal the db ready status
 	//
@@ -27,6 +28,7 @@ private static TransactionDataManagerImpl mInstance = null;
 		mTdDao = new HbmTransactionDataDao();
 		mSws = new SynergyWebServices();
 		mTds = new ArrayList<TransactionDataPOJO>();
+		mEmpMgr = EmployeeManagerImpl.getInstance();
 	} 
 	
 	public static TransactionDataManagerImpl getInstance(){
@@ -37,14 +39,16 @@ private static TransactionDataManagerImpl mInstance = null;
 	}
 
 	@Override
-	public int uploadTransactionRt(PunchDataPOJO pd) {
-		//int id, long epoch, int uId, String eId,
-		// int punchType, String lldetails
-		int uId = pd.getUserId();
-		long epoch = pd.getTransactionTime();
-		String punchType = pd.getPunchType();
-		List<Integer>lldetailIds = pd.getLaborLevelDetailIds();
-		return mSws.sendPunchRt(uId, epoch, punchType, lldetailIds);
+	public int uploadTransactionRt(String badgeNum, String punchType, long timestamp, List<Integer> lldetailIds) {
+		
+		//int uId = mEmpMgr.getuIdByBadgeNum(badgeNum);
+		//int uId = mEmpMgr.getuIdByBadgeNum("101"); //for test only
+		int uId = Integer.parseInt(badgeNum); //test
+		if (null == lldetailIds){
+			//lldetailIds = EntityMapUtility.mapToLaborLevelDetailIds(mEmpMgr.getEmployeeLaborLevelsById(badgeNum));
+			lldetailIds = EntityMapUtility.mapToLaborLevelDetailIds("00,01,02,03"); //for test only
+		}
+		return mSws.sendPunchRt(uId, timestamp, punchType, lldetailIds);
 	}
 
 	@Override
@@ -72,5 +76,11 @@ private static TransactionDataManagerImpl mInstance = null;
 			}
 		}
 		return res;
+	}
+
+	@Override
+	public int uploadTransactionRt(PunchDataPOJO pd) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -78,22 +78,22 @@ public class AppTest {
 
 	
 	public static void testUpdateEmployeeLaborLevels() {
-		System.out.println("updated "+mEmpMgr.updateEmployeeLaborLevels(101, "01,02,03,04")+" record ");
+		System.out.println("updated "+mEmpMgr.updateEmployeeLaborLevels("101", "01,02,03,04")+" record ");
 	}
 
 	public static void testDeleteEmployeeById() {
-		int res = mEmpMgr.deleteEmployeeById(101);
+		int res = mEmpMgr.deleteEmployeeById("101");
 		System.out.println("Deleted "+res+" record 101");
 	}
 
 	
 	public static void testGetEmployeeLaborLevelsById() {
-		System.out.println("LaborLevels for employee 101 is : "+mEmpMgr.getEmployeeLaborLevelsById(101));
+		System.out.println("LaborLevels for employee 101 is : "+mEmpMgr.getEmployeeLaborLevelsById("101"));
 	}
 
 	
 	public static void testGetEmployeeNameById() {
-		System.out.println("Employee #101 name is: "+mEmpMgr.getEmployeeNameById(101));
+		System.out.println("Employee #101 name is: "+mEmpMgr.getEmployeeNameById("101"));
 	}
 
 

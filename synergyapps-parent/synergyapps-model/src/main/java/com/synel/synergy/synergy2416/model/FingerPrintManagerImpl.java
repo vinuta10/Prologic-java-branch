@@ -8,7 +8,6 @@ import com.synel.synergy.synergy2416.persistent.FingerPrintPOJO;
 import com.synel.synergy.synergy2416.persistent.HbmFingerPrintDao;
 import com.synel.synergy.synergy2416.webservices.SynergyWebServices;
 import com.synel.synergy.synergy2416.webservices.api.SynergyWebServiceApi;
-import com.xacttime.Fingerprint;
 
 public class FingerPrintManagerImpl implements FingerPrintManager{
 	

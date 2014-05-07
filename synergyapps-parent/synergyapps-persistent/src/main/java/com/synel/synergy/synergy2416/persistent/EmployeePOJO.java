@@ -17,7 +17,7 @@ protected String laborLevelMap;
 public class EmployeePOJO {
 	
 	private int id;
-	private int badgeNumber;
+	private String badgeNumber;
 	private String employeeNumber;
 	private String name;
 	private String laborLevelMap;
@@ -36,13 +36,13 @@ public class EmployeePOJO {
 	/**
 	 * @return the badgeNumber
 	 */
-	public int getBadgeNumber() {
+	public String getBadgeNumber() {
 		return badgeNumber;
 	}
 	/**
 	 * @param badgeNumber the badgeNumber to set
 	 */
-	public void setBadgeNumber(int badgeNumber) {
+	public void setBadgeNumber(String badgeNumber) {
 		this.badgeNumber = badgeNumber;
 	}
 	/**

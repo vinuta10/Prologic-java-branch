@@ -11,7 +11,7 @@ public class HbmTransactionDataDao extends HbmBaseDao<TransactionDataPOJO> imple
 
 	@Override
 	public TransactionDataPOJO getTransactionDataById(long id) {
-		return this.getData(id);
+		return this.getDataWithLongId(id);
 	}
 
 	@SuppressWarnings("unchecked")

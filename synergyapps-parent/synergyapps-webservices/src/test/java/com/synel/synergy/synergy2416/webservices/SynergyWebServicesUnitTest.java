@@ -62,9 +62,12 @@ public class SynergyWebServicesUnitTest extends TestCase {
 	public void testGetFingerPrints() {
 		try {
 			mFps = mSws.getFingerPrints();
-			showFingerprints(mFps);
+			
 		}catch (Exception ex) {
 			ex.printStackTrace();
+		}
+		if (null != mFps){
+			showFingerprints(mFps);
 		}
 	}
 

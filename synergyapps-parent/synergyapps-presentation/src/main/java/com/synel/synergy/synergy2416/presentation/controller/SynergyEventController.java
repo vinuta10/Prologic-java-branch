@@ -20,8 +20,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.synel.synergy.synergy2416.model.EmployeeManager;
+import com.synel.synergy.synergy2416.model.EmployeeManagerImpl;
 import com.synel.synergy.synergy2416.model.FingerPrintManager;
 import com.synel.synergy.synergy2416.model.FingerPrintManagerImpl;
+import com.synel.synergy.synergy2416.model.TransactionDataManager;
+import com.synel.synergy.synergy2416.model.TransactionDataManagerImpl;
+import com.synel.synergy.synergy2416.persistent.PunchDataPOJO;
 import com.synel.synergy.synergy2416.presentation.controller.SynergyEventDispatcher.SYNERGY_STATUS;
 import com.synel.synergy.synergy2416.presentation.view.MainWindow;
 import com.synel.synergy.synergy2416.presentation.view.SynergyFingerPrintEnrollmentForm;
@@ -30,7 +35,6 @@ import com.synel.synergy.synergy2416.presentation.view.SynergyWelcomeForm;
 
 public class SynergyEventController implements SynergyStatusListener {
 	
-	//private FingerPrintManager mFpMgr = FingerPrintManagerImpl.getInstance();
 	
 	private static final String ResPath = "/multimedia/";
 	
@@ -101,6 +105,9 @@ public class SynergyEventController implements SynergyStatusListener {
 		m_frame.get_Sed().addListener(this); //This is similar to the "Connect(SIGNAL ... SLOT) idiom in QT
 		//Initialize HW component, such as the finger print reader
 		initializeGUI();
+		if (null != m_welcomeForm){
+		   m_welcomeForm.addListener(this);
+		}
 	    returnToMain();
 	}
 	
@@ -327,38 +334,89 @@ public class SynergyEventController implements SynergyStatusListener {
 	 * @see com.synel.synergy.synergy2416.presentation.controller.SynergyStatusListener#synergyStatusChanged(com.synel.synergy.synergy2416.presentation.controller.SynergyEventDispatcher.SYNERGY_STATUS)
 	 */
 	
-	// This correspond to the "SLOT" part of the QT's signal slot idiom...
-	public void synergyStatusChanged(SYNERGY_STATUS ss) {
+	// This correspond to the "SLOT" part of the QT's signal slot idiom... implement the SynergyStatusLister interface
+	@Override
+	public void onSynergyStatusChanged(SYNERGY_STATUS ss) {
 		//System.out.println("clock status changed to ..."+cs.toString());
   		m_curStatus = ss;
   		returnToMain();
 	}
 	
+	@Override
 	public void onFingerprintEnrollmentSuccess(String strBadgeNum, int nFingerNum){
+		
+	
 		//String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
 		//save it to persistent layer. and/or upload to the server (in the background thread of course).
 		//mFpMgr.addFingerPrint(Integer.parseInt(strBadgeNum), 0, template);
 		//uploadFingerPrintBatch();
 	}
+    
+	@Override
+	public void onPunchEvent(String badgeNum, int punchTypeCode, long timestamp) {
+			//This punchTypeCode has to match the enum class TimeSlicePreType generated from the xacttime wsdl file
+			String punchType = punchTypeStringFromNum(punchTypeCode);
+			System.out.println("PunchType: "+punchType);
+			m_frame.get_Sed().getmTdMgr().uploadTransactionRt(badgeNum, punchType, timestamp, null);
+			String info = "User "+badgeNum+" Punch "+punchType+" Success!";
+			m_welcomeForm.setWelcomFormTextInfo(info);	
+		}
+		
+
+	@Override
+	public void onFingerPrintValidationTimerStart() {
+		// TODO Auto-generated method stub
+		
+	}
 	
-//	public void uploadFingerPrintBatch() {
-//		//int res = mFpMgr.uploadFingerPrintBatch();
-//		//System.out.println("upload return code: "+res);
-//		//using async method
-//		ExecutorService executorService = Executors.newSingleThreadExecutor();
-//		Future future = executorService.submit(new Callable(){
-//		    public Object call() throws Exception {
-//		        return mFpMgr.uploadFingerPrintBatch();
-//		    }
-//		});
-//		try {
-//			System.out.println("upload future.get() = " + future.get());
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ExecutionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	private String punchTypeStringFromNum(int punchNum) {
+		switch(punchNum){
+		/*
+		 *  @XmlEnumValue("NonWork")
+    NON_WORK("NonWork"),
+    @XmlEnumValue("Transfer")
+    TRANSFER("Transfer"),
+    @XmlEnumValue("StartLunch")
+    START_LUNCH("StartLunch"),
+    @XmlEnumValue("StartBreak")
+    START_BREAK("StartBreak"),
+    @XmlEnumValue("ClockIn")
+    CLOCK_IN("ClockIn"),
+    @XmlEnumValue("ClockOut")
+    CLOCK_OUT("ClockOut"),
+    @XmlEnumValue("EndLunch")
+    END_LUNCH("EndLunch"),
+    @XmlEnumValue("EndBreak")
+    END_BREAK("EndBreak"),
+    @XmlEnumValue("PayAdjustment")
+    PAY_ADJUSTMENT("PayAdjustment"),
+    @XmlEnumValue("SwipeAndGo")
+    SWIPE_AND_GO("SwipeAndGo"),
+    @XmlEnumValue("CallBack")
+    CALL_BACK("CallBack");
+		 */
+		case 1:
+			return "ClockIn";
+		case 2:
+			return "ClockOut";
+		case 3:
+			return "StartBreak";
+		case 4:
+			return "StartLunch";
+		case 5:
+			return "EndBreak";
+		case 6:
+			return "EndLunch";
+		case 7:
+			return "PayAdjustment";
+		case 8:
+			return "NonWork";
+		case 9:
+			return "Transfer";
+		case 10:
+			return "CallBack";
+		default:
+			return "SwipeAndGo";
+		}
+	}
 }

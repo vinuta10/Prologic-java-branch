@@ -14,6 +14,10 @@ import javax.swing.JTextField;
 
 import com.synel.synergy.synergy2416.model.EmployeeManager;
 import com.synel.synergy.synergy2416.model.EmployeeManagerImpl;
+import com.synel.synergy.synergy2416.model.FingerPrintManager;
+import com.synel.synergy.synergy2416.model.FingerPrintManagerImpl;
+import com.synel.synergy.synergy2416.model.TransactionDataManager;
+import com.synel.synergy.synergy2416.model.TransactionDataManagerImpl;
 
 /**
  * @author chaol
@@ -25,6 +29,9 @@ import com.synel.synergy.synergy2416.model.EmployeeManagerImpl;
 public class SynergyEventDispatcher {
 	
 	private static final String fpPath = "/root/templates";
+	private FingerPrintManager mFpMgr = FingerPrintManagerImpl.getInstance();
+	private TransactionDataManager mTdMgr = TransactionDataManagerImpl.getInstance();
+	private EmployeeManager mEmpMgr = EmployeeManagerImpl.getInstance();
 	
 	
 	public enum SYNERGY_STATUS
@@ -46,7 +53,6 @@ public class SynergyEventDispatcher {
 	private static SYNERGY_STATUS m_prestatus;
 	private SYNERGY_STATUS m_status;
 	List<SynergyStatusListener> listeners = new ArrayList<SynergyStatusListener>();
-	//private EmployeeManager mEmpMgr = EmployeeManagerImpl.getInstance();
 	
 	public void addListener(SynergyStatusListener sl) {
 		listeners.add(sl);
@@ -54,7 +60,7 @@ public class SynergyEventDispatcher {
 	
 	private void emit(SYNERGY_STATUS cs){
 		for (SynergyStatusListener sl : listeners) {
-			sl.synergyStatusChanged(cs);
+			sl.onSynergyStatusChanged(cs);
 		}	
 	}
 	
@@ -196,6 +202,51 @@ public class SynergyEventDispatcher {
 //	  	  	System.out.println("Changing clock status to ready done.");
 //		}
 		
+	}
+	
+	public void uploadFingerPrintBatch() {
+	//int res = mFpMgr.uploadFingerPrintBatch();
+	//System.out.println("upload return code: "+res);
+	//using async method
+	ExecutorService executorService = Executors.newSingleThreadExecutor();
+	Future future = executorService.submit(new Callable(){
+	    public Object call() throws Exception {
+	        return mFpMgr.uploadFingerPrintBatch();
+	    }
+	});
+	try {
+		System.out.println("upload future.get() = " + future.get());
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ExecutionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+	public FingerPrintManager getmFpMgr() {
+		return mFpMgr;
+	}
+
+	public void setmFpMgr(FingerPrintManager mFpMgr) {
+		this.mFpMgr = mFpMgr;
+	}
+
+	public TransactionDataManager getmTdMgr() {
+		return mTdMgr;
+	}
+
+	public void setmTdMgr(TransactionDataManager mTdMgr) {
+		this.mTdMgr = mTdMgr;
+	}
+
+	public EmployeeManager getmEmpMgr() {
+		return mEmpMgr;
+	}
+
+	public void setmEmpMgr(EmployeeManager mEmpMgr) {
+		this.mEmpMgr = mEmpMgr;
 	}
 
 //	@Override
