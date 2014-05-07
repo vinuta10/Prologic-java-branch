@@ -217,11 +217,14 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	}
 
 	public static String enroll(String strBadgeNum, int nFingerNum, FingerPrintEnrollmentHandler fph) {
-		//System.out.println("Enrolling "+strBadgeNum+" FingerNum: "+nFingerNum);
+		System.out.println("Enrolling "+strBadgeNum+" FingerNum: "+nFingerNum);
 		int enrollMessage = -111;
 		m_bFingerisEnrolling = true;
+		System.out.println("1 setting fp enrollment to "+m_bFingerisEnrolling);
 		enrollMessage = FPU.FP_ENROLE_EMPLOYEE(strBadgeNum,nFingerNum,(long)15000,(long)1000, fph);
+		System.out.println("2 setting fp enrollment to "+m_bFingerisEnrolling);
 		m_bFingerisEnrolling = false;
+		System.out.println("3 setting fp enrollment to "+m_bFingerisEnrolling);
 		return app_msgConvert(enrollMessage);
 	}
 	
@@ -258,15 +261,16 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	}
 
 	public static String identifyEmployee(){
-		int nRet = FPU.FP_IDENTIFY_EMPLOYEE();
+		int nRet = -107;
 		while (nRet == -107 || nRet == -101) {
 			try {
-				Thread.sleep(400);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(!m_bFingerisEnrolling){
+				System.out.println("identifying employee");
 				nRet = FPU.FP_IDENTIFY_EMPLOYEE();
 			}
 
@@ -277,7 +281,9 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	public static void main (String args[]){
 		System.out.println("Open FPU");
 		System.out.println(FPU.openFPU("/root/templates"));
-		System.out.println(FPU.enroll("1234", 0, FPU.getInstance()));
+		String fpnum = args[0]==null?args[0]:"4321";
+		System.out.println("enrolling employee... "+fpnum);
+		System.out.println(FPU.enroll(fpnum, 0, FPU.getInstance()));
 	}
 	@Override
 	public void onReadyForFinger(int step, boolean repeatOnReaderError) {
@@ -285,18 +291,18 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 		switch(step){
 		case 1:
 			//MainWindow.placefingersound.start();
-			//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
-			System.out.println("Please place finger Step: "+ step);
+			System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+			//System.out.println("Please place finger Step: "+ step);
 			break;
 		case 2:
 			//MainWindow.placefingeragainsound.start();
-			//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
-			System.out.println("\nPlease place finger Step: "+ step );
+			System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+			//System.out.println("\nPlease place finger Step: "+ step );
 			break;
 		case 3:
 			//MainWindow.placefingeragainsound.start();
-			//System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
-			System.out.println("\nPlease place finger Step: "+ step );
+			System.out.println("Please place finger Step: "+ step + " Error: " + repeatOnReaderError);
+			//System.out.println("\nPlease place finger Step: "+ step );
 			break;
 		}
 		
@@ -307,8 +313,7 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	public void onFingerPrintRead(int step) {
 		// TODO Auto-generated method stub
 		//MainWindow.successbuzzersound.start();
-		//System.out.println("Please Remove Finger Step: "+ step + "  ");
-		System.out.println("\nPlease Remove finger Step: "+ step + " ");
+		System.out.println("Please Remove Finger Step: "+ step + "  ");
 		
 	}
 
@@ -316,8 +321,7 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	public void setStepCount(int count) {
 		// TODO Auto-generated method stub
 		//System.out.println("Start");
-		//System.out.println("Please place finger "+ count + " times");
-		System.out.println("\nPlease place finger "+ count + " times");
+		System.out.println("Please place finger "+ count + " times");
 		
 	}
 }

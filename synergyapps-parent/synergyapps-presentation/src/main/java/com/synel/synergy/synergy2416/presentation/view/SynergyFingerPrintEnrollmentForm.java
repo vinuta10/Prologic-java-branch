@@ -200,15 +200,15 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 	    }
 
 		public void setStepCount(int count) {
-			// TODO Auto-generated method stub
-			//System.out.println("Start");
+			
+			System.out.println("Start");
 			//System.out.println("Please place finger "+ count + " times");
 			m_lblEnrollmentStatus.setText("\nPlease place finger "+ count + " times");
 			
 		}
 
 		public void onReadyForFinger(int step, boolean repeatOnReaderError) {
-			// TODO Auto-generated method stub
+			
 			switch(step){
 			case 1:
 				//MainWindow.placefingersound.start();
@@ -230,7 +230,6 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 		}
 
 		public void onFingerPrintRead(int step) {
-			// TODO Auto-generated method stub
 			//MainWindow.successbuzzersound.start();
 			//System.out.println("Please Remove Finger Step: "+ step + "  ");
 			m_lblEnrollmentStatus.setText("\nPlease Remove finger Step: "+ step + " ");
@@ -243,7 +242,7 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 			if (! m_txtEmployeeNum.requestFocusInWindow()){
 	    		m_txtEmployeeNum.requestFocus();
 	    	}
-			//System.out.println("goEnroll!");
+			System.out.println("goEnroll!");
 //			setInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, getInputMap());
 //		    KeyStroke key = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
 //		    getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(key, "pressed");

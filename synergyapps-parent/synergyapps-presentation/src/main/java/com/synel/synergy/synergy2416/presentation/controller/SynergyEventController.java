@@ -30,7 +30,7 @@ import com.synel.synergy.synergy2416.presentation.view.SynergyWelcomeForm;
 
 public class SynergyEventController implements SynergyStatusListener {
 	
-	private FingerPrintManager mFpMgr = FingerPrintManagerImpl.getInstance();
+	//private FingerPrintManager mFpMgr = FingerPrintManagerImpl.getInstance();
 	
 	private static final String ResPath = "/multimedia/";
 	

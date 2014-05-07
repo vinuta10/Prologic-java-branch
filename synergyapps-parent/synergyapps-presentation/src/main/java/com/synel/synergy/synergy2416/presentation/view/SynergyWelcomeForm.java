@@ -57,7 +57,7 @@ public class SynergyWelcomeForm extends JPanel {
 	 */
 	public SynergyWelcomeForm(MainWindow mw) {
 		m_nIdThread = new AtomicInteger(0);
-		m_bRunIdThread = true;
+		m_bRunIdThread = false;
 		m_bIsPiggyBack = false;
 		m_iconDoorOpen = createImageIcon(ResPath+"gif_door_in.gif",
                 "a door open gif file");
@@ -243,10 +243,10 @@ public class SynergyWelcomeForm extends JPanel {
 }
 	
 	protected void runIdThreadAgain() {
-		//System.out.println("m_nThread is "+m_nIdThread.get());
+		System.out.println("m_nThread is "+m_nIdThread.get());
 		if (m_idEmpWorker != null){
-		//System.out.println("thread is done? "+m_idEmpWorker.isDone());
-		//System.out.println("thtread is cancelled? "+m_idEmpWorker.isCancelled());
+		System.out.println("thread is done? "+m_idEmpWorker.isDone());
+		System.out.println("thread is cancelled? "+m_idEmpWorker.isCancelled());
 		}
 		if (m_idEmpWorker == null || (m_bRunIdThread && m_idEmpWorker.isDone())) {
 			updateLabel();

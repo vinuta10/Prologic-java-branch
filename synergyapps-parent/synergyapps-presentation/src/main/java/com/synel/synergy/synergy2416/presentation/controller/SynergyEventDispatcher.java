@@ -24,7 +24,7 @@ import com.synel.synergy.synergy2416.model.EmployeeManagerImpl;
  */
 public class SynergyEventDispatcher {
 	
-	private static final String fpPath = "/home/admin/synergy/fingers/";
+	private static final String fpPath = "/root/templates";
 	
 	
 	public enum SYNERGY_STATUS
@@ -46,7 +46,7 @@ public class SynergyEventDispatcher {
 	private static SYNERGY_STATUS m_prestatus;
 	private SYNERGY_STATUS m_status;
 	List<SynergyStatusListener> listeners = new ArrayList<SynergyStatusListener>();
-	private EmployeeManager mEmpMgr = EmployeeManagerImpl.getInstance();
+	//private EmployeeManager mEmpMgr = EmployeeManagerImpl.getInstance();
 	
 	public void addListener(SynergyStatusListener sl) {
 		listeners.add(sl);
@@ -77,8 +77,9 @@ public class SynergyEventDispatcher {
 		m_status = SYNERGY_STATUS.SYNERGYSTATUS_LOADINGDATABASE;
   	  	emit(m_status);
   	    syncEmployeesFromServer(); //will emit ready when database sync is done
-  	    while (FPU.openFPU(fpPath) !=0 ){
-		}
+//  	    while (FPU.openFPU(fpPath) !=0 ){
+//		}
+  	    FPU.openFPU(fpPath);
 	}
 
 	public void handlekeyPressed(KeyEvent e) {
