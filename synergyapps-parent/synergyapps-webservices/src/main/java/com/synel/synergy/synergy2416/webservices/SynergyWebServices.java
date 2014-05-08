@@ -53,7 +53,7 @@ public class SynergyWebServices implements SynergyWebServiceApi {
 		pd.setTransactionTime(System.currentTimeMillis());
 		System.out.println("Sending punch data realtime for terminalId: "+mTerminalId + " puchType: "+pd.getPunchType().toString());
 		PunchStatus ps = mPort.synergyRecordPunch(mWebServicesKey, mTerminalId, pd);
-		System.out.println(ps.toString());
+		System.out.println(ps.getMessage());
 		return ps.isSuccess()?0:-1;
 	}
 

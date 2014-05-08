@@ -31,7 +31,9 @@ public class SynergyWebServicesUnitTest extends TestCase {
 
 	public void testSendPunchRt() {
 		try {
-			mSws.sendPunchRt(3,System.currentTimeMillis(), punchTypeStringFromNum(new Random().nextInt(5)) , generateListOfInt(new int[] {12,11,16,9}));
+			String puntype = punchTypeStringFromNum(new Random().nextInt(5));
+			System.out.println("punchType is "+puntype);
+			mSws.sendPunchRt(3,System.currentTimeMillis(), "ClockIn" , generateListOfInt(new int[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -8,6 +8,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,6 +22,7 @@ import javax.swing.SwingWorker;
 
 import com.synel.synergy.synergy2416.presentation.api.FingerPrintEnrollmentHandler;
 import com.synel.synergy.synergy2416.presentation.controller.FPU;
+import com.synel.synergy.synergy2416.presentation.controller.SynergyStatusListener;
 
 public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPrintEnrollmentHandler, KeyListener{
 		
@@ -44,6 +47,14 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 		private final int m_width=320;
 		private final int m_height = 240;
 		private MainWindow m_mw;
+		
+		private FPenrollWindow m_fw;
+		//private static Timer m_punchwindowtimer;
+		private List<SynergyStatusListener> listeners = new ArrayList<SynergyStatusListener>();
+		
+		public void addListener(SynergyStatusListener sl) {
+			listeners.add(sl);
+		}
 	    
 	    public enum CardNames {
 	    	Input_Employee_ID,
@@ -64,9 +75,12 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 	            	String strResult = get();
 	                m_txtEnrollmentResult.setText("<html><font color=black>"+strResult+"<br>Press Enter to Restart "+"<br>Press MENU to the main menu</font><html>");
 	                m_lblEnrollmentStatus.setText("Enroll Employee ID: "+m_strEmployeeNum+" Finger: "+m_nFingerNum);
-	                if (strResult.compareTo("Succeed!") == 0) {
-	                	//send signal to event dispatcher
-	                	SynergyFingerPrintEnrollmentForm.this.m_mw.get_Sec().onFingerprintEnrollmentSuccess(m_strEmployeeNum,m_nFingerNum);
+	                if (strResult.compareTo("0") == 0) {// 0 means succeed.
+	                	m_fw = new FPenrollWindow();
+	                	m_fw.setEnrolled(true);
+	                	m_fw.setBadgeNum(m_strEmployeeNum);
+	                	m_fw.setFingerNum(0);
+	                	emit(m_fw);
 	                	FPU.Light.RED.off();
 	                	FPU.Light.GREEN.on();
 	                	MainWindow.get_Sap().playEnrollSound();
@@ -338,5 +352,11 @@ public class SynergyFingerPrintEnrollmentForm extends JPanel implements FingerPr
 				m_mw.get_Sed().handlekeyPressed(e);
 			}
 			
+		}
+		
+		private void emit(FPenrollWindow fw){
+			for (SynergyStatusListener sl : listeners) {
+				sl.onFingerprintEnrollmentSuccess(fw.getBadgeNum(), fw.getFingerNum());
+			}	
 		}
 	}

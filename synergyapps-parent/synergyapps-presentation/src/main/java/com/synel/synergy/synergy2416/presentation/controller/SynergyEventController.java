@@ -108,6 +108,9 @@ public class SynergyEventController implements SynergyStatusListener {
 		if (null != m_welcomeForm){
 		   m_welcomeForm.addListener(this);
 		}
+		if (null != m_fingerPrintEnrollForm) {
+			m_fingerPrintEnrollForm.addListener(this);
+		}
 	    returnToMain();
 	}
 	
@@ -346,10 +349,13 @@ public class SynergyEventController implements SynergyStatusListener {
 	public void onFingerprintEnrollmentSuccess(String strBadgeNum, int nFingerNum){
 		
 	
-		//String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
+		String template = FPU.encodedTemplate(strBadgeNum, nFingerNum);
 		//save it to persistent layer. and/or upload to the server (in the background thread of course).
-		//mFpMgr.addFingerPrint(Integer.parseInt(strBadgeNum), 0, template);
-		//uploadFingerPrintBatch();
+		int uId = Integer.parseInt(strBadgeNum);//for test only, it really should get from the persistence layer:
+		uId = m_frame.get_Sed().getmEmpMgr().getuIdByBadgeNum(strBadgeNum);
+		if(m_frame.get_Sed().getmFpMgr().updateFingerPrint(uId, 0, template) <0){
+			m_frame.get_Sed().getmFpMgr().addFingerPrint(uId, 0, template);
+		}
 	}
     
 	@Override
@@ -359,7 +365,7 @@ public class SynergyEventController implements SynergyStatusListener {
 			System.out.println("PunchType: "+punchType);
 			m_frame.get_Sed().getmTdMgr().uploadTransactionRt(badgeNum, punchType, timestamp, null);
 			String info = "User "+badgeNum+" Punch "+punchType+" Success!";
-			m_welcomeForm.setWelcomFormTextInfo(info);	
+			m_welcomeForm.onSentPunchSuccess(info);	
 		}
 		
 

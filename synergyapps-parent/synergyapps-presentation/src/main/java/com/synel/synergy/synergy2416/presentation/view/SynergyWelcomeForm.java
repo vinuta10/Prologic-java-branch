@@ -170,8 +170,12 @@ public class SynergyWelcomeForm extends JPanel {
 		this.m_bIsPiggyBack = bIsPiggyBack;
 	}
 	
-	public void setWelcomFormTextInfo(String info){
+	public void onSentPunchSuccess(String info){
+		m_pw.setM_punchaccepted(false);
 		m_lblText.setText("<html><font color=black><div style=\"text-align: center;\"><b>"+info+"</b></font></html>");
+		FPU.Light.RED.off();
+		FPU.Light.GREEN.on();
+		MainWindow.get_Sap().playAcceptedSound();
 	}
 
 	private void addComponentsToPane() {
@@ -231,7 +235,7 @@ public class SynergyWelcomeForm extends JPanel {
 							m_lblText.setText("<html><font color=black><div style=\"text-align: center;\">Access Granted!</font></html>");
 							m_lblText.setIcon(m_iconDoorOpen);
 						}else{
-							String echoStr = "Hello BadgeNum: "+badgenumber;
+							String echoStr = "Hello Employee: "+badgenumber+"<br>"+"Please press IN/OUT";
 							//store the employee fingerprint validation status and its associated badgenumber
 							m_pw.setM_punchaccepted(true);
 							m_pw.setM_badgenum(String.valueOf(badgenumber));
@@ -243,9 +247,6 @@ public class SynergyWelcomeForm extends JPanel {
 
 						}
 						//m_lblWelcomeLabel.repaint();
-						FPU.Light.RED.off();
-						FPU.Light.GREEN.on();
-						MainWindow.get_Sap().playAcceptedSound();
 
 					} else {
 						if (m_bIsPiggyBack){

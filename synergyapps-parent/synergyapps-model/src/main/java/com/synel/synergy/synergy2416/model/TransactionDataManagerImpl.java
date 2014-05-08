@@ -44,10 +44,10 @@ private static TransactionDataManagerImpl mInstance = null;
 		//int uId = mEmpMgr.getuIdByBadgeNum(badgeNum);
 		//int uId = mEmpMgr.getuIdByBadgeNum("101"); //for test only
 		int uId = Integer.parseInt(badgeNum); //test
-		if (null == lldetailIds){
+		
 			//lldetailIds = EntityMapUtility.mapToLaborLevelDetailIds(mEmpMgr.getEmployeeLaborLevelsById(badgeNum));
-			lldetailIds = EntityMapUtility.mapToLaborLevelDetailIds("00,01,02,03"); //for test only
-		}
+		lldetailIds = EntityMapUtility.mapToLaborLevelDetailIds("0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"); //for test only
+		System.out.println("Uid: "+uId+ " Sending punchType: "+punchType+" to server..."+"LLIds: "+lldetailIds+" timestamp: "+timestamp);
 		return mSws.sendPunchRt(uId, timestamp, punchType, lldetailIds);
 	}
 
