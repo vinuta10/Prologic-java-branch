@@ -33,7 +33,7 @@ public class SynergyWebServicesUnitTest extends TestCase {
 		try {
 			String puntype = punchTypeStringFromNum(new Random().nextInt(5));
 			System.out.println("punchType is "+puntype);
-			mSws.sendPunchRt(3,System.currentTimeMillis(), "ClockIn" , generateListOfInt(new int[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}));
+			mSws.sendPunchRt(3,System.currentTimeMillis(), "ClockOut" , generateListOfInt(new int[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

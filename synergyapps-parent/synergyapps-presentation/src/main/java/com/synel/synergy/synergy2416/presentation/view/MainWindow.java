@@ -34,14 +34,19 @@ public class MainWindow extends JFrame {
 	private static SynergyEventController m_sec;
 	private static SynergyEventDispatcher m_sed;
 	private static SynergyAudioPool m_sap;
+	private static final SplashScreen m_splash = SplashScreen.getSplashScreen();
 
-	static void renderSplashFrame(Graphics2D g, int frame) {
-        final String[] comps = {"database", "fingerprintreader", "keypad"};
+	public static SplashScreen getmSplash() {
+		return m_splash;
+	}
+
+	public static void renderSplashFrame(Graphics2D g, int frame) {
+        final String[] comps = {"database", "fingerprintreader","event controller"};
         g.setComposite(AlphaComposite.Clear);
         g.fillRect(120,140,200,40);
         g.setPaintMode();
         g.setColor(Color.BLACK);
-        g.drawString("Loading "+comps[(frame/5)%3]+"...", 120, 150);
+        g.drawString("Loading "+comps[(frame)%3]+"...", 120, 150);
     }
 
 	/**
@@ -89,28 +94,28 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow(String name) {
 		super(name);
-		final SplashScreen splash = SplashScreen.getSplashScreen();
-		if (splash == null){
+		if (m_splash == null){
 			System.out.println("getSplashScreen() returned null");
 			return;
 		}
-		Graphics2D g = splash.createGraphics();
-		if (g == null){
-			System.out.println("g is null");
-			return;
-		}
-		for(int i=0; i<3; i++) {
-			renderSplashFrame(g,i);
-			splash.update();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		splash.close();
+//		Graphics2D g = m_splash.createGraphics();
+//		if (g == null){
+//			System.out.println("g is null");
+//			return;
+//		}
+//		for(int i=0; i<3; i++) {
+//			renderSplashFrame(g,i);
+//			m_splash.update();
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		//m_splash.close(); //do not close it until the main screen is ready to show.
 	}
+	
 	
 	private static void startMainThread() {
 		//Create and set up the main window.

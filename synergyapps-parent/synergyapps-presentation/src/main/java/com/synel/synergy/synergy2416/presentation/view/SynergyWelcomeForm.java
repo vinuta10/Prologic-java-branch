@@ -85,23 +85,23 @@ public class SynergyWelcomeForm extends JPanel {
 		this.addKeyListener(new KeyListener(){
 
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			public void keyPressed(KeyEvent e) {
 
 				if (KeyEvent.VK_F5 == e.getKeyCode()){
 					//IN key sequence starts with F5 (keyCode 116)
-					if (m_pw.isM_punchaccepted()){
 						m_pw.setM_punchType(1);
-						emit(m_pw);
-					}
+						m_pw.setM_punchkeypressed(true);
+						if (! m_pw.isM_allowedToPunch()){
+						m_lblText.setText("<html><font color=black><div style=\"text-align: center;\"><b>Please place your finger</b></font></html>");
+						}
 				}else if (KeyEvent.VK_F6 == e.getKeyCode()){
-					if (m_pw.isM_punchaccepted()){
 						m_pw.setM_punchType(2);
-						emit(m_pw);
-					}
+						m_pw.setM_punchkeypressed(true);
+						if (! m_pw.isM_allowedToPunch()){
+						m_lblText.setText("<html><font color=black><div style=\"text-align: center;\"><b>Please place your finger</b></font></html>");
+						}
 				} else {
 					m_mw.get_Sed().handlekeyPressed(e);
 				}
@@ -109,8 +109,7 @@ public class SynergyWelcomeForm extends JPanel {
 			}
 
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
+				System.out.println("Key released");
 			}
 
 		});
@@ -171,11 +170,21 @@ public class SynergyWelcomeForm extends JPanel {
 	}
 	
 	public void onSentPunchSuccess(String info){
-		m_pw.setM_punchaccepted(false);
-		m_lblText.setText("<html><font color=black><div style=\"text-align: center;\"><b>"+info+"</b></font></html>");
+		clearPunchWindow();
+		displayTextInfo(info);
 		FPU.Light.RED.off();
 		FPU.Light.GREEN.on();
 		MainWindow.get_Sap().playAcceptedSound();
+	}
+	
+	private void clearPunchWindow()
+	{
+		m_pw.setM_allowedToPunch(false);
+		m_pw.setM_punchkeypressed(false);
+	}
+	
+	private void displayTextInfo(String info){
+		m_lblText.setText("<html><font color=black><div style=\"text-align: center;\"><b>"+info+"</b></font></html>");
 	}
 
 	private void addComponentsToPane() {
@@ -232,19 +241,22 @@ public class SynergyWelcomeForm extends JPanel {
 					}
 					if (badgenumber >= 0) {
 						if (m_bIsPiggyBack){
-							m_lblText.setText("<html><font color=black><div style=\"text-align: center;\">Access Granted!</font></html>");
+							displayTextInfo("Access Granted!");
 							m_lblText.setIcon(m_iconDoorOpen);
 						}else{
-							String echoStr = "Hello Employee: "+badgenumber+"<br>"+"Please press IN/OUT";
+							//Set allowed to punch to true
 							//store the employee fingerprint validation status and its associated badgenumber
-							m_pw.setM_punchaccepted(true);
+							m_pw.setM_allowedToPunch(true);
 							m_pw.setM_badgenum(String.valueOf(badgenumber));
 							m_pw.setM_timestamp(System.currentTimeMillis());
+							if (! m_pw.isM_punchkeypressed()){
+								String echoStr = "Hello Employee: "+badgenumber+"<br>"+"Please press IN/OUT";
+								displayTextInfo(echoStr);
+							} else {
+								emit(m_pw);
+								clearPunchWindow();
+							}
 							//invoke the punchwindow timer to wait for IN/OUT key event.
-
-							m_lblText.setText("<html><font color=black><div style=\";text-align: center;\">"+echoStr+"</font></html");	
-
-
 						}
 						//m_lblWelcomeLabel.repaint();
 

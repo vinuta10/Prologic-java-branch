@@ -18,6 +18,7 @@ import com.synel.synergy.synergy2416.model.FingerPrintManager;
 import com.synel.synergy.synergy2416.model.FingerPrintManagerImpl;
 import com.synel.synergy.synergy2416.model.TransactionDataManager;
 import com.synel.synergy.synergy2416.model.TransactionDataManagerImpl;
+import com.synel.synergy.synergy2416.presentation.view.MainWindow;
 
 /**
  * @author chaol
@@ -74,18 +75,28 @@ public class SynergyEventDispatcher {
 	//Constructor
 	public SynergyEventDispatcher(){
 		m_status = SYNERGY_STATUS.SYNERGYSTATUS_UNINITIALIZED;
-		diffAndEmit (m_status);
+		//diffAndEmit (m_status);
 	}
 	
 	public void initialize() {	  
 		
 		System.out.println("LOADING DATABASE FROM SERVER ...");
-		m_status = SYNERGY_STATUS.SYNERGYSTATUS_LOADINGDATABASE;
-  	  	emit(m_status);
-  	    syncEmployeesFromServer(); //will emit ready when database sync is done
-//  	    while (FPU.openFPU(fpPath) !=0 ){
+//		if(null != MainWindow.getmSplash()){
+//			MainWindow.renderSplashFrame(MainWindow.getmSplash().createGraphics(), 0);
+//			MainWindow.getmSplash().update();
 //		}
-  	    FPU.openFPU(fpPath);
+		m_status = SYNERGY_STATUS.SYNERGYSTATUS_LOADINGDATABASE;
+//  	  	emit(m_status);
+  	    syncEmployeesFromServer(); //will emit ready when database sync is done
+//  	    if(null != MainWindow.getmSplash()){
+//			MainWindow.renderSplashFrame(MainWindow.getmSplash().createGraphics(), 1);
+//			MainWindow.getmSplash().update();
+//		}
+  	    syncFingerPrintsFromServer();
+  	    
+  	    while (FPU.openFPU(fpPath) !=0 ){
+		}
+  	    //m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
 	}
 
 	public void handlekeyPressed(KeyEvent e) {
@@ -197,16 +208,47 @@ public class SynergyEventDispatcher {
 		}
 		if (res == 0) {
 			m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
-	  	  	//diffAndEmit(m_status);
-	  	  	emit(m_status);
-	  	  	System.out.println("Changing clock status to ready done.");
+	  	  	diffAndEmit(m_status);
+	  	  	//emit(m_status);
+	  	  	System.out.println("Employee table ready done.");
+		}
+		
+	}
+	
+	public void syncFingerPrintsFromServer(){
+		
+		int res = -1;
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
+		Future future = executorService.submit(new Callable(){
+
+			public Object call() throws Exception {
+		        return mFpMgr.syncFingerPrintsFromServer();
+		    }
+		});
+		try {
+			res = (Integer) future.get();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (res == 0) {
+			m_status = SYNERGY_STATUS.SYNERGYSTATUS_READY;
+	  	  	diffAndEmit(m_status);
+	  	  	//emit(m_status);
+	  	  	System.out.println("Fingerprint table ready done.");
 		}
 		
 	}
 	
 	public void uploadFingerPrintBatch() {
-	//int res = mFpMgr.uploadFingerPrintBatch();
-	//System.out.println("upload return code: "+res);
+		
+//	int res = mFpMgr.uploadFingerPrintBatch();
+//	System.out.println("upload return code: "+res);
 	//using async method
 	ExecutorService executorService = Executors.newSingleThreadExecutor();
 	Future future = executorService.submit(new Callable(){

@@ -17,7 +17,7 @@ import org.hibernate.Transaction;
 public class HbmBaseDao<T> {
 	
 	protected Session msession;
-	protected static final int BATCH_NUM = 50;
+	protected static final int BATCH_NUM = 10; //make cache smaller to save mem , java oom killer need adjustment
 	
 	@SuppressWarnings("unchecked")
 	protected Class<T> g() throws Exception {

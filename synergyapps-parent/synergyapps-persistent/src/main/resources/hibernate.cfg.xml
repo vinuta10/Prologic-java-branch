@@ -10,6 +10,9 @@
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
   <property name="hibernate.current_session_context_class">thread</property>
+  <property name="connection.pool_size">5</property>
+  <property name="connection.pool_expand">false</property>
+  <property name="hibernate.cache.size">0</property>
   <mapping resource="EmployeePOJO.hbm.xml"/>
   <mapping resource="FingerPrintPOJO.hbm.xml"/>
   <mapping resource="TransactionDataPOJO.hbm.xml"/>

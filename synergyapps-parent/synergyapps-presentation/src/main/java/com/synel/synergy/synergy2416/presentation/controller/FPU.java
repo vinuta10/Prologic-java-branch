@@ -9,11 +9,14 @@ import com.synel.synergy.synergy2416.presentation.api.FingerPrintEnrollmentHandl
 
 public final class FPU implements FingerPrintEnrollmentHandler {  //implements FingerPrintEnrollmentHandler, Employee{
 	private static boolean m_bFingerisEnrolling = false;
+	private static boolean isMock = false;
+	private static String m_badgenum = "0";
 
 	static { 
 		System.out.println(System.getProperty("os.arch"));
 		if (System.getProperty("os.arch").compareTo("i386") == 0) {
 			System.loadLibrary("synergy-mock"); //changeme to "synergy"->libsynergy.so for real device. place it in /home/admin/synergy/lib/.
+			isMock = true;
 		} else {
 			System.loadLibrary("synergy2416"); //changeme to "synergy"->libsynergy.so for real device. place it in /home/admin/synergy/lib/.
 		}
@@ -147,6 +150,8 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 	 */
 
 	private static native int FP_IDENTIFY_EMPLOYEE();
+	
+	private static native int FP_IDENTIFY_EMPLOYEE_MOCK(String badgeNum);
 
 	private static String app_msgConvert(int nRet){
 		switch (nRet){
@@ -217,6 +222,7 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 
 	public static String enroll(String strBadgeNum, int nFingerNum, FingerPrintEnrollmentHandler fph) {
 		System.out.println("Enrolling "+strBadgeNum+" FingerNum: "+nFingerNum);
+		m_badgenum  = strBadgeNum;
 		int enrollMessage = -111;
 		m_bFingerisEnrolling = true;
 		System.out.println("1 setting fp enrollment to "+m_bFingerisEnrolling);
@@ -269,8 +275,13 @@ public final class FPU implements FingerPrintEnrollmentHandler {  //implements F
 				e.printStackTrace();
 			}
 			if(!m_bFingerisEnrolling){
-				nRet = FPU.FP_IDENTIFY_EMPLOYEE();
-				System.out.println("identifying employee: "+nRet);
+				if(!isMock){
+					nRet = FPU.FP_IDENTIFY_EMPLOYEE();
+				}else{
+					nRet = FPU.FP_IDENTIFY_EMPLOYEE_MOCK(m_badgenum);
+					System.out.println("identifying employee: "+m_badgenum);
+				}
+				
 			}
 
 		}
