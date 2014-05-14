@@ -3,18 +3,31 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory>
-  <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-  <property name="hibernate.connection.url">jdbc:hsqldb:file:/home/admin/synergy/database/synergydb</property>
+<!--   <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property> -->
+<!--   <property name="hibernate.connection.url">jdbc:hsqldb:file:/home/admin/synergy/database/synergydb</property> -->
   <property name="hibernate.connection.username">SA</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
-  <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
+<!--   <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property> -->
+  <property name="hibernate.show_sql">false</property>
+  <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
   <property name="hibernate.current_session_context_class">thread</property>
+  <!-- Use the C3P0 connection pool provider 
+   <property name="hibernate.c3p0.min_size">1</property> 
+   <property name="hibernate.c3p0.max_size">5</property> 
+   <property name="hibernate.c3p0.timeout">300</property> 
+   <property name="hibernate.c3p0.max_statements">50</property> 
+   <property name="hibernate.c3p0.idle_test_period">3000</property> -->
   <property name="connection.pool_size">5</property>
   <property name="connection.pool_expand">false</property>
   <property name="hibernate.cache.size">0</property>
+  <property name="hibernate.cache.use_second_level_cache">false</property>
+  <property name="hibernate.cache.use_structured_entries">false</property>
+  <property name="hibernate.jdbc.batch_size">50</property>
+  <property name="hibernate.query.startup_check">false</property>
+  <!--   <property name="hibernate.hbm2ddl.auto">validate</property> -->
+  <!--   <property name="hibernate.transaction.auto_close_session">true</property> -->
   <mapping resource="EmployeePOJO.hbm.xml"/>
   <mapping resource="FingerPrintPOJO.hbm.xml"/>
+  <mapping resource="PunchDataPOJO.hbm.xml"/>
   <mapping resource="TransactionDataPOJO.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

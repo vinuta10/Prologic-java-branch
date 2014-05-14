@@ -13,10 +13,11 @@ import junit.framework.TestCase;
 public class HbmTransactionDataDaoTest extends TestCase {
 	
 	private HbmTransactionDataDao htdd;
-	private long mId = 3;
+	private long mId=1003;
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		HibernateUtilities.createSchema();
 		htdd = new HbmTransactionDataDao();
 	}
 	
@@ -25,8 +26,8 @@ public class HbmTransactionDataDaoTest extends TestCase {
 		
 		System.out.println("================== Begin test suite 1===================================");
 		testSaveTransactionData();
-		System.out.println("================== Begin test suite 2===================================");
-		testSaveTransactionDataList();
+		//System.out.println("================== Begin test suite 2===================================");
+		//testSaveTransactionDataList();
 		System.out.println("================== Begin test suite 3===================================");
 		testGetTransactionDataList();
 		System.out.println("================== Begin test suite 4===================================");
@@ -54,7 +55,7 @@ public class HbmTransactionDataDaoTest extends TestCase {
 	@Ignore
 	public void testSaveTransactionData() {
 		PunchDataPOJO pd = new PunchDataPOJO();
-		pd.setUserId(2);
+		pd.setUserId(1);
 		pd.setPunchType("ClockIn");
 		pd.setLaborLevelDetailIds(new ArrayList<Integer>(Arrays.asList(12,2,3,11)));
 		TransactionDataPOJO td = new TransactionDataPOJO();

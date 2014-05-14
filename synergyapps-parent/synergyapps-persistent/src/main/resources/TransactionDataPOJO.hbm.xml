@@ -25,9 +25,9 @@
         <property name="punchType" type="java.lang.String">
             <column name="PUNCHTYPE" />
         </property>
-        <list name="laborLevelDetailIds" inverse="false" table="laborLevelDetailTbl" lazy="true">
+        <list name="laborLevelDetailIds" inverse="false" table="laborLevelDetailTbl">
             <key>
-                <column name="UID" />
+                <column name="USERID" />
             </key>
             <list-index base="0" column="POSITION"/>
             <element type="java.lang.Integer">

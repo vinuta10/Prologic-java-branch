@@ -2,12 +2,17 @@ package com.synel.synergy.synergy2416.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import com.synel.synergy.synergy2416.persistent.EmployeeDao;
 import com.synel.synergy.synergy2416.persistent.EmployeePOJO;
 import com.synel.synergy.synergy2416.persistent.HbmEmployeeDao;
 import com.synel.synergy.synergy2416.webservices.SynergyWebServices;
 import com.synel.synergy.synergy2416.webservices.api.SynergyWebServiceApi;
+import com.xacttime.Employee;
 
 
 public class EmployeeManagerImpl implements EmployeeManager {
@@ -44,16 +49,16 @@ public class EmployeeManagerImpl implements EmployeeManager {
 		
 		int res = -1;
 		//Do it in Future thread example:
-//		ExecutorService executorService = Executors.newSingleThreadExecutor();
-//		Future future = executorService.submit(new Callable(){
-//		    public Object call() throws Exception {
-//		        return mSws.getEmployees();
-//		    }
-//		});
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		Future future = executorService.submit(new Callable(){
+		    public Object call() throws Exception {
+		        return mSws.getEmployees();
+		    }
+		});
 
 		//System.out.println("future.get() = " + future.get().toString());
 		try {
-			mEmps = EntityMapUtility.mapToEmployeePOJOList(mSws.getEmployees());
+			mEmps = EntityMapUtility.mapToEmployeePOJOList((List<Employee>)future.get());
 		} catch (Exception ex){
 			ex.printStackTrace();
 			return -1;

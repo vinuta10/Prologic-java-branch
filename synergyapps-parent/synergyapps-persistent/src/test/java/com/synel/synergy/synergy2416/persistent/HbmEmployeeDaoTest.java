@@ -1,7 +1,5 @@
 package com.synel.synergy.synergy2416.persistent;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +15,7 @@ public class HbmEmployeeDaoTest {
 	@Before
 	public void setUp() throws Exception {
 		System.out.println("setup the test...");
+		HibernateUtilities.createSchema();
 	}
 
 	@After

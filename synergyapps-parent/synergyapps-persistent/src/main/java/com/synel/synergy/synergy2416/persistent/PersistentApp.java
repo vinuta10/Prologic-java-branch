@@ -3,10 +3,34 @@ package com.synel.synergy.synergy2416.persistent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class PersistentApp {
 	
 	public static void main(String[] args){
+        System.out.println("Creating Schema...");
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("unchecked")
+		final Future future = executorService.submit(new Callable(){
+		    public Object call() throws Exception {
+		        HibernateUtilities.createSchema();
+				return null;
+		    }
+		});
+		try {
+			System.out.println("future.get() = " + future.get());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		testMasterSuites();
 	}
 	

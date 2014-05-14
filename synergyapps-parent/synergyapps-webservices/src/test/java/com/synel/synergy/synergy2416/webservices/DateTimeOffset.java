@@ -1,4 +1,4 @@
-package com.xacttime;
+package com.synel.synergy.synergy2416.webservices;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -1,7 +1,5 @@
 package com.synel.synergy.synergy2416.persistent;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +38,7 @@ UID: 27 Template: ZQAAAAABASYAAAAAAAAAAAAAAAAAAAAAFVVUAABqqqQAAD//9AAAv//5AAH///
  */
 	@Before
 	public void setUp() throws Exception {
+		    HibernateUtilities.createSchema();
 			mFps = new ArrayList<FingerPrintPOJO>();
 			for(int i=0; i<fpsamples.length;i++){
 				FingerPrintPOJO fp= new FingerPrintPOJO();

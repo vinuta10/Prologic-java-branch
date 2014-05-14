@@ -23,10 +23,16 @@ public class HibernateUtilities {
 	{
 		try
 		{
-			mConf = new Configuration().configure();
+			//TODO set the hibernate config properties from the SystemInformation class
+			mConf = new Configuration();
+			mConf.configure();
+			mConf.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
+			mConf.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+			mConf.setProperty("hibernate.connection.url","jdbc:hsqldb:file:/home/admin/synergy/database/synergydb");
+			mConf.setProperty("hibernate.hbm2ddl.auto", "update");
 			mServiceRegistry = new StandardServiceRegistryBuilder().applySettings(mConf.getProperties()).build();
 			mSessionFactory = mConf.buildSessionFactory(mServiceRegistry);
-			//createSchema();
+			//mSessionFactory = mConf.buildSessionFactory();
 		} catch (HibernateException ex) {
 			System.out.println("Problem creating hibernate db session factory! "+ex);
 		}
@@ -39,7 +45,7 @@ public class HibernateUtilities {
 	
 	public static List<?> SelectQueryList(String hql) {
 		if (msession == null || !msession.isOpen()){
-			msession = HibernateUtilities.getSessionFactory().openSession();
+			msession = mSessionFactory.openSession();
 		}
 		List<?> results;
 		Transaction tx = null;
@@ -60,7 +66,7 @@ public class HibernateUtilities {
 	
 	public static int SelectQueryUniqueInt(String hql) {
 		if (msession == null || !msession.isOpen()){
-			msession = HibernateUtilities.getSessionFactory().openSession();
+			msession = mSessionFactory.openSession();
 		}
 		Query qry = msession.createQuery(hql);
 		int res = -1;
@@ -76,7 +82,7 @@ public class HibernateUtilities {
 	
 	public static int ExecUpdateQuery(String hql) {
 		if (msession == null || !msession.isOpen()){
-			msession = HibernateUtilities.getSessionFactory().openSession();
+			msession = mSessionFactory.openSession();
 		}
 		int result;
 		Transaction tx = null;
@@ -99,7 +105,8 @@ public class HibernateUtilities {
 		//Session session = mSessionFactory.openSession();
 		//create database schema if not exists:
 		SchemaExport schema = new SchemaExport(mConf);
-		schema.execute(false,true,false,true);
+		//schema.execute(false,true,false,true);
+		schema.execute(false, false,false,false);
 		//session.close();
 	}
 	

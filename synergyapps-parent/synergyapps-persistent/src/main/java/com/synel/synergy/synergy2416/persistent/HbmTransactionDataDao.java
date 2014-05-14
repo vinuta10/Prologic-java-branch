@@ -35,7 +35,7 @@ public class HbmTransactionDataDao extends HbmBaseDao<TransactionDataPOJO> imple
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TransactionDataPOJO> getTransactiondataListThatNeedUpload() {
-	    String hql = "From TransactionDataPOJO where uploaded = 'false'";
+	    String hql = "from TransactionDataPOJO where uploaded = 'false'";
 		return (List<TransactionDataPOJO>) HibernateUtilities.SelectQueryList(hql);
 	}
 

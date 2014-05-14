@@ -1,7 +1,5 @@
 package com.synel.synergy.synergy2416.model;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
